@@ -1,4 +1,10 @@
-﻿namespace GalacticTitans.Models.Titans
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GalacticTitans.Core.Domain
 {
     public enum TitanType
     {
@@ -8,8 +14,10 @@
     {
         Dead, Alive, GuardingPlanet
     }
-    public class TitanIndexViewModel
-    {        
+
+
+    public class Titan
+    {
         public Guid ID { get; set; }
         public string TitanName { get; set; }
         public int TitanHealth { get; set; }
