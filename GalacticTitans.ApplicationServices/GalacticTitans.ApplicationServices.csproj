@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GalacticTitans.Data\GalacticTitans.Data.csproj" />
+  </ItemGroup>
+
 </Project>

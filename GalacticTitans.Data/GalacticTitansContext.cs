@@ -10,6 +10,7 @@ namespace GalacticTitans.Data
 {
     public class GalacticTitansContext : DbContext
     {
+        public GalacticTitansContext(DbContextOptions<GalacticTitansContext> options) : base(options) {}
         public DbSet<Titan> Titans { get; set; }
     }
 }
