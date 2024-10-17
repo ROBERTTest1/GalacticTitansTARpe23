@@ -1,1 +1,36 @@
-﻿
+﻿@model IEnumerable<GalacticTitans.Models.Titans.TitanIndexViewModel>
+
+    @{ int rowNumber = 1; }
+    <div><a asp-action="Add" asp-controller="Titans" type="submit" class="btn btn-primary">Go on mission for a new titan</a></div>
+    @* User can go on mission using ADD function, to obtain a new titan. In controller, this is called "PlayerSoloMission" *@
+
+    <div class="h1">Your Titans:</div>
+    <form method="post">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var titan in Model)
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <td>@rowNumber</td>
+                    <td>@titan.TitanName</td>
+                    <td>@titan.TitanType</td>
+                    <td>@titan.TitanLevel</td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+        </table>
+    </form>
+    @* Missing Button for player profile *@
+    @* Missing Button for solar system page *@
+    @* Missing Button for player activity history *@
