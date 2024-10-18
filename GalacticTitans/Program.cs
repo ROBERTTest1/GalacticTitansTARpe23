@@ -1,3 +1,5 @@
+using GalacticTitans.ApplicationServices.Services;
+using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -5,8 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+/* Adding titanservices as if it was a normal service */
+builder.Services.AddScoped<ITitansServices, TitansServices>();
+
 builder.Services.AddDbContext<GalacticTitansContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("UnstableBranchConnection")));
 
 var app = builder.Build();
 
