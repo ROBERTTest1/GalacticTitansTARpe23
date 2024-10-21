@@ -12,5 +12,6 @@ namespace GalacticTitans.Data
     {
         public GalacticTitansContext(DbContextOptions<GalacticTitansContext> options) : base(options) {}
         public DbSet<Titan> Titans { get; set; }
+        public DbSet<FileToDatabase> FilesToDatabase { get; set; }
     }
 }
