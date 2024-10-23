@@ -23,7 +23,7 @@ namespace GalacticTitans.TagHelpers
             // Set the tag to be <svg>
             output.TagName = "svg";
 
-            // Add SVG attributes
+            // Add SVG attribui b v tes
             output.Attributes.SetAttribute("width", "100");
             output.Attributes.SetAttribute("height", "100");
 
