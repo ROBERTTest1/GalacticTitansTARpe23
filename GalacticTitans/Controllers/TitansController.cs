@@ -1,4 +1,5 @@
-﻿using GalacticTitans.Core.ServiceInterface;
+﻿using GalacticTitans.Core.Dto;
+using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,52 @@ namespace GalacticTitans.Controllers
                     TitanLevel = x.TitanLevel,                    
                 });
             return View(resultingInventory);
+        }
+        [HttpGet]
+        public IActionResult Create() 
+        {
+            TitanCreateViewModel vm = new();
+            return View("Create",vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(TitanCreateViewModel vm)
+        {
+            var dto = new TitanDto()
+            {
+                TitanName = vm.TitanName,
+                TitanHealth = 100,
+                TitanXP = 0,
+                TitanXPNextLevel = 100,
+                TitanLevel = 0,
+                TitanType = (Core.Dto.TitanType)vm.TitanType,
+                TitanStatus = (Core.Dto.TitanStatus)vm.TitanStatus,
+                PrimaryAttackName = vm.PrimaryAttackName,
+                PrimaryAttackPower = vm.PrimaryAttackPower,
+                SecondaryAttackName = vm.SecondaryAttackName,
+                SecondaryAttackPower = vm.SecondaryAttackPower,
+                SpecialAttackName = vm.SpecialAttackName,
+                SpecialAttackPower = vm.SpecialAttackPower,
+                TitanWasBorn = vm.TitanWasBorn,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Files = vm.Files,
+                Image = vm.Image
+                .Select(x => new FileToDatabaseDto
+                {
+                    ID = x.ImageID,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    TitanID = x.TitanID,
+                }).ToArray()
+            };
+            var result = await _titansServices.Create(dto);
+
+            if (result != null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index", vm);
         }
     }
 }

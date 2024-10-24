@@ -32,7 +32,7 @@ namespace GalacticTitans.Core.Dto
         public int SpecialAttackPower { get; set; }
         public string SpecialAttackName { get; set; }
         public DateTime TitanWasBorn { get; set; }
-        public DateTime TitanDied { get; set; }
+        public DateTime? TitanDied { get; set; }
 
         //image 
                
