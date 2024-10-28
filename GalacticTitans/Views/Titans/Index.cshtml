@@ -23,6 +23,19 @@
     <form method="post">
         <table class="table table-hover">
             <thead>
+            @if (!Model.Any())
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <th scope="col" colspan="4" class="gTZRG">
+                        <span class="gXmc">Sorry, it appears that</span>
+                        <span class="isPlayerName">#playernamehere#</span> 
+                        <span class="gXmc">does not have any Titans yet.</span>
+                    </th>
+                </tr>
+            }
+            else
+            {
                 <tr>
                     @* Later, once images have been implemented, add image here aswell *@
                     <th scope="col">#</th>
@@ -30,19 +43,43 @@
                     <th scope="col">Type</th>
                     <th scope="col">Level</th>
                 </tr>
+            }
+
+
             </thead>
             <tbody>
-            @foreach (var titan in Model)
+            @if (!Model.Any() )
             {
-                <tr>
+                <table class="gTB">
+                    <tr class="gTZRG"><td colspan="2">TitanName</td></tr>
+                    <tr class="gTZRG"><td colspan="2"><img src="~/lib/gameasset/image/premadetitans/captainobvious.png" /></td></tr>
+                    <tr class="gTZRG"><td>Type</td><td>Level</td></tr>
+                    <tr class="gTZRG"><td colspan="2">XPBAROBJECT</td></tr>
+                </table>
+@*                 <tr> *@
                     @* Later, once images have been implemented, add image here aswell *@
-                    <td>@rowNumber</td>
-                    <td>@titan.TitanName</td>
-                    <td>@titan.TitanType</td>
-                    <td>@titan.TitanLevel</td>
-                </tr>
+@*                     <td>@rowNumber</td>
+                    <td>NoTitans</td>
+                    <td>NoType</td>
+                    <td>NoLevel</td> *@
+@*                 </tr> *@
                 rowNumber++;
             }
+            else
+            {
+                @foreach (var titan in Model)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>@titan.TitanName</td>
+                        <td>@titan.TitanType</td>
+                        <td>@titan.TitanLevel</td>
+                    </tr>
+                    rowNumber++;
+                } 
+            }
+
         </tbody>
         </table>
     </form>
