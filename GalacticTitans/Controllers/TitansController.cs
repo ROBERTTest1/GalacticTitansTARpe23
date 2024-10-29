@@ -2,6 +2,7 @@
 using GalacticTitans.Data;
 using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace GalacticTitans.Controllers
 {
@@ -10,14 +11,15 @@ namespace GalacticTitans.Controllers
         /*
          * Titanscontroller controls all functions for titans, including, missions.
          */
-
+        private readonly ITagHelper _tagHelper;
         private readonly GalacticTitansContext _context;
         private readonly ITitansServices _titansServices;
 
-        public TitansController(GalacticTitansContext context, ITitansServices titansServices)
+        public TitansController(GalacticTitansContext context, ITitansServices titansServices, ITagHelper tagHelper)
         {
             _context = context;
             _titansServices = titansServices;
+            _tagHelper = tagHelper;
         }
 
         [HttpGet]
@@ -34,5 +36,6 @@ namespace GalacticTitans.Controllers
                 });
             return View(resultingInventory);
         }
+								
     }
 }
