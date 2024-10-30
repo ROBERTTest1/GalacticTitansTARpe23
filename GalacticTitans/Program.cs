@@ -1,6 +1,7 @@
 using GalacticTitans.ApplicationServices.Services;
 using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 /* Adding titanservices as if it was a normal service */
 builder.Services.AddScoped<ITitansServices, TitansServices>();
+//builder.Services.AddScoped<ITagHelper, TagHelper>();
 
 builder.Services.AddDbContext<GalacticTitansContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("UnstableBranchConnection")));
