@@ -30,7 +30,7 @@ namespace GalacticTitans.Controllers
                 {
                     ID = x.ID,
                     TitanName = x.TitanName,
-                    TitanType = (TitanType)x.TitanType,
+                    TitanType = (Models.Titans.TitanType)(Core.Dto.TitanType)x.TitanType,
                     TitanLevel = x.TitanLevel,                    
                 });
             return View(resultingInventory);
@@ -42,7 +42,8 @@ namespace GalacticTitans.Controllers
             return View("Create",vm);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(TitanCreateViewModel vm)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePost(TitanCreateViewModel vm)
         {
             var dto = new TitanDto()
             {

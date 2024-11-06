@@ -1,15 +1,15 @@
 ﻿@model GalacticTitans.Models.Titans.TitanCreateViewModel
 
 <div>
-    <form method="post" enctype="multipart/form-data">
-        <input asp-for="CreatedAt" type="hidden"/>
+    <form method="post" asp-action="CreatePost" enctype="multipart/form-data">
+        @* <input asp-for="CreatedAt" type="hidden"/>
         <input asp-for="UpdatedAt" type="hidden"/>
         <input asp-for="TitanXP" value="0" type="hidden"/>
         <input asp-for="TitanLevel" value="0" type="hidden"/>
         <input asp-for="TitanXPNextLevel" value="100" type="hidden"/>
         <input asp-for="TitanStatus" value="Alive" type="hidden" />
         <input asp-for="TitanWasBorn" type="hidden" />
-        <input asp-for="TitanHealth" type="hidden" />
+        <input asp-for="TitanHealth" type="hidden" /> *@
 
         <div class="form-group-row">
             <label asp-for="TitanName" class="col-sm-2 col-form-label"></label>
@@ -82,8 +82,8 @@
 
         </div>
 
-        <a asp-action="create" asp-controller="titans" type="submit" 
-        class="btn btn-primary" value="Make Titan"></a>
+        <a asp-action="createpost" asp-controller="Titans" type="submit" 
+        class="btn btn-primary" value="Create">Make this titan</a>
         <a asp-action="index" class="btn btn-primary">Cancel</a>
 
     </form>
