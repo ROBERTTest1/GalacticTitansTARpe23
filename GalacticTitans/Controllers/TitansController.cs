@@ -43,7 +43,7 @@ namespace GalacticTitans.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePost(TitanCreateViewModel vm)
+        public async Task<IActionResult> Create(TitanCreateViewModel vm)
         {
             var dto = new TitanDto()
             {
