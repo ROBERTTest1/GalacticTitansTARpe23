@@ -28,7 +28,6 @@ namespace GalacticTitans.ApplicationServices.Services
                 .FirstOrDefaultAsync(x => x.ID == id);
             return result;
         }
-
         public async Task<Titan> Create(TitanDto dto)
         {
             Titan titan = new Titan();
@@ -44,6 +43,7 @@ namespace GalacticTitans.ApplicationServices.Services
             titan.TitanDied = DateTime.Parse("01/01/9999 00:00:00");
 
             //set by user
+            titan.TitanName = dto.TitanName;
             titan.TitanType = (Core.Domain.TitanType)dto.TitanType;
             titan.PrimaryAttackName = dto.PrimaryAttackName;
             titan.PrimaryAttackPower = dto.PrimaryAttackPower;

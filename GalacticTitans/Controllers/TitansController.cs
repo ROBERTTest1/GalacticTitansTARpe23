@@ -41,7 +41,7 @@ namespace GalacticTitans.Controllers
             TitanCreateViewModel vm = new();
             return View("Create",vm);
         }
-        [HttpPost]
+        [HttpPost , ActionName("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TitanCreateViewModel vm)
         {
@@ -75,7 +75,7 @@ namespace GalacticTitans.Controllers
             };
             var result = await _titansServices.Create(dto);
 
-            if (result != null)
+            if (result == null)
             {
                 return RedirectToAction("Index");
             }

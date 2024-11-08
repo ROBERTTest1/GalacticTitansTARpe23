@@ -1,7 +1,7 @@
 ﻿@model GalacticTitans.Models.Titans.TitanCreateViewModel
 
 <div>
-    <form method="post" asp-action="CreatePost" enctype="multipart/form-data">
+    <form method="post" asp-action="Create" enctype="multipart/form-data">
         @* <input asp-for="CreatedAt" type="hidden"/>
         <input asp-for="UpdatedAt" type="hidden"/>
         <input asp-for="TitanXP" value="0" type="hidden"/>
@@ -81,10 +81,12 @@
             </div>
 
         </div>
-
-        <a asp-action="create" asp-controller="Titans" type="submit" 
-        class="btn btn-primary" value="Create">Make this titan</a>
-        <a asp-action="index" class="btn btn-primary">Cancel</a>
+        @{
+            var breakpoint = "";
+        }
+        <input asp-action="Create" asp-controller="Titans" type="submit"
+               class="btn btn-primary" value="Make this titan"/>
+        <a asp-action="index"  class="btn btn-primary">Cancel</a>
 
     </form>
 </div>
