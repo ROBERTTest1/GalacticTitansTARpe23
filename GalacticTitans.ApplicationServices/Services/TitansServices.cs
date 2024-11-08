@@ -68,9 +68,43 @@ namespace GalacticTitans.ApplicationServices.Services
             return titan;
         }
 
-        public Task Update(TitanDto dto)
+        public async Task<Titan> Update(TitanDto dto)
         {
-            throw new NotImplementedException();
+            Titan titan = new Titan();
+
+            // set by service
+            titan.ID = dto.ID;
+            titan.TitanHealth = dto.TitanHealth;
+            titan.TitanXP = dto.TitanXP;
+            titan.TitanXPNextLevel = dto.TitanXPNextLevel;
+            titan.TitanLevel = dto.TitanLevel;
+            titan.TitanStatus = (Core.Domain.TitanStatus)dto.TitanStatus;
+            titan.TitanWasBorn = dto.TitanWasBorn;
+            titan.TitanDied = (DateTime)dto.TitanDied;
+
+            //set by user
+            titan.TitanName = dto.TitanName;
+            titan.TitanType = (Core.Domain.TitanType)dto.TitanType;
+            titan.PrimaryAttackName = dto.PrimaryAttackName;
+            titan.PrimaryAttackPower = dto.PrimaryAttackPower;
+            titan.SecondaryAttackName = dto.SecondaryAttackName;
+            titan.SecondaryAttackPower = dto.SecondaryAttackPower;
+            titan.SpecialAttackName = dto.SpecialAttackName;
+            titan.SpecialAttackPower = dto.SpecialAttackPower;
+
+            //set for db
+            titan.CreatedAt = dto.CreatedAt;
+            titan.UpdatedAt = DateTime.Now;
+
+            //files
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, titan);
+            }
+            _context.Titans.Update(titan);
+            await _context.SaveChangesAsync();
+
+            return titan;
         }
     }
 }
