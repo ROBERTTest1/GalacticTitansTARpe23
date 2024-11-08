@@ -3,6 +3,7 @@ using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GalacticTitans.Controllers
 {
@@ -81,6 +82,45 @@ namespace GalacticTitans.Controllers
             }
 
             return RedirectToAction("Index", vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id /*, Guid ref*/)
+        {
+            var titan = await _titansServices.DetailsAsync(id);
+
+            if (titan == null) 
+            {
+                return NotFound(); // <- TODO; custom partial view with message, titan is not located
+            }
+
+            var images = await _context.FilesToDatabase
+                .Where(t => t.TitanID == id)
+                .Select(y => new TitanImageViewModel
+                {
+                    TitanID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
+            var vm = new TitanDetailsViewModel();
+            vm.ID = titan.ID;
+            vm.TitanName = titan.TitanName;
+            vm.TitanHealth = titan.TitanHealth;
+            vm.TitanXP = titan.TitanXP;
+            vm.TitanLevel = titan.TitanLevel;
+            vm.TitanType = (Models.Titans.TitanType)titan.TitanType;
+            vm.TitanStatus = (Models.Titans.TitanStatus)titan.TitanStatus;
+            vm.PrimaryAttackName = titan.PrimaryAttackName;
+            vm.PrimaryAttackPower = titan.PrimaryAttackPower;
+            vm.SecondaryAttackName = titan.SecondaryAttackName;
+            vm.SecondaryAttackPower = titan.SecondaryAttackPower;
+            vm.SpecialAttackName = titan.SpecialAttackName;
+            vm.SpecialAttackPower = titan.SpecialAttackPower;
+            vm.Image.AddRange(images);
+            
+            return View(vm);
         }
     }
 }

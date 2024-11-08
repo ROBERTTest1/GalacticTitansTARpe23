@@ -17,6 +17,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Type</th>
                     <th scope="col">Level</th>
+                    <th scope="col">Admin Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,9 @@
                     <td>@titan.TitanName</td>
                     <td>@titan.TitanType</td>
                     <td>@titan.TitanLevel</td>
+                    <td>
+                        <a asp-action="details" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDetails</a>
+                    </td>
                 </tr>
                 rowNumber++;
             }
