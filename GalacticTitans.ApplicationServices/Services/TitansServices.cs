@@ -67,5 +67,10 @@ namespace GalacticTitans.ApplicationServices.Services
 
             return titan;
         }
+
+        public Task Update(TitanDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

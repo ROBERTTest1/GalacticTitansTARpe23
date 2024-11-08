@@ -122,5 +122,86 @@ namespace GalacticTitans.Controllers
             
             return View(vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            if (id == null) { return NotFound(); }
+
+            var titan = await _titansServices.DetailsAsync(id);
+
+            if (titan == null) { return NotFound(); }
+
+            var images = await _context.FilesToDatabase
+                .Where(x => x.TitanID == id)
+                .Select(y => new TitanImageViewModel
+                {
+                    TitanID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
+            var vm = new TitanCreateViewModel();
+            vm.ID = titan.ID;
+            vm.TitanName = titan.TitanName;
+            vm.TitanHealth = titan.TitanHealth;
+            vm.TitanXP = titan.TitanXP;
+            vm.TitanXPNextLevel = titan.TitanXPNextLevel;
+            vm.TitanLevel = titan.TitanLevel;
+            vm.TitanType = (Models.Titans.TitanType)titan.TitanType;
+            vm.TitanStatus = (Models.Titans.TitanStatus)titan.TitanStatus;
+            vm.PrimaryAttackName = titan.PrimaryAttackName;
+            vm.PrimaryAttackPower = titan.PrimaryAttackPower;
+            vm.SecondaryAttackName = titan.SecondaryAttackName;
+            vm.SecondaryAttackPower = titan.SecondaryAttackPower;
+            vm.SpecialAttackName = titan.SpecialAttackName;
+            vm.SpecialAttackPower = titan.SpecialAttackPower;
+            vm.TitanDied = titan.TitanDied;
+            vm.TitanWasBorn = titan.TitanWasBorn;
+            vm.CreatedAt = titan.CreatedAt;
+            vm.UpdatedAt = DateTime.Now;
+            vm.Image.AddRange(images);
+
+            return View("Update", vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(TitanCreateViewModel vm)
+        {
+            var dto = new TitanDto()
+            {
+                ID = (Guid)vm.ID,
+                TitanName = vm.TitanName,
+                TitanHealth = 100,
+                TitanXP = 0,
+                TitanXPNextLevel = 100,
+                TitanLevel = 0,
+                TitanType = (Core.Dto.TitanType)vm.TitanType,
+                TitanStatus = (Core.Dto.TitanStatus)vm.TitanStatus,
+                PrimaryAttackName = vm.PrimaryAttackName,
+                PrimaryAttackPower = vm.PrimaryAttackPower,
+                SecondaryAttackName = vm.SecondaryAttackName,
+                SecondaryAttackPower = vm.SecondaryAttackPower,
+                SpecialAttackName = vm.SpecialAttackName,
+                SpecialAttackPower = vm.SpecialAttackPower,
+                TitanWasBorn = vm.TitanWasBorn,
+                CreatedAt = vm.CreatedAt,
+                UpdatedAt = DateTime.Now,
+                Files = vm.Files,
+                Image = vm.Image
+                .Select(x => new FileToDatabaseDto
+                {
+                    ID = x.ImageID,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    TitanID = x.TitanID,
+                }).ToArray()
+            };
+            var result = await _titansServices.Update(dto);
+
+            if (result == null) { return RedirectToAction("Index"); }
+            return RedirectToAction("Index", vm);
+        }
     }
 }
