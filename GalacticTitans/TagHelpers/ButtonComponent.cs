@@ -1,13 +1,31 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GalacticTitans.TagHelpers
 {
     //Custom html komponendi klass, kus asuvad path-tüüpi nupu visuaalsed komponendid
 
-    [HtmlTargetElement("button1")]
-    public class ButtonTagHelper
+    [HtmlTargetElement("cyberbutton")]
+    public class ButtonTagHelper : TagHelper
     {
         public string Message { get; set; }
+
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            output.TagName = "<button>";
+            //string content = "< svg width = \"300\" height = \"130\" >" +
+            //    "< rect width = \"200\" height = \"50\" fill = \"white\" />" +
+            //    "< polygon points = \"0,0 0,20 20,0\" fill = \"red\" />" +
+            //    "< polygon points = \"200,50 200,30 180,50\" fill = \"red\" />" +
+            //    "< text > " +Message+ "</ text >  Sorry, your browser does not support inline SVG.</ svg >";
+            string content = @$"< svg width = '300' height = '130' >" +
+                "< rect width = '200' height = '50' fill = 'white' />" +
+                "< polygon points = '0,0 0,20 20,0' fill = 'red' />" +
+                "< polygon points = '200,50 200,30 180,50' fill = 'red' />" +
+                "< text > " + Message + "</ text >  Sorry, your browser does not support inline SVG.</ svg >";
+            output.Content.SetHtmlContent(content);
+        }
+
         //public override void Process(TagHelperContext context, TagHelperOutput output)
         //{
         //    output.TagName = "div"; //button1 is aliasing svg
@@ -30,5 +48,17 @@ namespace GalacticTitans.TagHelpers
         //    // Set the inner content of the SVG
         //    output.Content.SetHtmlContent(@"<circle cx='50' cy='50' r='40' stroke='green' stroke-width='4' fill='yellow' />beeboob");
         //}
+    }
+    [HtmlTargetElement("testbuttondiv")]
+    public class TestButtonDiv : TagHelper
+    {
+        public string Message { get; set; }
+
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            output.TagName = "div";
+            
+            output.Content.SetHtmlContent(Message);
+        }
     }
 }
