@@ -61,4 +61,16 @@ namespace GalacticTitans.TagHelpers
             output.Content.SetHtmlContent(Message);
         }
     }
+    [HtmlTargetElement("custom-svg")]
+    public class SvgButton : TagHelper
+    {
+        public string Message { get; set; }
+
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            output.TagName = "div";
+
+            output.Content.SetHtmlContent(Message);
+        }
+    }
 }
