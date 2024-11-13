@@ -1,0 +1,80 @@
+﻿@model GalacticTitans.Models.Titans.TitanDeleteViewModel
+
+<h1> @Html.DisplayFor(model => model.TitanName) </h1>
+
+<div>
+    <h4> My lord, thyne Titan, be in a state of DESPAIR: </h4>
+    <hr />
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="ID" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.ID)
+        </div>
+        <div class="form-group row">
+            <label asp-for="TitanName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanName)
+        </div>
+        <div id="imagediv">
+            @foreach (var image in Model.Image)
+            {
+                <partial name="_Images" model="image" />
+            }
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="TitanHealth" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanHealth)
+        </div>
+        <div class="form-group row">
+            <label asp-for="TitanLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanLevel)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="TitanXP" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanXP)
+        </div>
+        <div class="form-group row">
+            <label asp-for="TitanXPNextLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanXPNextLevel)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="TitanXPNextLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanXPNextLevel)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="TitanStatus" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.TitanStatus)
+        </div>
+
+
+
+        <div class="form-group row">
+            <label asp-for="PrimaryAttackName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.PrimaryAttackName)
+            <label asp-for="PrimaryAttackPower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.PrimaryAttackPower)
+        </div>
+        <div class="form-group row">
+            <label asp-for="SecondaryAttackName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SecondaryAttackName)
+            <label asp-for="SecondaryAttackPower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SecondaryAttackPower)
+        </div>
+        <div class="form-group row">
+            <label asp-for="SpecialAttackName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SpecialAttackName)
+            <label asp-for="SpecialAttackPower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SpecialAttackPower)
+        </div>
+
+    </dl>
+    <form asp-action="DeleteConfirmation">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" asp-controller="titans" class="btn btn-secondary">Index</a>
+    </form>
+
+</div>

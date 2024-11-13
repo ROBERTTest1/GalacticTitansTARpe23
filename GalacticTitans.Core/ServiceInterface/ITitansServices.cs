@@ -13,5 +13,6 @@ namespace GalacticTitans.Core.ServiceInterface
         Task<Titan> DetailsAsync(Guid id);
         Task<Titan> Create(TitanDto dto);
         Task<Titan> Update(TitanDto dto);
+        Task<Titan> Delete(Guid id);
     }
 }

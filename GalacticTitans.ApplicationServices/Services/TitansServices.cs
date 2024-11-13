@@ -80,7 +80,7 @@ namespace GalacticTitans.ApplicationServices.Services
             titan.TitanLevel = dto.TitanLevel;
             titan.TitanStatus = (Core.Domain.TitanStatus)dto.TitanStatus;
             titan.TitanWasBorn = dto.TitanWasBorn;
-            titan.TitanDied = (DateTime)dto.TitanDied;
+            titan.TitanDied = DateTime.Parse("01/01/9999 00:00:00");
 
             //set by user
             titan.TitanName = dto.TitanName;
@@ -105,6 +105,16 @@ namespace GalacticTitans.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return titan;
+        }
+
+        public async Task<Titan> Delete(Guid id)
+        {
+            var result = await _context.Titans
+                .FirstOrDefaultAsync(x => x.ID == id);
+            _context.Titans.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }

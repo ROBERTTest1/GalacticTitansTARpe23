@@ -11,5 +11,6 @@ namespace GalacticTitans.Core.ServiceInterface
     public interface IFileServices
     {
         void UploadFilesToDatabase(TitanDto dto, Titan domain);
+        Task<FileToDatabase> RemoveImageFromDatabase(FileToDatabaseDto dto);
     }
 }

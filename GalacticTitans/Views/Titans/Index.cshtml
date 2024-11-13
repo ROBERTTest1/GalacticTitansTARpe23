@@ -31,6 +31,10 @@
                     <td>@titan.TitanLevel</td>
                     <td>
                         <a asp-action="details" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDetails</a>
+                        <br />
+                        <a asp-action="update" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanConfigure</a>
+                        <br />
+                        <a asp-action="delete" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDelete</a>
                     </td>
                 </tr>
                 rowNumber++;

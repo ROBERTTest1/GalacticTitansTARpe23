@@ -15,11 +15,13 @@ namespace GalacticTitans.Controllers
 
         private readonly GalacticTitansContext _context;
         private readonly ITitansServices _titansServices;
+        private readonly IFileServices _fileServices;
 
-        public TitansController(GalacticTitansContext context, ITitansServices titansServices)
+        public TitansController(GalacticTitansContext context, ITitansServices titansServices, IFileServices fileServices)
         {
             _context = context;
             _titansServices = titansServices;
+            _fileServices = fileServices;
         }
 
         [HttpGet]
@@ -202,6 +204,69 @@ namespace GalacticTitans.Controllers
 
             if (result == null) { return RedirectToAction("Index"); }
             return RedirectToAction("Index", vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == null) { return NotFound(); }
+
+            var titan = await _titansServices.DetailsAsync(id);
+
+            if (titan == null) { return NotFound(); };
+
+            var images = await _context.FilesToDatabase
+                .Where(x => x.TitanID == id)
+                .Select( y => new TitanImageViewModel
+                {
+                    TitanID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+            var vm = new TitanDeleteViewModel();
+
+            vm.ID = titan.ID;
+            vm.TitanName = titan.TitanName;
+            vm.TitanHealth = titan.TitanHealth;
+            vm.TitanXP = titan.TitanXP;
+            vm.TitanXPNextLevel = titan.TitanXPNextLevel;
+            vm.TitanLevel = titan.TitanLevel;
+            vm.TitanType = (Models.Titans.TitanType)titan.TitanType;
+            vm.TitanStatus = (Models.Titans.TitanStatus)titan.TitanStatus;
+            vm.PrimaryAttackName = titan.PrimaryAttackName;
+            vm.PrimaryAttackPower = titan.PrimaryAttackPower;
+            vm.SecondaryAttackName = titan.SecondaryAttackName;
+            vm.SecondaryAttackPower = titan.SecondaryAttackPower;
+            vm.SpecialAttackName = titan.SpecialAttackName;
+            vm.SpecialAttackPower = titan.SpecialAttackPower;
+            vm.CreatedAt = titan.CreatedAt;
+            vm.UpdatedAt = DateTime.Now;
+            vm.Image.AddRange(images);
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var titanToDelete = await _titansServices.Delete(id);
+
+            if (titanToDelete == null) { return RedirectToAction("Index"); }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(TitanImageViewModel vm)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                ID = vm.ImageID
+            };
+            var image = await _fileServices.RemoveImageFromDatabase(dto);
+            if (image == null) { return RedirectToAction("Index"); }
+            return RedirectToAction("Index");
         }
     }
 }
