@@ -100,6 +100,15 @@
     border: 10px solid;
     border-color: rgb(77, 237, 255);
 }
+
+/*Error-klassid*/
+
+.galacticMessageTableError, .gMTE {
+    /*background-color: -webkit-linear-gradient(rgb(252, 255, 77), rgb(77, 237, 255)) !important;*/
+    border: 5px solid;
+    border-color: rgb(255, 66, 66);
+    -webkit-text-fill-color: transparent;
+}
 .galacticErrorMessageColor, .gXmc {
     /*background-color: -webkit-linear-gradient(rgb(252, 255, 77), rgb(77, 237, 255)rgb(242, 66, 255)rgb(255, 66, 66)) !important;*/
     /*    color: magenta !important;*/
