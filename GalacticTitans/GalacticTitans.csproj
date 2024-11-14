@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\ErrorPartial\SCRs\1xx\" />
+    <Folder Include="Views\ErrorPartial\SCRs\2xx\" />
+    <Folder Include="Views\ErrorPartial\SCRs\3xx\" />
+    <Folder Include="Views\ErrorPartial\SCRs\4xx\" />
+    <Folder Include="Views\ErrorPartial\SCRs\5xx\" />
+    <Folder Include="Views\ErrorPartial\SCRs\" />
     <Folder Include="wwwroot\lib\gameasset\font\" />
   </ItemGroup>
 

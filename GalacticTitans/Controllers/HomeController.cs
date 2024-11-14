@@ -28,5 +28,13 @@ namespace GalacticTitans.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult UnderConstructionError()
+        {
+            List<string> errordatas = ["Area", "Under Construction"];
+            ViewBag.ErrorDatas = errordatas;
+            return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
