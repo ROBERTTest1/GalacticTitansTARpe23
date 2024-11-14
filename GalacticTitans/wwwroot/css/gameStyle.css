@@ -118,8 +118,8 @@
 }
 .galacticWarningMessageColor, .gWmc {
     /*background-color: -webkit-linear-gradient(rgb(252, 255, 77), rgb(77, 237, 255)rgb(242, 66, 255)rgb(255, 66, 66)) !important;*/
-    /*    color: magenta !important;*/
-    background: -webkit-linear-gradient(rgb(252, 255, 77), rgb(245, 221, 39));
+    /*    color: magenta !important; rgb(252, 255, 77)*/
+    background: -webkit-linear-gradient(rgb(255, 255, 97), rgb(245, 221, 39));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
