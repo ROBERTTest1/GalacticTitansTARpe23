@@ -1,0 +1,36 @@
+﻿@{
+    List<string> errordatas = ViewBag.ErrorDatas;
+    bool IsThereData = false;
+    if (errordatas != null)
+    {
+        IsThereData = true;
+    }
+}
+
+<p class="gTZRG">
+    <span class="gWmc">Apologies for the inconvenience, but this area is currently under construction.</span>
+    <br />
+    @{
+        if (IsThereData)
+        {
+            <span class="gWmc">Please check back later. EMC: 00-?? "under construction", data given:</span><br />
+            <table class="gWmc gTZRG gMTE">
+                @for (int i = 0; i < errordatas.Count(); i += 2)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@errordatas[i]</td>
+                        <td>: </td>
+                        <td> :</td>
+                        <td class="gXmc">@errordatas[i + 1]</td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <span class="gWmc">Please check back later. EMC: 00-00 "under construction", no data given.</span>
+        }
+    }
+</p>

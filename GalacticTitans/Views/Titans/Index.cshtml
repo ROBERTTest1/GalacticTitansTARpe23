@@ -6,11 +6,42 @@
         <a asp-action="Create" asp-controller="Titans" class="btn btn-primary">Create new titan</a>
     </div>
     @* User can go on mission using ADD function, to obtain a new titan. In controller, this is called "PlayerSoloMission" *@
+@{
+    int rowNumber = 1;
+    int currentRow = 1;
+    int currentTile = 1;
+    int tilesInRow = 6;
+}
+    <div>
+        <svg width="120" height="120">
+        <a asp-action="Add" asp-controller="Titans" type="submit" class="gButton1 gButton1-normal">
+                <path d="M 0 0 L 120 0 L 120 120 L 60 80 L 0 120 Z fill="#FF0000" />
+                <text x="60" y="50" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">Go on mission for a new titan</text>
+@*     dv        https://www.w3schools.com/graphics/tryit.asp?filename=trysvg_path2 *@
+            </a>
+        </svg>
 
-    <div class="h1">Your Titans:</div>
+    </div>
+    @* User can go on mission using ADD function, to obtain a new titan. In controller, this is called "PlayerSoloMission" *@
+    @* As a temporary function, currently, user gets to add and customize their titan *@
+
+    <div class="h1 gTZRG">Your Titans:</div>
     <form method="post">
         <table class="table table-hover">
             <thead>
+            @if (!Model.Any())
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <th scope="col" colspan="4" class="gTZRG">
+                        <span class="gXmc">Sorry, it appears that</span>
+                        <span class="isPlayerName">#playernamehere#</span> 
+                        <span class="gXmc">does not have any Titans yet.</span>
+                    </th>
+                </tr>
+            }
+            else
+            {
                 <tr>
                     @* Later, once images have been implemented, add image here aswell *@
                     <th scope="col">#</th>
@@ -19,11 +50,20 @@
                     <th scope="col">Level</th>
                     <th scope="col">Admin Actions</th>
                 </tr>
+            }
+
+
             </thead>
             <tbody>
-            @foreach (var titan in Model)
+            @if (!Model.Any() )
             {
-                <tr>
+                <table class="gTB">
+                    <tr class="gTZRG"><td colspan="2">TitanName</td></tr>
+                    <tr class="gTZRG"><td colspan="2"><img src="~/lib/gameasset/image/premadetitans/captainobvious.png" /></td></tr>
+                    <tr class="gTZRG"><td>Type</td><td>Level</td></tr>
+                    <tr class="gTZRG"><td colspan="2">XPBAROBJECT</td></tr>
+                </table>
+@*                 <tr> *@
                     @* Later, once images have been implemented, add image here aswell *@
                     <td>@rowNumber</td>
                     <td>@titan.TitanName</td>
@@ -39,9 +79,48 @@
                 </tr>
                 rowNumber++;
             }
+            else
+            {
+                @foreach (var titan in Model)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>@titan.TitanName</td>
+                        <td>@titan.TitanType</td>
+                        <td>@titan.TitanLevel</td>
+                    </tr>
+                    rowNumber++;
+                } 
+            }
+
         </tbody>
         </table>
     </form>
+    <button1 message="test"></button1>
+@*     <svg width="300" height="130">
+        <rect width="200" height="50" fill="white" />
+        <polygon points="0,0 0,20 20,0" fill="red" />
+        <polygon points="200,50 200,30 180,50" fill="red" />
+        <text fill="#dcef44" x="150" y="65" text-anchor="middle" alignment-baseline="middle">pastesvg</text>
+        Sorry, your browser does not support inline SVG.
+    </svg> *@
+
     @* Missing Button for player profile *@
     @* Missing Button for solar system page *@
     @* Missing Button for player activity history *@
+
+@* 
+                        svg codes
+
+<svg width="300" height="130">
+  <rect width="200" height="50" fill="white" />
+  <polygon points="0,0 0,20 20,0" fill="red" />
+  <polygon points="200,50 200,30 180,50" fill="red" />
+  <text>Message</text>
+  Sorry, your browser does not support inline SVG.
+</svg>
+
+this is button template - particulate, so that one svg can be used for many buttons.
+
+ *@
