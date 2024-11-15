@@ -27,7 +27,7 @@
 
     <div class="h1 gTZRG">Your Titans:</div>
     <form method="post">
-        <table class="table table-hover">
+        <table class="">
             <thead>
             @if (!Model.Any())
             {
@@ -68,8 +68,16 @@
                 {
                 <td>
                     <table class="gTB">
-                        <tr class="gTZRG"><td colspan="2">@titan.TitanName</td></tr>
-                        <tr class="gTZRG"><td colspan="2"><img width="256" src="~/lib/gameasset/image/premadetitans/NotImplementedImage.png" /></td></tr>
+                        <tr class="gTZRG"><td colspan="2">@titan.TitanName</td></tr>@* 
+                        <tr class="gTZRG"><td colspan="2"><img width="256" src="@titan.Image.FirstOrDefault()" model="image" /></td></tr> *@
+                        <tr class="gTZRG">
+                            <td colspan="2">
+                                @foreach (var image in titan.Image)
+                                {
+                                <partial name="_ImageIndex" model="image" />
+                                }
+                            </td>
+                        </tr>
                         <tr class="gTZRG"><td>@titan.TitanType</td><td>@titan.TitanLevel</td></tr>
                         <tr class="gTZRG"><td colspan="2">XPBAROBJECT</td></tr>
                     </table>

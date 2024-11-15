@@ -35,6 +35,7 @@ namespace GalacticTitans.Core.Domain
         public DateTime TitanWasBorn { get; set; }
         public DateTime TitanDied { get; set; }
 
+
         //db only
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
