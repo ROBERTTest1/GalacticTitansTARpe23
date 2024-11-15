@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITitansServices, TitansServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
 builder.Services.AddDbContext<GalacticTitansContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("UnstableBranchConnection")));
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

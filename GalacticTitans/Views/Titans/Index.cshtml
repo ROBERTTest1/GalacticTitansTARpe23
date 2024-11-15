@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<GalacticTitans.Models.Titans.TitanIndexViewModel>
 
-    @{ int rowNumber = 1; }
-    <div>
-        <a asp-action="Add" asp-controller="Titans" type="submit" class="btn btn-primary">Go on mission for a new titan</a>
-        <a asp-action="Create" asp-controller="Titans" class="btn btn-primary">Create new titan</a>
-    </div>
-    @* User can go on mission using ADD function, to obtain a new titan. In controller, this is called "PlayerSoloMission" *@
 @{
     int rowNumber = 1;
     int currentRow = 1;
     int currentTile = 1;
     int tilesInRow = 6;
 }
+    <div>
+        <a asp-action="Add" asp-controller="Titans" type="submit" class="btn btn-primary">Go on mission for a new titan</a>
+        <a asp-action="Create" asp-controller="Titans" class="btn btn-primary">Create new titan</a>
+    </div>
+    @* User can go on mission using ADD function, to obtain a new titan. In controller, this is called "PlayerSoloMission" *@
+
     <div>
         <svg width="120" height="120">
         <a asp-action="Add" asp-controller="Titans" type="submit" class="gButton1 gButton1-normal">
@@ -44,10 +44,7 @@
             {
                 <tr>
                     @* Later, once images have been implemented, add image here aswell *@
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Level</th>
+                    <th scope="col">Card</th>
                     <th scope="col">Admin Actions</th>
                 </tr>
             }
@@ -63,33 +60,27 @@
                     <tr class="gTZRG"><td>Type</td><td>Level</td></tr>
                     <tr class="gTZRG"><td colspan="2">XPBAROBJECT</td></tr>
                 </table>
-@*                 <tr> *@
-                    @* Later, once images have been implemented, add image here aswell *@
-                    <td>@rowNumber</td>
-                    <td>@titan.TitanName</td>
-                    <td>@titan.TitanType</td>
-                    <td>@titan.TitanLevel</td>
-                    <td>
-                        <a asp-action="details" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDetails</a>
-                        <br />
-                        <a asp-action="update" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanConfigure</a>
-                        <br />
-                        <a asp-action="delete" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDelete</a>
-                    </td>
-                </tr>
                 rowNumber++;
             }
             else
             {
                 @foreach (var titan in Model)
                 {
-                    <tr>
-                        @* Later, once images have been implemented, add image here aswell *@
-                        <td>@rowNumber</td>
-                        <td>@titan.TitanName</td>
-                        <td>@titan.TitanType</td>
-                        <td>@titan.TitanLevel</td>
-                    </tr>
+                <td>
+                    <table class="gTB">
+                        <tr class="gTZRG"><td colspan="2">@titan.TitanName</td></tr>
+                        <tr class="gTZRG"><td colspan="2"><img width="256" src="~/lib/gameasset/image/premadetitans/NotImplementedImage.png" /></td></tr>
+                        <tr class="gTZRG"><td>@titan.TitanType</td><td>@titan.TitanLevel</td></tr>
+                        <tr class="gTZRG"><td colspan="2">XPBAROBJECT</td></tr>
+                    </table>
+                </td>
+                <td>
+                        <a asp-action="details" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDetails</a>
+                        <br />
+                        <a asp-action="update" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanConfigure</a>
+                        <br />
+                        <a asp-action="delete" asp-controller="titans" asp-route-id="@titan.ID" class="btn btn-info">TitanDelete</a>
+                </td>
                     rowNumber++;
                 } 
             }
