@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>
+
+@{
+    bool devflag = true;
+
+    int rowNumber = 1;
+}
+<div class="gTZRG"><a asp-action="Create" asp-controller="AstralBodies" type="submit" class="btn btn-primary gTZRG">Create new planet</a></div>
+@* Admin Control for adding a new astral body of X type into the DB *@
+
+<div class="h1">All planets:</div>
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                @* Later, once images have been implemented, add image here aswell *@
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name of Planet</th>
+                <th scope="col">Type of Astral Body</th>
+                <th scope="col">Boost type</th>
+                <th scope="col">Settlement Count</th>
+                <th scope="col">Kardashev Scale</th>
+                <th scope="col">Belongs to solar system:</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var planet in Model)
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <td>@rowNumber</td>
+                    <td>@planet.ID</td>
+                    <td>@planet.AstralBodyName</td>
+                    <td>@planet.AstralBodyType</td>
+                    <td>@planet.EnvironmentBoost</td>
+                    <td>@planet.MajorSettlements</td>
+                    <td>@planet.TechnicalLevel</td>
+                    <td>@planet.SolarSystemID</td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+</form>

@@ -28,6 +28,7 @@
     <Folder Include="Views\ErrorPartial\SCRs\4xx\" />
     <Folder Include="Views\ErrorPartial\SCRs\5xx\" />
     <Folder Include="Views\ErrorPartial\SCRs\" />
+    <Folder Include="Views\AstralBodies\" />
     <Folder Include="Views\Planets\" />
     <Folder Include="wwwroot\lib\gameasset\font\" />
   </ItemGroup>
