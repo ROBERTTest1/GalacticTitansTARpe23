@@ -1,16 +1,12 @@
 ﻿using GalacticTitans.Core.Domain;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GalacticTitans.Models.Titans;
+using TitanType = GalacticTitans.Models.Titans.TitanType;
 
-namespace GalacticTitans.Core.Dto
+namespace GalacticTitans.Models.AstralBodies
 {
-    public class AstralBodyDto
+    public class AstralBodyCreateUpdateViewModel
     {
-        public Guid ID { get; set; }
+        public Guid? ID { get; set; }
         public string AstralBodyName { get; set; }
         public AstralBodyType AstralBodyType { get; set; }
         public TitanType EnvironmentBoost { get; set; }
@@ -18,17 +14,16 @@ namespace GalacticTitans.Core.Dto
         public int MajorSettlements { get; set; }
         public KardashevScale TechnicalLevel { get; set; }
         //public List<Titan> TitansWhoOwnThisPlanet { get; set; }
-        public Titan? TitanWhoOwnsThisPlanet { get; set; }
+        public Titan TitanWhoOwnsThisPlanet { get; set; }
         //public Guid PlayerProfileID { get; set; }
-        public Guid? SolarSystemID { get; set; }
+        public Guid SolarSystemID { get; set; }
 
-        //image 
+        //image
         public List<IFormFile> Files { get; set; }
-        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
+        public List<TitanImageViewModel> Image { get; set; } = new List<TitanImageViewModel>();
 
-        //db
+        //db only
         public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
-
+        public DateTime UpdatedAt { get; set; }
     }
 }

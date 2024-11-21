@@ -1,4 +1,5 @@
-﻿using GalacticTitans.Core.ServiceInterface;
+﻿using GalacticTitans.Core.Dto;
+using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models.AstralBodies;
 using GalacticTitans.Models.Titans;
@@ -44,6 +45,41 @@ namespace GalacticTitans.Controllers
                     //   })
                 });
             return View(allPlanets);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            AstralBodyCreateUpdateViewModel vm = new();
+            return View("Create", vm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(AstralBodyCreateUpdateViewModel vm)
+        {
+            // this make new, do not add guid
+            var dto = new AstralBodyDto()
+            {
+                AstralBodyName = vm.AstralBodyName,
+                AstralBodyType = vm.AstralBodyType,
+                EnvironmentBoost = (Core.Dto.TitanType)vm.EnvironmentBoost,
+                AstralBodyDescription = vm.AstralBodyDescription,
+                MajorSettlements = vm.MajorSettlements,
+                TechnicalLevel = vm.TechnicalLevel,
+                //no titan owns a planet that has been created by admin
+                //and no planet is assigned to a solar system in the planet creation view
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+                //Files = vm.Files,
+                //Image = vm.Image
+                //.Select(x => new FileToDatabaseDto
+                //{
+                //    ID = x.ImageID,
+                //    ImageData = x.ImageData,
+                //    ImageTitle = x.ImageTitle,
+                //    AstralBodyID = x.AstralBodyID
+                //}).ToArray()
+            };
         }
     }
 }

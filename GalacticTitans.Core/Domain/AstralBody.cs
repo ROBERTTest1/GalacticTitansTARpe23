@@ -50,9 +50,9 @@ namespace GalacticTitans.Core.Domain
         public int MajorSettlements { get; set; }
         public KardashevScale TechnicalLevel { get; set; }
         //public List<Titan> TitansWhoOwnThisPlanet { get; set; }
-        public Titan TitanWhoOwnsThisPlanet { get; set; }
+        public Titan? TitanWhoOwnsThisPlanet { get; set; }
         //public Guid PlayerProfileID { get; set; }
-        public Guid SolarSystemID { get; set; }
+        public Guid? SolarSystemID { get; set; }
 
         //db
         public DateTime CreatedAt { get; set; }
