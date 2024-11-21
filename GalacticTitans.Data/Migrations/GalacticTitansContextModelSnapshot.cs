@@ -22,6 +22,51 @@ namespace GalacticTitans.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("GalacticTitans.Core.Domain.AstralBody", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AstralBodyDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AstralBodyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AstralBodyType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EnvironmentBoost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MajorSettlements")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("SolarSystemID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TechnicalLevel")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TitanWhoOwnsThisPlanetID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("TitanWhoOwnsThisPlanetID");
+
+                    b.ToTable("AstralBodies");
+                });
+
             modelBuilder.Entity("GalacticTitans.Core.Domain.FileToDatabase", b =>
                 {
                     b.Property<Guid>("ID")
@@ -108,6 +153,17 @@ namespace GalacticTitans.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Titans");
+                });
+
+            modelBuilder.Entity("GalacticTitans.Core.Domain.AstralBody", b =>
+                {
+                    b.HasOne("GalacticTitans.Core.Domain.Titan", "TitanWhoOwnsThisPlanet")
+                        .WithMany()
+                        .HasForeignKey("TitanWhoOwnsThisPlanetID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TitanWhoOwnsThisPlanet");
                 });
 #pragma warning restore 612, 618
         }

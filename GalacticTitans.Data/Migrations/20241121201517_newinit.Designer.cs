@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GalacticTitans.Data.Migrations
 {
     [DbContext(typeof(GalacticTitansContext))]
-    [Migration("20241018064727_initunstanble")]
-    partial class initunstanble
+    [Migration("20241121201517_newinit")]
+    partial class newinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,73 @@ namespace GalacticTitans.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GalacticTitans.Core.Domain.AstralBody", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AstralBodyDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AstralBodyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AstralBodyType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EnvironmentBoost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MajorSettlements")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("SolarSystemID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TechnicalLevel")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TitanWhoOwnsThisPlanetID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("TitanWhoOwnsThisPlanetID");
+
+                    b.ToTable("AstralBodies");
+                });
+
+            modelBuilder.Entity("GalacticTitans.Core.Domain.FileToDatabase", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TitanID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FilesToDatabase");
+                });
 
             modelBuilder.Entity("GalacticTitans.Core.Domain.Titan", b =>
                 {
@@ -89,6 +156,17 @@ namespace GalacticTitans.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Titans");
+                });
+
+            modelBuilder.Entity("GalacticTitans.Core.Domain.AstralBody", b =>
+                {
+                    b.HasOne("GalacticTitans.Core.Domain.Titan", "TitanWhoOwnsThisPlanet")
+                        .WithMany()
+                        .HasForeignKey("TitanWhoOwnsThisPlanetID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TitanWhoOwnsThisPlanet");
                 });
 #pragma warning restore 612, 618
         }
