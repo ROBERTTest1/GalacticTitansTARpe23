@@ -51,7 +51,7 @@ namespace GalacticTitans.Controllers
         public IActionResult Create()
         {
             AstralBodyCreateUpdateViewModel vm = new();
-            return View("Create", vm);
+            return View("CreateUpdate", vm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
