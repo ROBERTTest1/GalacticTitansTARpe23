@@ -32,7 +32,7 @@ namespace GalacticTitans.Controllers
                     EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
-                    SolarSystemID = x.SolarSystemID,
+                    SolarSystemID = (Guid)x.SolarSystemID,
                     //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
                     //   .Where(t => t.TitanID == x.ID)
                     //   .Select(z => new AstralBodyIndexViewModel
@@ -70,16 +70,22 @@ namespace GalacticTitans.Controllers
                 //and no planet is assigned to a solar system in the planet creation view
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
-                //Files = vm.Files,
-                //Image = vm.Image
-                //.Select(x => new FileToDatabaseDto
-                //{
-                //    ID = x.ImageID,
-                //    ImageData = x.ImageData,
-                //    ImageTitle = x.ImageTitle,
-                //    AstralBodyID = x.AstralBodyID
-                //}).ToArray()
+                Files = vm.Files,
+                Image = vm.Image
+                .Select(x => new FileToDatabaseDto
+                {
+                    ID = x.ImageID,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    AstralBodyID = x.AstralBodyID
+                }).ToArray()
             };
+            var addedPlanet = await _astralBodiesServices.Create(dto);
+            if (addedPlanet == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", vm);
         }
     }
 }

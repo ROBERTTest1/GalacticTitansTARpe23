@@ -20,7 +20,7 @@ namespace GalacticTitans.Models.AstralBodies
 
         //image
         public List<IFormFile> Files { get; set; }
-        public List<TitanImageViewModel> Image { get; set; } = new List<TitanImageViewModel>();
+        public List<AstralBodyImageViewModel> Image { get; set; } = new List<AstralBodyImageViewModel>();
 
         //db only
         public DateTime CreatedAt { get; set; }
