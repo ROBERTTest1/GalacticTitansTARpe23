@@ -1,6 +1,7 @@
 ﻿using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models.AstralBodies;
+using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,12 +11,12 @@ namespace GalacticTitans.Controllers
     {
         private readonly GalacticTitansContext _context;
         private readonly IFileServices _fileServices;
-        //private readonly IAstralBodiesServices _astralBodiesServices;
-        public AstralBodiesController(GalacticTitansContext context, /*IAstralBodiesServices _astralBodiesServices,*/ IFileServices fileServices)
+        private readonly IAstralBodiesServices _astralBodiesServices;
+        public AstralBodiesController(GalacticTitansContext context, IAstralBodiesServices astralBodiesServices, IFileServices fileServices)
         {
             _context = context;
             _fileServices = fileServices;
-            //_astralBodiesServices = astralBodiesServices;
+            _astralBodiesServices = astralBodiesServices;
         }
         [HttpGet]
         public IActionResult Index()
