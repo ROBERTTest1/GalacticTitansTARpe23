@@ -10,7 +10,7 @@
 
 <div class="h1 gTZRG">All planets:</div>
 <form method="post">
-    <table class="table gTZRG">
+    <table class="table gHT gTZRG">
         <thead class="isCommonWhite">
             <tr>
                 @* Later, once images have been implemented, add image here aswell *@
@@ -26,7 +26,7 @@
 
             </tr>
         </thead>
-        <tbody class="isCommonYellow">
+        <tbody class="isCommonBlue">
             @if (!Model.Any())
             {
                 <tr>
@@ -59,9 +59,9 @@
                         <td>@planet.TechnicalLevel</td>
                         <td>@planet.SolarSystemID</td>
                         <td>
-                            @*
+                            
                     <a asp-action="details" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">INFO</a>
-                    <a asp-action="update" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">EDIT</a>
+                @*    <a asp-action="update" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">EDIT</a>
                     <a asp-action="delete" asp-controller="astralbodies" asp-route-id="planet.ID" class="btn btn-light">DEL</a>
                     *@
                         </td>

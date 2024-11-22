@@ -95,6 +95,7 @@ namespace GalacticTitans.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Details(Guid id)
         {
+            ViewData["RequestedView"] = "Details";
             var dto = await _astralBodiesServices.DetailsAsync(id);
 
             if (dto == null)
@@ -127,7 +128,7 @@ namespace GalacticTitans.Controllers
             vm.ModifiedAt = dto.ModifiedAt;
             vm.Image.AddRange(images);
 
-            return View(vm);
+            return View("DetailsDelete",vm);
         }
     }
 }

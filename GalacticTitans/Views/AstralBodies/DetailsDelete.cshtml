@@ -1,0 +1,67 @@
+﻿@model GalacticTitans.Models.AstralBodies.AstralBodyDetailsDeleteViewModel
+@if (ViewData["RequestedView"] == "Details")
+{
+    <h1 class="gTZRG">@Model.AstralBodyName</h1>
+}
+else
+{
+    <h1 class="gTZRG">Delete @Model.AstralBodyName ?</h1>
+}
+<div class="gTZRG gTB">
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="ModifiedAt" type="hidden" />
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="5"> planetimage here </th>
+                    <th>planetname</th>
+                </tr>
+                <tr>
+                    <td>planettype</td>
+                </tr>
+                <tr>
+                    <td>settlementcount</td>
+                </tr>
+                <tr>
+                    <td>technicals</td>
+                </tr>
+                <tr>
+                    <td>environmentboost</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">description</td>
+                </tr>
+                <tr>
+                    <td>currentowner</td>
+                    <td>titanid</td>
+                </tr>
+                <tr>
+                    <td>whereis</td>
+                    <td>solarsystemid</td>
+                </tr>
+                <tr>
+                    <td>actions</td>
+                    <td>
+                        @if (ViewData["RequestedView"] == "Details")
+                        {
+                            <a asp-action="index" class="btn btn-primary">Back</a>
+                        }
+                        else
+                        {
+                            <input asp-action="Delete"
+                                   asp-controller="AstralBodies"
+                                   type="submit"
+                                   class="btn btn-primary"
+                                   value="Thanos snap" />
+                            <a asp-action="index" class="btn btn-primary">Cancel</a>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
