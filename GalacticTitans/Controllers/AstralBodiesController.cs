@@ -1,10 +1,13 @@
 ﻿using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
+using GalacticTitans.Models;
 using GalacticTitans.Models.AstralBodies;
 using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 namespace GalacticTitans.Controllers
 {
@@ -86,6 +89,45 @@ namespace GalacticTitans.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", vm);
+        }
+
+        [HttpGet]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var dto = await _astralBodiesServices.DetailsAsync(id);
+
+            if (dto == null)
+            {
+                List<string> errordatas = ["Area", "Planets", "Issue", "var dto == null", "StatusMessage", "This planet was not found"];
+                ViewBag.ErrorDatas = errordatas;
+                return RedirectToAction("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+            var images = await _context.FilesToDatabase
+                .Where(x => x.AstralBodyID == id)
+                .Select(y => new AstralBodyImageViewModel
+                {
+                    AstralBodyID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+            var vm = new AstralBodyDetailsDeleteViewModel();
+
+            vm.ID = dto.ID;
+            vm.AstralBodyName = dto.AstralBodyName;
+            vm.AstralBodyDescription = dto.AstralBodyDescription;
+            vm.TechnicalLevel = dto.TechnicalLevel;
+            vm.MajorSettlements = dto.MajorSettlements;
+            vm.AstralBodyType = dto.AstralBodyType;
+            vm.EnvironmentBoost = dto.EnvironmentBoost;
+            vm.SolarSystemID = dto.SolarSystemID;
+            vm.CreatedAt = dto.CreatedAt;
+            vm.ModifiedAt = dto.ModifiedAt;
+            vm.Image.AddRange(images);
+
+            return View(vm);
         }
     }
 }
