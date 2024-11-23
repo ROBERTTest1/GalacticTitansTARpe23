@@ -1,0 +1,28 @@
+﻿@model GalacticTitans.Models.AstralBodies.AstralBodyImageViewModel
+
+<div>
+    <div>
+        @if (!Model.Image.Any())
+        {
+            <p>"No images are found"</p>
+        }
+    </div>
+    @if (ViewData["IsAnimated"] == "false")
+    {
+        @if (Model.ImageTitle == "LongViewStatic.png")
+        {
+            <img width="256" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+        }
+    }
+    else if (ViewData["IsAnimated"] == "true")
+    {
+        @if (Model.ImageTitle == "LongViewAnimated.gif")
+        {
+            <img width="256" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+        }
+    }
+    else
+    {
+        <p>"Image type is not defined"</p>        
+    }
+</div>

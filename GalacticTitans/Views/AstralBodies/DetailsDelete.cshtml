@@ -2,10 +2,12 @@
 @if (ViewData["RequestedView"] == "Details")
 {
     <h1 class="gTZRG">@Model.AstralBodyName</h1>
+    ViewData["IsAnimated"] = "true";
 }
 else
 {
     <h1 class="gTZRG">Delete @Model.AstralBodyName ?</h1>
+    ViewData["IsAnimated"] = "true";
 }
 <div class="gTZRG gTB">
     <form method="post" enctype="multipart/form-data">
@@ -15,33 +17,45 @@ else
         <table>
             <thead>
                 <tr>
-                    <th rowspan="5"> planetimage here </th>
-                    <th>planetname</th>
+                    <th rowspan="5">
+                        @foreach (var image in Model.Image)
+                        {
+                            if (image.ImageTitle == "LongViewAnimated.gif" && ViewData["IsAnimated"] == "true")
+                            {
+                                <partial name="_Images" model="image" />                                
+                            }
+                            if (image.ImageTitle == "LongViewStatic.png" && ViewData["IsAnimated"] == "false")
+                            {
+                                <partial name="_Images" model="image" />
+                            }
+                        }
+                    </th>
+                    <th>@Model.AstralBodyName</th>
                 </tr>
                 <tr>
-                    <td>planettype</td>
+                    <td>@Model.AstralBodyType</td>
                 </tr>
                 <tr>
-                    <td>settlementcount</td>
+                    <td>@Model.MajorSettlements</td>
                 </tr>
                 <tr>
-                    <td>technicals</td>
+                    <td>@Model.TechnicalLevel</td>
                 </tr>
                 <tr>
-                    <td>environmentboost</td>
+                    <td>Titans of type @Model.EnvironmentBoost are boosted</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="2">description</td>
+                    <td colspan="2">@Model.AstralBodyDescription</td>
                 </tr>
                 <tr>
                     <td>currentowner</td>
-                    <td>titanid</td>
+                    <td>@Model.TitanWhoOwnsThisPlanet</td>
                 </tr>
                 <tr>
                     <td>whereis</td>
-                    <td>solarsystemid</td>
+                    <td>@Model.SolarSystemID</td>
                 </tr>
                 <tr>
                     <td>actions</td>
