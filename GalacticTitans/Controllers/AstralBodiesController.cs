@@ -102,7 +102,7 @@ namespace GalacticTitans.Controllers
             {
                 List<string> errordatas = ["Area", "Planets", "Issue", "var dto == null", "StatusMessage", "This planet was not found"];
                 ViewBag.ErrorDatas = errordatas;
-                return RedirectToAction("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return View("~/Views/Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
             var images = await _context.FilesToDatabase
                 .Where(x => x.AstralBodyID == id)
@@ -128,7 +128,45 @@ namespace GalacticTitans.Controllers
             vm.ModifiedAt = dto.ModifiedAt;
             vm.Image.AddRange(images);
 
-            return View("DetailsDelete",vm);
+            return View("DetailsDelete", vm);
+        }
+        [HttpGet]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            ViewData["RequestedView"] = "Delete";
+            var deletableAstralBody = await _astralBodiesServices.DetailsAsync(id);
+            if (deletableAstralBody == null)
+            {
+                List<string> errordatas = ["Area", "Planets", "Issue", "var deletableAstralBody == null", "StatusMessage", "This planet was not found"];
+                ViewBag.ErrorDatas = errordatas;
+                return View("~/Views/Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+            var images = await _context.FilesToDatabase
+                .Where(x => x.AstralBodyID == id)
+                .Select(y => new AstralBodyImageViewModel
+                {
+                    AstralBodyID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+            var vm = new AstralBodyDetailsDeleteViewModel();
+
+            vm.ID = deletableAstralBody.ID;
+            vm.AstralBodyName = deletableAstralBody.AstralBodyName;
+            vm.AstralBodyDescription = deletableAstralBody.AstralBodyDescription;
+            vm.TechnicalLevel = deletableAstralBody.TechnicalLevel;
+            vm.MajorSettlements = deletableAstralBody.MajorSettlements;
+            vm.AstralBodyType = deletableAstralBody.AstralBodyType;
+            vm.EnvironmentBoost = deletableAstralBody.EnvironmentBoost;
+            vm.SolarSystemID = deletableAstralBody.SolarSystemID;
+            vm.CreatedAt = deletableAstralBody.CreatedAt;
+            vm.ModifiedAt = deletableAstralBody.ModifiedAt;
+            vm.Image.AddRange(images);
+
+            return View("DetailsDelete", vm);
         }
     }
 }
