@@ -7,5 +7,11 @@ Branchlist:
 - 2-Users: Branch for implementation of user system with login and registration
 - 3-Planets: Branch for implementing second object to the game necessary for gameplay
 -----------------------------------------------------
+How to run:
+- fetch
+- pull
+- update local database, or make new migration and then update
+- run on IIS Express 
+-----------------------------------------------------
 See the .docx for current software requirements
 -----------------------------------------------------
