@@ -245,7 +245,7 @@ namespace GalacticTitans.Controllers
             vm.EnvironmentBoost = deletableAstralBody.EnvironmentBoost;
             vm.SolarSystemID = deletableAstralBody.SolarSystemID;
             vm.CreatedAt = deletableAstralBody.CreatedAt;
-            vm.ModifiedAt = deletableAstralBody.ModifiedAt;
+            vm.ModifiedAt = DateTime.Now;
             vm.Image.AddRange(images);
 
             return View("DetailsDelete", vm);

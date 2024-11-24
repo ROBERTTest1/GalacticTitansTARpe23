@@ -71,6 +71,34 @@ namespace GalacticTitans.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return newPlanet;
         }
+
+        public async Task<AstralBody> Update(AstralBodyDto dto)
+        {
+            AstralBody astralChangedBody = new();
+
+            astralChangedBody.ID = dto.ID;
+            astralChangedBody.AstralBodyName = dto.AstralBodyName;
+            astralChangedBody.AstralBodyType = dto.AstralBodyType;
+            astralChangedBody.EnvironmentBoost = (Core.Domain.TitanType)dto.EnvironmentBoost;
+            astralChangedBody.AstralBodyDescription = dto.AstralBodyDescription;
+            astralChangedBody.MajorSettlements = dto.MajorSettlements;
+            astralChangedBody.TechnicalLevel = dto.TechnicalLevel;
+            astralChangedBody.TitanWhoOwnsThisPlanet = dto.TitanWhoOwnsThisPlanet;
+            astralChangedBody.SolarSystemID = dto.SolarSystemID;
+            astralChangedBody.CreatedAt = dto.CreatedAt;
+            astralChangedBody.ModifiedAt = DateTime.Now;
+
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, astralChangedBody);
+            }
+
+            _context.AstralBodies.Update(astralChangedBody);
+            await _context.SaveChangesAsync();
+            return astralChangedBody;
+
+        }
+
         public async Task<AstralBody> Delete(Guid id)
         {            
             var result = await _context.AstralBodies.FirstOrDefaultAsync(x => x.ID == id);

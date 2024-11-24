@@ -13,5 +13,6 @@ namespace GalacticTitans.Core.ServiceInterface
         Task<AstralBody> DetailsAsync(Guid id);
         Task<AstralBody> Create(AstralBodyDto dto);
         Task<AstralBody> Delete(Guid id);
+        Task<AstralBody> Update(AstralBodyDto dto);
     }
 }
