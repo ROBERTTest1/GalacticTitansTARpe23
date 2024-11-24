@@ -130,6 +130,88 @@ namespace GalacticTitans.Controllers
 
             return View("DetailsDelete", vm);
         }
+
+        [HttpGet]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var astralBodyToBeUpdated = await _astralBodiesServices.DetailsAsync(id);
+            if (astralBodyToBeUpdated == null)
+            {
+                List<string> errordatas = ["Area", "Planets", "Issue", "var astralBodyToBeUpdated == null", "StatusMessage", "Planet with this ID is null"];
+                ViewBag.ErrorDatas = errordatas;
+                return View("~/Views/Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+            var images = await _context.FilesToDatabase
+                .Where(x => x.AstralBodyID == id)
+                .Select(y => new AstralBodyImageViewModel
+                {
+                    AstralBodyID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
+            var vm = new AstralBodyCreateUpdateViewModel();
+
+            vm.ID = astralBodyToBeUpdated.ID;
+            vm.AstralBodyName = astralBodyToBeUpdated.AstralBodyName;
+            vm.AstralBodyType = astralBodyToBeUpdated.AstralBodyType;
+            vm.EnvironmentBoost = (Models.Titans.TitanType)astralBodyToBeUpdated.EnvironmentBoost;
+            vm.AstralBodyDescription = astralBodyToBeUpdated.AstralBodyDescription;
+            vm.MajorSettlements = astralBodyToBeUpdated.MajorSettlements;
+            vm.TechnicalLevel = astralBodyToBeUpdated.TechnicalLevel;
+            vm.TitanWhoOwnsThisPlanet = astralBodyToBeUpdated.TitanWhoOwnsThisPlanet;
+            vm.SolarSystemID = astralBodyToBeUpdated.SolarSystemID;
+            vm.CreatedAt = astralBodyToBeUpdated.CreatedAt;
+            vm.UpdatedAt = astralBodyToBeUpdated.ModifiedAt;
+            vm.Image.AddRange(images);
+
+            return View("CreateUpdate", vm);
+        }
+
+        //for the time being, create and update post methods are separate with only 2
+        //differences between them, in the future, these can be combined into one method
+        //it is 23:01 and i cant be assed to figure that shit our rn, so this is what you get.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(AstralBodyCreateUpdateViewModel vm)
+        {
+            // this make new, do not add guid
+            var dto = new AstralBodyDto()
+            {
+                ID = (Guid)vm.ID,
+                AstralBodyName = vm.AstralBodyName,
+                AstralBodyType = vm.AstralBodyType,
+                EnvironmentBoost = (Core.Dto.TitanType)vm.EnvironmentBoost,
+                AstralBodyDescription = vm.AstralBodyDescription,
+                MajorSettlements = vm.MajorSettlements,
+                TechnicalLevel = vm.TechnicalLevel,
+                //no titan owns a planet that has been created by admin
+                //and no planet is assigned to a solar system in the planet creation view
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+                Files = vm.Files,
+                Image = vm.Image
+                .Select(x => new FileToDatabaseDto
+                {
+                    ID = x.ImageID,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    AstralBodyID = x.AstralBodyID
+                }).ToArray()
+            };
+            var addedPlanet = await _astralBodiesServices.Update(dto);
+            if (addedPlanet == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", vm);
+        }
+
+
+
         [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Delete(Guid id)
