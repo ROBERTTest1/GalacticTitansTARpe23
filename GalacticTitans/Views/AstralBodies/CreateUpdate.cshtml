@@ -31,7 +31,7 @@ else
         <div class="form-group-row">
             <label asp-for="AstralBodyType" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <select asp-items="Html.GetEnumSelectList<AstralBodyType>()">                   
+                <select asp-for="AstralBodyType" asp-items="Html.GetEnumSelectList<AstralBodyType>()">                   
                     <option value="">Select type of planet</option>
                 </select>
                 <span asp-validation-for="AstralBodyType" class="galacticErrorMessageColor"></span>
