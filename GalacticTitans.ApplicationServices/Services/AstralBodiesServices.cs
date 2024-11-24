@@ -5,8 +5,10 @@ using GalacticTitans.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,7 +71,13 @@ namespace GalacticTitans.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return newPlanet;
         }
-
+        public async Task<AstralBody> Delete(Guid id)
+        {            
+            var result = await _context.AstralBodies.FirstOrDefaultAsync(x => x.ID == id);
+            _context.AstralBodies.Remove(result);
+            await _context.SaveChangesAsync();
+            return result;
+        }
 
     }
 }

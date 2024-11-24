@@ -168,5 +168,17 @@ namespace GalacticTitans.Controllers
 
             return View("DetailsDelete", vm);
         }
+        [HttpPost]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var astralBodyId = await _astralBodiesServices.Delete(id);
+            if (astralBodyId == null) 
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
