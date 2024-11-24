@@ -41,7 +41,7 @@ else
         <div class="form-group-row">
             <label asp-for="EnvironmentBoost" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <select asp-items="Html.GetEnumSelectList<TitanType>()">                   
+                <select asp-for=EnvironmentBoost asp-items="Html.GetEnumSelectList<TitanType>()">                   
                     <option value="">Select environmental boost</option>
                 </select>
                 <span asp-validation-for="EnvironmentBoost" class="galacticErrorMessageColor"></span>
