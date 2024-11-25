@@ -22,6 +22,10 @@ namespace GalacticTitans.Controllers
             _fileServices = fileServices;
             _astralBodiesServices = astralBodiesServices;
         }
+        /// <summary>
+        /// Index for admin view of planets
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
@@ -50,12 +54,22 @@ namespace GalacticTitans.Controllers
             return View(allPlanets);
         }
 
+        /// <summary>
+        /// Create get for admin
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Create()
         {
             AstralBodyCreateUpdateViewModel vm = new();
             return View("CreateUpdate", vm);
         }
+
+        /// <summary>
+        /// create post for admin
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AstralBodyCreateUpdateViewModel vm)
@@ -91,6 +105,11 @@ namespace GalacticTitans.Controllers
             return RedirectToAction("Index", vm);
         }
 
+        /// <summary>
+        /// details for admin
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Details(Guid id)
@@ -131,6 +150,11 @@ namespace GalacticTitans.Controllers
             return View("DetailsDelete", vm);
         }
 
+        /// <summary>
+        /// update get for admin
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Update(Guid id)
@@ -171,6 +195,11 @@ namespace GalacticTitans.Controllers
             return View("CreateUpdate", vm);
         }
 
+        /// <summary>
+        /// update post for admin
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         //for the time being, create and update post methods are separate with only 2
         //differences between them, in the future, these can be combined into one method
         //it is 23:01 and i cant be assed to figure that shit our rn, so this is what you get.
@@ -210,8 +239,11 @@ namespace GalacticTitans.Controllers
             return RedirectToAction("Index", vm);
         }
 
-
-
+        /// <summary>
+        /// delete get for admin
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Delete(Guid id)
@@ -250,6 +282,12 @@ namespace GalacticTitans.Controllers
 
             return View("DetailsDelete", vm);
         }
+
+        /// <summary>
+        /// delete post for admin
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
@@ -262,5 +300,40 @@ namespace GalacticTitans.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public IActionResult SolarSystemExplore(Guid id)
+        {
+            var thisSystem = _context.AstralBodies
+                .OrderByDescending(y => y.CreatedAt)
+                .Where(z => z.SolarSystemID == id)
+                .Select(x => new SolarSystemExploreView
+                {
+
+                });
+
+            var allPlanets = _context.AstralBodies
+                .OrderByDescending(y => y.AstralBodyType)
+                .Select(x => new AstralBodyIndexViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyName = x.AstralBodyName,
+                    AstralBodyType = x.AstralBodyType,
+                    EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
+                    MajorSettlements = x.MajorSettlements,
+                    TechnicalLevel = x.TechnicalLevel,
+                    SolarSystemID = (Guid)x.SolarSystemID,
+                    //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
+                    //   .Where(t => t.TitanID == x.ID)
+                    //   .Select(z => new AstralBodyIndexViewModel
+                    //   {
+                    //       TitanID = z.ID,
+                    //       ImageID = z.ID,
+                    //       ImageData = z.ImageData,
+                    //       ImageTitle = z.ImageTitle,
+                    //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                    //   })
+                });
+            return View(allPlanets);
+        }
     }
 }
