@@ -16,7 +16,14 @@ namespace GalacticTitans.Controllers
         private readonly GalacticTitansContext _context;
         private readonly IFileServices _fileServices;
         private readonly IAstralBodiesServices _astralBodiesServices;
-        public AstralBodiesController(GalacticTitansContext context, IAstralBodiesServices astralBodiesServices, IFileServices fileServices)
+        private readonly ISolarSystemsServices _solarSystemsServices;
+        public AstralBodiesController
+            (
+            GalacticTitansContext context, 
+            IAstralBodiesServices astralBodiesServices, 
+            IFileServices fileServices,
+            ISolarSystemsServices solarSystemsServices
+            )
         {
             _context = context;
             _fileServices = fileServices;
