@@ -1,4 +1,5 @@
-﻿using GalacticTitans.Core.Dto;
+﻿using GalacticTitans.Core.Domain;
+using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models;
@@ -28,6 +29,7 @@ namespace GalacticTitans.Controllers
             _context = context;
             _fileServices = fileServices;
             _astralBodiesServices = astralBodiesServices;
+            _solarSystemsServices = solarSystemsServices;
         }
         /// <summary>
         /// Index for admin view of planets
@@ -365,6 +367,37 @@ namespace GalacticTitans.Controllers
                     UpdatedAt = x.UpdatedAt,
                 });
             return View(allSystems);
+        }
+
+        [HttpGet]
+        public IActionResult SolarSystemCreate()
+        {
+            SolarSystemCreateUpdateViewModel vm = new();
+            return View("SolarSystemCreateUpdate", vm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, List<AstralBody> planets)
+        {
+            // this make new, do not add guid
+            var dto = new SolarSystemDto()
+            {
+                SolarSystemName = vm.SolarSystemName,
+                SolarSystemLore = vm.SolarSystemLore,
+                AstralBodyAtCenter = vm.AstralBodyAtCenter,
+                AstralBodyIDs = vm.AstralBodyIDs,
+                Planets = planets,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            };
+
+
+            var newSystem = await _solarSystemsServices.Create(dto);
+            if (newSystem == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", vm);
         }
 
         [HttpGet]
