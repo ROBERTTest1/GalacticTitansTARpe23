@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITitansServices, TitansServices>();
 builder.Services.AddScoped<IAstralBodiesServices, AstralBodiesServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
+builder.Services.AddScoped<ISolarSystemsServices, SolarSystemsServices>();
 builder.Services.AddDbContext<GalacticTitansContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
