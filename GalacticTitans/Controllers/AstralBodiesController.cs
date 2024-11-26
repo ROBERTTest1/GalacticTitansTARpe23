@@ -303,16 +303,9 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public IActionResult SolarSystemExplore(Guid id)
         {
-            var thisSystem = _context.AstralBodies
+            var thisSystemPlanets = _context.AstralBodies
                 .OrderByDescending(y => y.CreatedAt)
                 .Where(z => z.SolarSystemID == id)
-                .Select(x => new SolarSystemExploreView
-                {
-
-                });
-
-            var allPlanets = _context.AstralBodies
-                .OrderByDescending(y => y.AstralBodyType)
                 .Select(x => new AstralBodyIndexViewModel
                 {
                     ID = x.ID,
@@ -322,18 +315,31 @@ namespace GalacticTitans.Controllers
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
                     SolarSystemID = (Guid)x.SolarSystemID,
-                    //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
-                    //   .Where(t => t.TitanID == x.ID)
-                    //   .Select(z => new AstralBodyIndexViewModel
-                    //   {
-                    //       TitanID = z.ID,
-                    //       ImageID = z.ID,
-                    //       ImageData = z.ImageData,
-                    //       ImageTitle = z.ImageTitle,
-                    //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
-                    //   })
+                    Image = (List<AstralBodyImageViewModel>)_context.FilesToDatabase
+                       .Where(t => t.AstralBodyID == x.ID)
+                       .Select(z => new AstralBodyImageViewModel
+                       {
+                           AstralBodyID = z.ID,
+                           ImageID = z.ID,
+                           ImageData = z.ImageData,
+                           ImageTitle = z.ImageTitle,
+                           Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                       })
                 });
-            return View(allPlanets);
+            var thisSystem = _context.SolarSystems
+                .Where(z => z.ID == id)
+                .Select(x => new SolarSystemExploreViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    Planets = (List<AstralBodyIndexViewModel>)thisSystemPlanets
+                });
+
+            return View(thisSystem);
         }
     }
 }

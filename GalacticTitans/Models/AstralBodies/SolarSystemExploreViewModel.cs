@@ -2,7 +2,7 @@
 
 namespace GalacticTitans.Models.AstralBodies
 {
-    public class SolarSystemExploreView
+    public class SolarSystemExploreViewModel
     {
         public Guid ID { get; set; }
         public Guid AstralBodyAtCenter { get; set; }
@@ -12,7 +12,7 @@ namespace GalacticTitans.Models.AstralBodies
         //public Guid ControllingPlayerID { get; set; }
         public List<Guid> AstralBodyIDs { get; set; } = new List<Guid>();
 
-        public List<AstralBodyImageViewModel> Image { get; set; } = new();
+        public List<AstralBodyIndexViewModel> Planets { get; set; } = new();
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

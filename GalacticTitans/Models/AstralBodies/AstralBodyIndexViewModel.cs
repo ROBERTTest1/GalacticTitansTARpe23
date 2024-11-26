@@ -14,6 +14,7 @@ namespace GalacticTitans.Models.AstralBodies
         public KardashevScale TechnicalLevel { get; set; }
         //public Guid PlayerProfileID { get; set; }
         public Guid? SolarSystemID { get; set; }
+        public List<AstralBodyImageViewModel>? Image { get; set; } = new List<AstralBodyImageViewModel>();
 
         //db only
         public DateTime CreatedAt { get; set; }

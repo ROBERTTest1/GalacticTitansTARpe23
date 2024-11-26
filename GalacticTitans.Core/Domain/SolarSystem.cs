@@ -14,7 +14,7 @@ namespace GalacticTitans.Core.Domain
         public string SolarSystemName { get; set; }
         public string SolarSystemLore { get; set; }
         //public Guid ControllingPlayerID { get; set; }
-        public List<Guid> AstralBodyIDs { get; set; } = new List<Guid>();
+        //public List<Guid> AstralBodyIDs { get; set; } = new List<Guid>();
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
