@@ -366,5 +366,22 @@ namespace GalacticTitans.Controllers
                 });
             return View(allSystems);
         }
+
+        [HttpGet]
+        public IActionResult GalacticConquest()
+        {
+            var allSolarSystems = _context.SolarSystems
+                .OrderBy(y => y.UpdatedAt)
+                .Select(x => new SolarSystemExploreViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt= x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                }).Take(16);
+            return View(allSolarSystems);
+        }
     }
 }
