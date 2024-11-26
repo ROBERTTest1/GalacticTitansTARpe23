@@ -348,5 +348,23 @@ namespace GalacticTitans.Controllers
 
             return View(thisSystem);
         }
+
+
+        [HttpGet]
+        public IActionResult SolarSystemAdminIndex()
+        {
+            var allSystems = _context.SolarSystems
+                .OrderByDescending(y => y.SolarSystemName)
+                .Select(x => new SolarSystemAdminIndexViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                });
+            return View(allSystems);
+        }
     }
 }
