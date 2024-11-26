@@ -379,6 +379,7 @@ namespace GalacticTitans.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, List<AstralBody> planets)
         {
+
             // this make new, do not add guid
             var dto = new SolarSystemDto()
             {
@@ -392,7 +393,7 @@ namespace GalacticTitans.Controllers
             };
 
 
-            var newSystem = await _solarSystemsServices.Create(dto);
+            var newSystem = await _solarSystemsServices.Create(dto, planets);
             if (newSystem == null)
             {
                 return RedirectToAction("Index");
