@@ -15,9 +15,8 @@ namespace GalacticTitans.Core.Domain
         public string SolarSystemLore { get; set; }
         //public Guid ControllingPlayerID { get; set; }
 
-        //public List<Guid> AstralBodyIDs { get; set; } = new List<Guid>();
-        //the above property is not required as the planets themselves contain property for storing what solar
-        //system they belong to.
+        public List<Guid> AstralBodyIDs { get; set; } = new List<Guid>();
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

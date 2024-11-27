@@ -370,9 +370,32 @@ namespace GalacticTitans.Controllers
         }
 
         [HttpGet]
-        public IActionResult SolarSystemCreate()
+        public async Task<IActionResult> SolarSystemCreate()
         {
             SolarSystemCreateUpdateViewModel vm = new();
+            var allPlanets = _context.AstralBodies
+                .OrderByDescending(y => y.AstralBodyType)
+                .Select(x => new AstralBodyIndexViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyName = x.AstralBodyName,
+                    AstralBodyType = x.AstralBodyType,
+                    EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
+                    MajorSettlements = x.MajorSettlements,
+                    TechnicalLevel = x.TechnicalLevel,
+                    SolarSystemID = (Guid)x.SolarSystemID,
+                    //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
+                    //   .Where(t => t.TitanID == x.ID)
+                    //   .Select(z => new AstralBodyIndexViewModel
+                    //   {
+                    //       TitanID = z.ID,
+                    //       ImageID = z.ID,
+                    //       ImageData = z.ImageData,
+                    //       ImageTitle = z.ImageTitle,
+                    //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                    //   })
+                });
+            ViewData["allPlanets"] = allPlanets;
             return View("SolarSystemCreateUpdate", vm);
         }
         [HttpPost]
@@ -391,6 +414,20 @@ namespace GalacticTitans.Controllers
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             };
+            if (!dto.Planets.Any())
+            {
+                if (dto.AstralBodyIDs.Any())
+                {
+                    dto.Planets = await IdToPlanet(dto.AstralBodyIDs);
+                }
+            }
+            else if (!dto.AstralBodyIDs.Any())
+            {
+                if (dto.Planets.Any())
+                {
+                    dto.AstralBodyIDs = await PlanetToID(dto.Planets);
+                }
+            }
 
 
             var newSystem = await _solarSystemsServices.Create(dto, planets);
@@ -399,6 +436,27 @@ namespace GalacticTitans.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", vm);
+        }
+
+        //private methods for use in controller only
+        private async Task<List<Guid>> PlanetToID(List<AstralBody> planets)
+        {
+            var result = new List<Guid>();
+            foreach (var planet in planets)
+            {
+                result.Add(planet.ID);
+            }
+            return result;
+        }
+
+        private async Task<List<AstralBody>> IdToPlanet(List<Guid> astralBodyIDs)
+        {
+            var result = new List<AstralBody>();
+            foreach (var id in astralBodyIDs)
+            {
+                result.Add( await _astralBodiesServices.DetailsAsync(id));
+            }
+            return result;
         }
 
         [HttpGet]
