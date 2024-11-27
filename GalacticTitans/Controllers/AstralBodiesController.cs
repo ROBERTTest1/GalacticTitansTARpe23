@@ -6,6 +6,7 @@ using GalacticTitans.Models;
 using GalacticTitans.Models.AstralBodies;
 using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
@@ -396,6 +397,7 @@ namespace GalacticTitans.Controllers
                     //   })
                 });
             ViewData["allPlanets"] = allPlanets;
+            ViewData["centerAstralBody"] = new SelectList(allPlanets, allPlanets);
             return View("SolarSystemCreateUpdate", vm);
         }
         [HttpPost]
@@ -414,28 +416,43 @@ namespace GalacticTitans.Controllers
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             };
-            if (!dto.Planets.Any())
-            {
-                if (dto.AstralBodyIDs.Any())
-                {
-                    dto.Planets = await IdToPlanet(dto.AstralBodyIDs);
-                }
-            }
-            else if (!dto.AstralBodyIDs.Any())
-            {
-                if (dto.Planets.Any())
-                {
-                    dto.AstralBodyIDs = await PlanetToID(dto.Planets);
-                }
-            }
 
+            //populate planets from ids
+            if (!dto.Planets.Any() && dto.AstralBodyIDs.Any())
+            {
+                dto.Planets = await IdToPlanet(dto.AstralBodyIDs);
+            }
+            //or populate ids from planets
+            else if (!dto.AstralBodyIDs.Any() && dto.Planets.Any())
+            {
+                dto.AstralBodyIDs = await PlanetToID(dto.Planets);
+            }
+            //do nothing if there is (something or nothing) in both
 
+            //make the system
             var newSystem = await _solarSystemsServices.Create(dto, planets);
             if (newSystem == null)
             {
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", vm);
+        }
+
+        [HttpGet]
+        public IActionResult GalacticConquest()
+        {
+            var allSolarSystems = _context.SolarSystems
+                .OrderBy(y => y.UpdatedAt)
+                .Select(x => new SolarSystemExploreViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                }).Take(16);
+            return View(allSolarSystems);
         }
 
         //private methods for use in controller only
@@ -459,21 +476,6 @@ namespace GalacticTitans.Controllers
             return result;
         }
 
-        [HttpGet]
-        public IActionResult GalacticConquest()
-        {
-            var allSolarSystems = _context.SolarSystems
-                .OrderBy(y => y.UpdatedAt)
-                .Select(x => new SolarSystemExploreViewModel
-                {
-                    ID = x.ID,
-                    AstralBodyAtCenter = x.AstralBodyAtCenter,
-                    SolarSystemName = x.SolarSystemName,
-                    SolarSystemLore = x.SolarSystemLore,
-                    CreatedAt= x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt,
-                }).Take(16);
-            return View(allSolarSystems);
-        }
+        
     }
 }
