@@ -35,8 +35,8 @@ else
             <div class="form-group-row">
                 <label asp-for="AstralBodyAtCenter" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <select asp-for="AstralBodyAtCenter" asp-items="@Html.DropDownListFor(ViewData["allPlanets"])">
-                        <option value="">Select type of planet</option>
+                    <select asp-for="AstralBodyAtCenter" asp-items="ViewBag.centerAstralBody">
+                        <option value="">Select astral body as the center object</option>
                     </select>
                     <span asp-validation-for="AstralBodyAtCenter" class="galacticErrorMessageColor"></span>
                 </div>

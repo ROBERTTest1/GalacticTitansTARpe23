@@ -397,7 +397,7 @@ namespace GalacticTitans.Controllers
                     //   })
                 });
             ViewData["allPlanets"] = allPlanets;
-            ViewData["centerAstralBody"] = new SelectList(allPlanets, allPlanets);
+            ViewData["centerAstralBody"] = new SelectList(allPlanets, "ID","AstralBodyName","AstralBodyType","EnvironmentBoost");
             return View("SolarSystemCreateUpdate", vm);
         }
         [HttpPost]
