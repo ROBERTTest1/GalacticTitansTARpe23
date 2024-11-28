@@ -399,6 +399,7 @@ namespace GalacticTitans.Controllers
             
             vm.Planets = allPlanets.ToList();
             ViewData["allPlanets"] = new SelectList(allPlanets, "ID","AstralBodyName", allPlanets);
+            //ViewData["selectedPlanets"] = vm.AstralBodyIDs;
             return View("SolarSystemCreateUpdate", vm);
         }
         [HttpPost]
@@ -434,9 +435,9 @@ namespace GalacticTitans.Controllers
             var newSystem = await _solarSystemsServices.Create(dto, planets);
             if (newSystem == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("SolarSystemAdminIndex");
             }
-            return RedirectToAction("Index", vm);
+            return RedirectToAction("SolarSystemAdminIndex", vm);
         }
 
         [HttpGet]

@@ -4,6 +4,8 @@
     bool devmode = false;
     var allPlanetsTickboxes = ViewData["allPlanets"] as List<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>;
     var listOfPlanets = Model.Planets;
+    // var existingPlanets = ViewData["selectedPlanets"];
+    var userHasSelected = new List<Guid>();
     if (listOfPlanets == null)
     {
         Console.WriteLine(listOfPlanets + "null");
@@ -21,7 +23,7 @@
 }
 else
 {
-    <form>
+    <form method="post" enctype="multipart/form-data">
         <div class="h1 gTZRG">Solar system data:</div>
         <div>
             <input asp-for="ID" type="hidden" />
@@ -69,14 +71,19 @@ else
             <tbody>
                 @if (listOfPlanets != null)
                 {
-                    @foreach (var selectablePlanet in listOfPlanets)
+                    @*foreach (var selectablePlanet in listOfPlanets)*@
+                    for (int i = 0; i < listOfPlanets.Count; i++)
                     {
-                        <tr>
+                        var selectablePlanet = listOfPlanets[i];
+                        <tr class="isCommonWhite">
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.Image)</td>
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.AstralBodyName)</td>
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.AstralBodyType)</td>
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.EnvironmentBoost)</td>
-                            <td>@Html.CheckBox("ID")</td>
+                            <td>
+                                @*Html.CheckBox("ID")*@
+                                <input type="checkbox" name="userHasSelected" value="@selectablePlanet.ID" />
+                            </td>
                         </tr>
                     }
                 }
@@ -92,7 +99,11 @@ else
                 }
             </tbody>
         </table>
-
+        <input asp-action="SolarSystemCreate"
+               asp-controller="AstralBodies"
+               type="submit"
+               class="btn btn-primary"
+               value="Make this system" />
     </form>
 
 }
