@@ -396,8 +396,9 @@ namespace GalacticTitans.Controllers
                     //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
                     //   })
                 });
-            ViewData["allPlanets"] = allPlanets;
-            ViewData["centerAstralBody"] = new SelectList(allPlanets, "ID","AstralBodyName","AstralBodyType","EnvironmentBoost");
+            
+            vm.Planets = allPlanets.ToList();
+            ViewData["allPlanets"] = new SelectList(allPlanets, "ID","AstralBodyName", allPlanets);
             return View("SolarSystemCreateUpdate", vm);
         }
         [HttpPost]

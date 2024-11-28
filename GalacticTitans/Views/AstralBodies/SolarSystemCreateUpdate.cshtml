@@ -2,6 +2,16 @@
 
 @{
     bool devmode = false;
+    var allPlanetsTickboxes = ViewData["allPlanets"] as List<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>;
+    var listOfPlanets = Model.Planets;
+    if (listOfPlanets == null)
+    {
+        Console.WriteLine(listOfPlanets + "null");
+    }
+    else
+    {
+        Console.WriteLine(listOfPlanets + "it something");
+    }
 }
 @if (devmode)
 {
@@ -35,7 +45,7 @@ else
             <div class="form-group-row">
                 <label asp-for="AstralBodyAtCenter" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <select asp-for="AstralBodyAtCenter" asp-items="ViewBag.centerAstralBody">
+                    <select asp-for="AstralBodyAtCenter" asp-items="ViewBag.allPlanets">
                         <option value="">Select astral body as the center object</option>
                     </select>
                     <span asp-validation-for="AstralBodyAtCenter" class="galacticErrorMessageColor"></span>
@@ -46,6 +56,42 @@ else
         <div> <br /><br /> </div>
         <div class="h1 gTZRG">Select planets for the system:</div>
         @*     <div class="h1 gTZRG">Add Astral Bodies into the solar system: (update)</div> *@
+        <table class="table gTZRG isCommonBlue gTB">
+            <thead>
+                <tr>
+                    <td>MiniIcon</td>
+                    <td>Astral Body Name</td>
+                    <td>Astral Body Type</td>
+                    <td>Environmental Boost Type</td>
+                    <td>Select?</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (listOfPlanets != null)
+                {
+                    @foreach (var selectablePlanet in listOfPlanets)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.Image)</td>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.AstralBodyName)</td>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.AstralBodyType)</td>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.EnvironmentBoost)</td>
+                            <td>@Html.CheckBox("ID")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>_</td>
+                        <td>No planets to select from</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>tickbox</td>
+                    </tr>                    
+                }
+            </tbody>
+        </table>
 
     </form>
 
