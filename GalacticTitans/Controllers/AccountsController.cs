@@ -15,7 +15,8 @@ namespace GalacticTitans.Controllers
         private readonly GalacticTitansContext _context;
 
         public AccountsController
-            (UserManager<ApplicationUser> userManager,
+            (
+            UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             GalacticTitansContext context
             )

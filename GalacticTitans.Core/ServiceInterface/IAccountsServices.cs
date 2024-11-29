@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalacticTitans.Core.Domain;
+using GalacticTitans.Core.Dto.AccountsDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,8 @@ namespace GalacticTitans.Core.ServiceInterface
 {
     public interface IAccountsServices
     {
+        Task<ApplicationUser> ConfirmEmail(string userId, string token);
+        Task<ApplicationUser> Register(ApplicationUserDto dto);
+
     }
 }
