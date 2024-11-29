@@ -407,44 +407,43 @@ namespace GalacticTitans.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, [Bind("userHasSelected")] List<Guid> planetIds, List<AstralBody>? planets)
+        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, List<Guid> userHasSelected, List<AstralBody> planets)
         {
-            List<Guid> newids = planetIds;
+            ViewData["userHasSelected"] = userHasSelected; /*opcheck: ids correctly obtained*/
             // this make new, do not add guid
-            var dto = new SolarSystemDto()
-            {
-                SolarSystemName = vm.SolarSystemName,
-                SolarSystemLore = vm.SolarSystemLore,
-                AstralBodyAtCenter = vm.AstralBodyAtCenter,
-                AstralBodyIDs = newids,
-                Planets = planets,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-            };
-            if (dto.Planets == null || dto.Planets.Count() !> 0)
+            var dto = new SolarSystemDto() { };
+            dto.SolarSystemName = vm.SolarSystemName;
+            dto.SolarSystemLore = vm.SolarSystemLore;
+            dto.AstralBodyAtCenter = vm.AstralBodyAtCenter;
+            dto.AstralBodyIDs = userHasSelected; /*opcheck: id correctly set in dbo*/
+            dto.Planets = planets; /*opfail: no planets*/
+            dto.CreatedAt = DateTime.Now;
+            dto.UpdatedAt = DateTime.Now;
+            if (dto.Planets == null || dto.Planets.Count() !> 0) /*debugfail: invert condition on second argument to LESSTHAN ONE*/
             {
                 await Console.Out.WriteLineAsync("planets null");
                 await Console.Out.WriteLineAsync("idcount" + dto.AstralBodyIDs.Count().ToString());
             }
-            if (dto.AstralBodyIDs == null || dto.AstralBodyIDs.Count() !> 0)
+            if (dto.AstralBodyIDs == null || dto.AstralBodyIDs.Count() !> 0) /*debugfail: bad condition*/
             {
-                await Console.Out.WriteLineAsync("ids null");
+                await Console.Out.WriteLineAsync("ids null"); /*debugfail: wrong error message here*/
                 await Console.Out.WriteLineAsync("planetcount" + dto.Planets.Count().ToString());
             }
             //populate planets from ids
             if (dto.Planets !=  null && dto.AstralBodyIDs.Any())
             {
-                dto.Planets = await IdToPlanet(dto.AstralBodyIDs);
+                dto.Planets = await IdToPlanet(dto.AstralBodyIDs); /*opcheck: correctly converts id to planet*/
             }
             //or populate ids from planets
             else if (!dto.AstralBodyIDs.Any() && dto.Planets.Any())
             {
                 dto.AstralBodyIDs = await PlanetToID(dto.Planets);
             }
+            planets = dto.Planets; //<--- added post next opcheck check
             //do nothing if there is (something or nothing) in both
 
             //make the system
-            var newSystem = await _solarSystemsServices.Create(dto, planets);
+            var newSystem = await _solarSystemsServices.Create(dto, planets); /*opcheck: planets is empty, should not be empty*/
             if (newSystem == null)
             {
                 return RedirectToAction("SolarSystemAdminIndex");

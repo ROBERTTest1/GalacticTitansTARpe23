@@ -31,7 +31,7 @@ namespace GalacticTitans.Data.Migrations
                 name: "IX_AstralBodies_SolarSystemID",
                 table: "AstralBodies",
                 column: "SolarSystemID",
-                unique: true,
+                unique: false, //manual change to false
                 filter: "[SolarSystemID] IS NOT NULL");
 
             migrationBuilder.AddForeignKey(

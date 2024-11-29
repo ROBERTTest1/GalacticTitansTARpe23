@@ -82,7 +82,7 @@ else
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.EnvironmentBoost)</td>
                             <td>
                                 @*Html.CheckBox("ID")*@
-                                <input type="checkbox" name="userHasSelected" value="userHasSelected.Add(selectablePlanet.ID)" />
+                                <input type="checkbox" name="userHasSelected" value="@selectablePlanet.ID" id="checkbox-@selectablePlanet.ID"/>
                             </td>
                         </tr>
                     }
