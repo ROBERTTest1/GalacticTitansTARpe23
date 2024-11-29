@@ -117,7 +117,56 @@ namespace GalacticTitans.Controllers
             return View(model);
         }
 
-        []
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            if (token == null || user.Email == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+            var model = new ResetPasswordViewModel
+            {
+                Token = token,
+                Email = user.Email
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                    if (result.Succeeded)
+                    {
+                        if(await _userManager.IsLockedOutAsync(user))
+                        {
+                            await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow);
+                        }
+                        await _signInManager.SignOutAsync();
+                        await _userManager.DeleteAsync(user);
+                        return RedirectToAction("ResetPasswordConfirmation", "Accounts");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return RedirectToAction("ResetPasswordConfirmation", "Accounts");
+                }
+                await _userManager.DeleteAsync(user);
+                return RedirectToAction("ResetPasswordConfirmation", "Accounts");
+            }
+
+            return RedirectToAction("ResetPasswordConfirmation", "Accounts");
+        }
 
         // user register methods
         [HttpGet]
