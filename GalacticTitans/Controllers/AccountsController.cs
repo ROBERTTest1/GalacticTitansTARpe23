@@ -117,7 +117,7 @@ namespace GalacticTitans.Controllers
             return View(model);
         }
 
-
+        []
 
         // user register methods
         [HttpGet]
