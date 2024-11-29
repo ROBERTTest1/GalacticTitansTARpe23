@@ -12,6 +12,6 @@ namespace GalacticTitans.Core.ServiceInterface
     {
         Task<ApplicationUser> ConfirmEmail(string userId, string token);
         Task<ApplicationUser> Register(ApplicationUserDto dto);
-
+        Task<ApplicationUser> Login(LoginDto dto);
     }
 }
