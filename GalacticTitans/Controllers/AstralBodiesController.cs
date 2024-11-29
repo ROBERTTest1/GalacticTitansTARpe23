@@ -351,7 +351,7 @@ namespace GalacticTitans.Controllers
 
             //var result = thisSystem.ToList();
 
-            return View(thisSystem);
+            return View("SolarSystemExplore", thisSystem);
         }
 
 
