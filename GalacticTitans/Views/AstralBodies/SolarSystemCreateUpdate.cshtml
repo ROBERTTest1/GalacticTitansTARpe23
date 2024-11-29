@@ -6,13 +6,13 @@
     var listOfPlanets = Model.Planets;
     // var existingPlanets = ViewData["selectedPlanets"];
     List<Guid> userHasSelected = (List<Guid>)ViewData["userHasSelected"];
-    if (listOfPlanets == null)
+    if (Model.ID.HasValue)
     {
-        Console.WriteLine(listOfPlanets + "null");
+        Console.WriteLine(listOfPlanets + "modelid has value");
     }
     else
     {
-        Console.WriteLine(listOfPlanets + "it something");
+        Console.WriteLine(listOfPlanets + "no id detected");
     }
 }
 @if (devmode)
@@ -24,7 +24,15 @@
 else
 {
     <form method="post" enctype="multipart/form-data">
-        <div class="h1 gTZRG">Solar system data:</div>
+        @if (Model.ID.HasValue)
+        {
+            <div class="h1 gTZRG">Edit @Model.SolarSystemName:</div>
+        }
+        else
+        {
+            <div class="h1 gTZRG">Solar system data:</div>
+        }
+        
         <div>
             <input asp-for="ID" type="hidden" />
             <input asp-for="CreatedAt" type="hidden" />
@@ -82,7 +90,24 @@ else
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.EnvironmentBoost)</td>
                             <td>
                                 @*Html.CheckBox("ID")*@
-                                <input type="checkbox" name="userHasSelected" value="@selectablePlanet.ID" id="checkbox-@selectablePlanet.ID"/>
+                                @if (Model.ID.HasValue)
+                                {
+                                    <input 
+                                        type="checkbox" 
+                                        name="userHasSelected" 
+                                        value="@selectablePlanet.ID" 
+                                        id="checkbox-@selectablePlanet.ID"
+                                        @if (userHasSelected.Contains(selectablePlanet.ID))
+                                        {
+                                            @:checked
+                                        }
+                                        />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="userHasSelected" value="@selectablePlanet.ID" id="checkbox-@selectablePlanet.ID" />
+                                }
+                               
                             </td>
                         </tr>
                     }
@@ -99,11 +124,23 @@ else
                 }
             </tbody>
         </table>
-        <input asp-action="SolarSystemCreate"
-               asp-controller="AstralBodies"
-               type="submit"
-               class="btn btn-primary"
-               value="Make this system" />
+        @if (Model.ID.HasValue)
+        {
+            <input asp-action="SolarSystemUpdate"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Save Changes" />
+        }
+        else
+        {
+            <input asp-action="SolarSystemCreate"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Make this system" />
+        }
+
     </form>
 
 }

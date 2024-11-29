@@ -450,6 +450,63 @@ namespace GalacticTitans.Controllers
             }
             return RedirectToAction("SolarSystemAdminIndex", vm);
         }
+        [HttpGet]
+        public async Task<IActionResult> SolarSystemUpdate(Guid id)
+        {
+            var modifyThisSystem = await _solarSystemsServices.DetailsAsync(id);
+            var allPlanets = _context.AstralBodies
+                .OrderByDescending(y => y.AstralBodyType)
+                .Select(x => new AstralBodyIndexViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyName = x.AstralBodyName,
+                    AstralBodyType = x.AstralBodyType,
+                    EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
+                    MajorSettlements = x.MajorSettlements,
+                    TechnicalLevel = x.TechnicalLevel,
+                    SolarSystemID = (Guid)x.SolarSystemID,
+                    /*Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
+                    //   .Where(t => t.TitanID == x.ID)
+                    //   .Select(z => new AstralBodyIndexViewModel
+                    //   {
+                    //       TitanID = z.ID,
+                    //       ImageID = z.ID,
+                    //       ImageData = z.ImageData,
+                    //       ImageTitle = z.ImageTitle,
+                    //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                       })*/
+                });
+            //List<Guid> preselectedPreviously = PlanetToID(allPlanets.ToList());
+            SolarSystemCreateUpdateViewModel vm = new();
+            vm.ID = modifyThisSystem.ID;
+            vm.SolarSystemName = modifyThisSystem.SolarSystemName;
+            vm.SolarSystemLore = modifyThisSystem.SolarSystemLore;
+            vm.AstralBodyAtCenter = modifyThisSystem.AstralBodyAtCenter;
+            vm.AstralBodyIDs = modifyThisSystem.AstralBodyIDs;
+            vm.AstralBodyAtCenterWith = modifyThisSystem.AstralBodyAtCenterWith;
+            vm.CreatedAt = modifyThisSystem.CreatedAt;
+            vm.UpdatedAt = modifyThisSystem.UpdatedAt;
+
+            List<Guid> preselectedPreviously = new();
+            List<AstralBodyIndexViewModel> planetSelection = new();
+
+            foreach (var planet in allPlanets)
+            {
+                if (planet.SolarSystemID == modifyThisSystem.ID)
+                {
+                    preselectedPreviously.Add(planet.ID);
+                    planetSelection.Add(planet);
+                }
+            }
+            vm.Planets.AddRange(planetSelection);
+
+            ViewData["userHasSelected"] = preselectedPreviously;
+            
+            vm.Planets = allPlanets.ToList();
+            ViewData["allPlanets"] = new SelectList(allPlanets, "ID", "AstralBodyName", allPlanets);
+            //ViewData["selectedPlanets"] = vm.AstralBodyIDs;
+            return View("SolarSystemCreateUpdate", vm);
+        }
 
         [HttpGet]
         public IActionResult GalacticConquest()
@@ -470,6 +527,15 @@ namespace GalacticTitans.Controllers
 
         //private methods for use in controller only
         private async Task<List<Guid>> PlanetToID(List<AstralBody> planets)
+        {
+            var result = new List<Guid>();
+            foreach (var planet in planets)
+            {
+                result.Add(planet.ID);
+            }
+            return result;
+        }
+        private List<Guid> PlanetToID(List<AstralBodyIndexViewModel> planets)
         {
             var result = new List<Guid>();
             foreach (var planet in planets)
