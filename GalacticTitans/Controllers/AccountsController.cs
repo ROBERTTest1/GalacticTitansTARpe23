@@ -168,6 +168,10 @@ namespace GalacticTitans.Controllers
             return RedirectToAction("ResetPasswordConfirmation", "Accounts");
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation() { return View(); }
+
         // user register methods
         [HttpGet]
         public IActionResult Register()
