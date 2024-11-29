@@ -349,6 +349,8 @@ namespace GalacticTitans.Controllers
                     Planets = (List<AstralBodyIndexViewModel>)thisSystemPlanets
                 });
 
+            //var result = thisSystem.ToList();
+
             return View(thisSystem);
         }
 

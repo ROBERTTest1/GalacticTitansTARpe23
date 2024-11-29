@@ -1,5 +1,4 @@
 ﻿using GalacticTitans.Core.Domain;
-using GalacticTitans.Models.Titans;
 using TitanType = GalacticTitans.Models.Titans.TitanType;
 
 namespace GalacticTitans.Models.AstralBodies
