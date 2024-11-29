@@ -5,7 +5,7 @@
     var allPlanetsTickboxes = ViewData["allPlanets"] as List<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>;
     var listOfPlanets = Model.Planets;
     // var existingPlanets = ViewData["selectedPlanets"];
-    var userHasSelected = new List<Guid>();
+    List<Guid> userHasSelected = (List<Guid>)ViewData["userHasSelected"];
     if (listOfPlanets == null)
     {
         Console.WriteLine(listOfPlanets + "null");
@@ -82,7 +82,7 @@ else
                             <td>@Html.DisplayFor(modelItem => selectablePlanet.EnvironmentBoost)</td>
                             <td>
                                 @*Html.CheckBox("ID")*@
-                                <input type="checkbox" name="userHasSelected" value="@selectablePlanet.ID" />
+                                <input type="checkbox" name="userHasSelected" value="userHasSelected.Add(selectablePlanet.ID)" />
                             </td>
                         </tr>
                     }

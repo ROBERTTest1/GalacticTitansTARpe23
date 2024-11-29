@@ -325,7 +325,7 @@ namespace GalacticTitans.Controllers
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
                     SolarSystemID = (Guid)x.SolarSystemID,
-                    Image = (List<AstralBodyImageViewModel>)_context.FilesToDatabase
+                    Image = _context.FilesToDatabase
                        .Where(t => t.AstralBodyID == x.ID)
                        .Select(z => new AstralBodyImageViewModel
                        {
@@ -334,8 +334,8 @@ namespace GalacticTitans.Controllers
                            ImageData = z.ImageData,
                            ImageTitle = z.ImageTitle,
                            Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
-                       })
-                });
+                       }).ToList()
+                }).ToList();
             var thisSystem = _context.SolarSystems
                 .Where(z => z.ID == id)
                 .Select(x => new SolarSystemExploreViewModel
@@ -346,12 +346,12 @@ namespace GalacticTitans.Controllers
                     SolarSystemLore = x.SolarSystemLore,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
-                    Planets = (List<AstralBodyIndexViewModel>)thisSystemPlanets
-                });
+                    Planets = thisSystemPlanets
+                }).ToList();
 
             //var result = thisSystem.ToList();
 
-            return View("SolarSystemExplore", thisSystem);
+            return View("SolarSystemExplore", thisSystem.First());
         }
 
 
@@ -375,6 +375,7 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public async Task<IActionResult> SolarSystemCreate()
         {
+            ViewData["userHasSelected"] = new List<Guid>();
             SolarSystemCreateUpdateViewModel vm = new();
             var allPlanets = _context.AstralBodies
                 .OrderByDescending(y => y.AstralBodyType)
@@ -406,23 +407,32 @@ namespace GalacticTitans.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, List<AstralBody> planets)
+        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, [Bind("userHasSelected")] List<Guid> planetIds, List<AstralBody>? planets)
         {
-
+            List<Guid> newids = planetIds;
             // this make new, do not add guid
             var dto = new SolarSystemDto()
             {
                 SolarSystemName = vm.SolarSystemName,
                 SolarSystemLore = vm.SolarSystemLore,
                 AstralBodyAtCenter = vm.AstralBodyAtCenter,
-                AstralBodyIDs = vm.AstralBodyIDs,
+                AstralBodyIDs = newids,
                 Planets = planets,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             };
-
+            if (dto.Planets == null || dto.Planets.Count() !> 0)
+            {
+                await Console.Out.WriteLineAsync("planets null");
+                await Console.Out.WriteLineAsync("idcount" + dto.AstralBodyIDs.Count().ToString());
+            }
+            if (dto.AstralBodyIDs == null || dto.AstralBodyIDs.Count() !> 0)
+            {
+                await Console.Out.WriteLineAsync("ids null");
+                await Console.Out.WriteLineAsync("planetcount" + dto.Planets.Count().ToString());
+            }
             //populate planets from ids
-            if (!dto.Planets.Any() && dto.AstralBodyIDs.Any())
+            if (dto.Planets !=  null && dto.AstralBodyIDs.Any())
             {
                 dto.Planets = await IdToPlanet(dto.AstralBodyIDs);
             }
