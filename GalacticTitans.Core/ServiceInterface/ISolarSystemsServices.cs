@@ -12,5 +12,6 @@ namespace GalacticTitans.Core.ServiceInterface
     {
         Task<SolarSystem> DetailsAsync(Guid id);
         Task<SolarSystem> Create(SolarSystemDto dto, List<AstralBody> planetsInSystem);
+        Task<SolarSystem> Update(SolarSystemDto dto, List<AstralBody> planetsInSystem);
     }
 }

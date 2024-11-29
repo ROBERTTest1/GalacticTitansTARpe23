@@ -508,6 +508,45 @@ namespace GalacticTitans.Controllers
             return View("SolarSystemCreateUpdate", vm);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<Guid> userHasSelected, List<AstralBody> planets)
+        {
+            ViewData["userHasSelected"] = userHasSelected; 
+            var dto = new SolarSystemDto() { };
+            dto.ID = vm.ID;
+            dto.SolarSystemName = vm.SolarSystemName;
+            dto.SolarSystemLore = vm.SolarSystemLore;
+            dto.AstralBodyAtCenter = vm.AstralBodyAtCenter;
+            dto.AstralBodyIDs = userHasSelected; 
+            dto.Planets = planets;
+            dto.CreatedAt = DateTime.Now;
+            dto.UpdatedAt = DateTime.Now;
+
+            //populate planets from ids
+            if (dto.Planets != null && dto.AstralBodyIDs.Any())
+            {
+                dto.Planets = await IdToPlanet(dto.AstralBodyIDs); /*opcheck: correctly converts id to planet*/
+            }
+            //or populate ids from planets
+            else if (!dto.AstralBodyIDs.Any() && dto.Planets.Any())
+            {
+                dto.AstralBodyIDs = await PlanetToID(dto.Planets);
+            }
+            planets = dto.Planets; //<--- added post next opcheck check
+            //do nothing if there is (something or nothing) in both
+
+            //Todo, null ids of planets not selected anymore.
+
+            //make the system
+            var newSystem = await _solarSystemsServices.Update(dto, planets);
+            if (newSystem == null)
+            {
+                return RedirectToAction("SolarSystemAdminIndex");
+            }
+            return RedirectToAction("SolarSystemAdminIndex", vm);
+        }
+
         [HttpGet]
         public IActionResult GalacticConquest()
         {

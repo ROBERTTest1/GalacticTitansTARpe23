@@ -69,6 +69,44 @@ namespace GalacticTitans.ApplicationServices.Services
 
             return newSystem;
         }
+        public async Task<SolarSystem> Update(SolarSystemDto dto, List<AstralBody> planetsInSystem)
+        {
+            SolarSystem modifiedSystem = new();
+
+            // set by service on first creation
+            modifiedSystem.ID = (Guid)dto.ID;
+
+            // set by admin
+            modifiedSystem.SolarSystemName = dto.SolarSystemName;
+            modifiedSystem.SolarSystemLore = dto.SolarSystemLore;
+            modifiedSystem.AstralBodyAtCenter = dto.AstralBodyAtCenter;
+            // set for db
+            modifiedSystem.CreatedAt = DateTime.Now;
+            modifiedSystem.UpdatedAt = DateTime.Now;
+            modifiedSystem.AstralBodyIDs = PlanetToID(planetsInSystem);
+            /*opcheck: newsystem is not assigned any planetids*/
+            _context.SolarSystems.Update(modifiedSystem);
+            await _context.SaveChangesAsync();
+
+            foreach (var planet in planetsInSystem)
+            {
+                _context.AstralBodies.Attach(planet);
+                planet.SolarSystemID = modifiedSystem.ID;
+                planet.ModifiedAt = DateTime.Now;
+
+                _context.Entry(planet).Property(p => p.SolarSystemID).IsModified = true;
+                _context.Entry(planet).Property(p => p.ModifiedAt).IsModified = true;
+
+                /*opfail: second object cannot be updated to have the same solarsystemid for some reason*/
+                //_context.AstralBodies.Attach(planet).Property(ssid => ssid.SolarSystemID).IsModified = true;
+                //_context.AstralBodies.Attach(planet).Property(mfat => mfat.ModifiedAt).IsModified = true;
+
+
+                await _context.SaveChangesAsync();
+            }
+
+            return modifiedSystem;
+        }
         private static List<Guid> PlanetToID(List<AstralBody> planets)
         {
             var result = new List<Guid>();
