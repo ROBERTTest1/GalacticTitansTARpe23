@@ -170,7 +170,10 @@ namespace GalacticTitans.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ResetPasswordConfirmation() { return View(); }
+        public IActionResult ResetPasswordConfirmation() 
+        { 
+            return View(); 
+        }
 
         // user register methods
         [HttpGet]
