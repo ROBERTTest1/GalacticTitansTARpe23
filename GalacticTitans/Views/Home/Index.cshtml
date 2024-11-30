@@ -1,13 +1,24 @@
 ﻿@{
     ViewData["Title"] = "Galactic Titans";
 }
+<audio id="hovering" src="~/lib/gameasset/uiaudio/button-33a.wav" autoplay="false"></audio>
+<audio id="clickedsound" src="~/lib/gameasset/uiaudio/button-39.wav" autoplay="false"></audio>
+<audio id="clickedsoundnav" src="~/lib/gameasset/uiaudio/beep-30b.wav" autoplay="false"></audio>
 
 <div class="text-center">
     <h1 class="galacticTitleFontIsGradient72px">GALACTIC TITANS</h1>
     <p>
         This is a test div. [<br />
-        <cyberbutton></cyberbutton>
+        <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50">
+            <svg id="indexButton" class="gCbuttonL1">
+                <rect class="svgButtonMainStyle"></rect>
+                <text x="10" y="20" class="svgButtonMainTextStyle gTZRG">abc</text>
+                <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+            </svg>
+        </a>
         <br />]
+        button implement
     </p>
     <p>
         <img src="~/lib/gameasset/image/site/title.png" class="gTW"/>
@@ -15,3 +26,18 @@
     <p class="gTZRG">In order to play the game, please <a asp-controller="Accounts" asp-action="Login">Log in</a>.</p>
 
 </div>
+
+<script>
+    function playHoverSound() {
+    var sound = document.getElementById("hovering");
+    sound.play();
+    }
+    function playClickSound() {
+        var sound = document.getElementById("clickedsound");
+    sound.play();
+    }
+    function playClickSoundNav() {
+        var sound = document.getElementById("clickedsoundnav");
+    sound.play();
+    }
+</script>
