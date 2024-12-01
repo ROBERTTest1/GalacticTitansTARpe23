@@ -69,7 +69,7 @@ namespace GalacticTitans.ApplicationServices.Services
 
             return newSystem;
         }
-        public async Task<SolarSystem> Update(SolarSystemDto dto, List<AstralBody> planetsInSystem)
+        public async Task<SolarSystem> Update(SolarSystemDto dto, List<AstralBody> planetsInSystem, List<AstralBody> removedPlanets)
         {
             SolarSystem modifiedSystem = new();
 
@@ -101,6 +101,18 @@ namespace GalacticTitans.ApplicationServices.Services
                 //_context.AstralBodies.Attach(planet).Property(ssid => ssid.SolarSystemID).IsModified = true;
                 //_context.AstralBodies.Attach(planet).Property(mfat => mfat.ModifiedAt).IsModified = true;
 
+
+                await _context.SaveChangesAsync();
+            }
+            // null ids of planets kicked out
+            foreach (var planet in removedPlanets)
+            {
+                _context.AstralBodies.Attach(planet);
+                planet.SolarSystemID = null;
+                planet.ModifiedAt = DateTime.Now;
+
+                _context.Entry(planet).Property(p => p.SolarSystemID).IsModified = true;
+                _context.Entry(planet).Property(p => p.ModifiedAt).IsModified = true;
 
                 await _context.SaveChangesAsync();
             }

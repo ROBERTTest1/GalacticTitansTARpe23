@@ -1,14 +1,29 @@
 ﻿@model GalacticTitans.Models.AstralBodies.SolarSystemCreateUpdateViewModel
 
 @{
+    //unused, for development only
     bool devmode = false;
+
+    //unused
     var allPlanetsTickboxes = ViewData["allPlanets"] as List<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>;
+
+    // list of planets given from the model, is used to create tickboxes
     var listOfPlanets = Model.Planets;
+
     // var existingPlanets = ViewData["selectedPlanets"];
+
+    // list of planets that the user has selected, contains everything given from the get method
     List<Guid> userHasSelected = (List<Guid>)ViewData["userHasSelected"];
+
+
     if (Model.ID.HasValue)
     {
         Console.WriteLine(listOfPlanets + "modelid has value");
+        //we make duplicate of userhasselected to remember what was 
+        //selected when editing a solar system
+        //this is because if a planet is REMOVED from a system, 
+        //we still want to update its solarsystemid with an anullment
+        List<Guid> previouslySelected = (List<Guid>)ViewData["previouslySelected"];
     }
     else
     {
@@ -37,6 +52,10 @@ else
             <input asp-for="ID" type="hidden" />
             <input asp-for="CreatedAt" type="hidden" />
             <input asp-for="UpdatedAt" type="hidden" />
+            @if (Model.ID.HasValue)
+            {
+                <p>id is here</p>
+            }
 
             <div class="form-group-row">
                 <label asp-for="SolarSystemName" class="col-sm-2 col-form-label"></label>

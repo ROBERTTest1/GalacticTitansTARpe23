@@ -453,6 +453,7 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public async Task<IActionResult> SolarSystemUpdate(Guid id)
         {
+
             var modifyThisSystem = await _solarSystemsServices.DetailsAsync(id);
             var allPlanets = _context.AstralBodies
                 .OrderByDescending(y => y.AstralBodyType)
@@ -501,6 +502,7 @@ namespace GalacticTitans.Controllers
             vm.Planets.AddRange(planetSelection);
 
             ViewData["userHasSelected"] = preselectedPreviously;
+            ViewData["previouslySelected"] = preselectedPreviously;
             
             vm.Planets = allPlanets.ToList();
             ViewData["allPlanets"] = new SelectList(allPlanets, "ID", "AstralBodyName", allPlanets);
@@ -510,9 +512,10 @@ namespace GalacticTitans.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<Guid> userHasSelected, List<AstralBody> planets)
+        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<Guid> userHasSelected, List<Guid> previouslySelected, List<AstralBody> planets)
         {
-            ViewData["userHasSelected"] = userHasSelected; 
+            ViewData["userHasSelected"] = userHasSelected;
+
             var dto = new SolarSystemDto() { };
             dto.ID = vm.ID;
             dto.SolarSystemName = vm.SolarSystemName;
@@ -535,11 +538,17 @@ namespace GalacticTitans.Controllers
             }
             planets = dto.Planets; //<--- added post next opcheck check
             //do nothing if there is (something or nothing) in both
+            List<AstralBody> removedPlanets = await IdToPlanet(previouslySelected);
+            for (int i = 0; i < removedPlanets.Count(); i++)
+            {
+                if (planets.Contains(removedPlanets[i]))
+                {
+                    removedPlanets.Remove(removedPlanets[i]);
+                }
+            }
 
-            //Todo, null ids of planets not selected anymore.
-
-            //make the system
-            var newSystem = await _solarSystemsServices.Update(dto, planets);
+            //change the system
+            var newSystem = await _solarSystemsServices.Update(dto, planets, removedPlanets);
             if (newSystem == null)
             {
                 return RedirectToAction("SolarSystemAdminIndex");
