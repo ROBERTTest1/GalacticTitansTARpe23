@@ -1,4 +1,9 @@
 ﻿@* no model, this view reads from and sends to other models *@
+
+<audio id="hovering" src="~/lib/gameasset/uiaudio/button-33a.wav" autoplay="false"></audio>
+<audio id="clickedsound" src="~/lib/gameasset/uiaudio/button-39.wav" autoplay="false"></audio>
+<audio id="clickedsoundnav" src="~/lib/gameasset/uiaudio/beep-30b.wav" autoplay="false"></audio>
+
 <style>
     .accordion {
         background-color: black;
@@ -280,3 +285,17 @@ for (i = 0; i < acc.length; i++) {
     }
   });
     }</script>
+<script>
+    function playHoverSound() {
+        var sound = document.getElementById("hovering");
+        sound.play();
+    }
+    function playClickSound() {
+        var sound = document.getElementById("clickedsound");
+        sound.play();
+    }
+    function playClickSoundNav() {
+        var sound = document.getElementById("clickedsoundnav");
+        sound.play();
+    }
+</script>
