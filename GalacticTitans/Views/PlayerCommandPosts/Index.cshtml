@@ -1,0 +1,282 @@
+﻿@* no model, this view reads from and sends to other models *@
+<style>
+    .accordion {
+        background-color: black;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+    }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active, .accordion:hover {
+            background-color: var(--purple-2);
+        }
+
+    /* Style the accordion panel. Note: hidden by default */
+    .panel {
+        padding: 0 18px;
+        background-color: black;
+        display: none;
+        overflow: hidden;
+    }
+</style>
+<button class="accordion gTZRG mag-1">Design Consideration</button>
+<div class="panel">
+    <p class="gTZRG teal-1">
+        <span class="white-1">intended design: </span>
+        <br />
+        3 columns:<br />
+        - thin column with actions/locations to left<br />
+        - thick center column with location images and camera view<br />
+        - thin column with player stats and 3 top titans to the right<br /><br />
+
+        <span class="white-1">left menu: </span>
+        <br />
+        EXPLORE - takes player to galaxy page where user can go to one of 16 galaxies<br />
+        BARRACKS - takes player to their titans page to see all titans<br />
+        RECRUITMENT - takes player onto a randomly generated quest to recruit a new titan<br />
+        ! as a test, this just gives the player a new instance of a titan<br />
+        HOME SYSTEM - takes player to their home solar system separate from the galaxy, activity hub<br />
+        <span class="green-1">-= separator =-</span>
+        <br />
+        USER SETTINGS - player can delete user, or reset progress<br />
+        GRAVEYARD - list of players dead titans<br />
+        <span class="green-1">-= separator =-</span>
+        <br />
+        AUTHOR<br /><br />
+
+        <span class="white-1">center menu: </span><br />
+        top row, name of player home galaxy<br />
+        - if activity is being visited, name of activity<br />
+        second row, image of home galaxy with imagelinks to activities in home galaxy<br />
+        - if activity is being visited, image of activity<br />
+        third row, flairtext of highlight link or description of home galaxy<br />
+        - if activity is being visited, flairtext of activity<br />
+        fourth row, auxiliary window for shop/yesno<br /><br />
+
+        <span class="white-1">right menu: </span><br />
+        playername<br />
+        playerlevel<br />
+        xptonextplayerlevel<br />
+        numberoftitans<br />
+        amountofCosmicCredits<br />
+        amountofScrapMetal<br />
+        numberofvictories<br />
+        <span class="green-1">-= separator =-</span>
+        <br />
+        top1titan<br />
+        top2titan<br />
+        top3titan<br />
+        SEEALLTITANS<br />
+
+
+    </p>
+</div>
+
+<div class="gTZRG isCommonBlue2">
+    <table class="gTB">
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;"> 
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Explore</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td rowspan="3" width="120%" align="center" >(NAME OF PLAYER) HOME GALAXY </td>
+            <td width="25%" align="center">PLAYERNAME</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Barracks</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td align="center">PLAYER LVL</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Recruitment</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td align="center">XPBAR</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Home System</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td rowspan="6" width="120%" align="center">(HOME GALAXY IMAGE)</td>
+            <td align="center">ALIVETITANCOUNT</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <svg id="separatortype" class="gCbuttonL1">
+                    <rect class="svgButtonMainStyle"></rect>
+                    <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">===========</text>
+                </svg>
+            </td>
+            <td align="center">COS-CREDITS</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Graveyard</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td align="center">SCRAPCOUNT</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Settings</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td align="center">VICTORIES</td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <svg id="separatortype" class="gCbuttonL1">
+                    <rect class="svgButtonMainStyle"></rect>
+                    <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">===========</text>
+                </svg>
+            </td>
+            <td width="15%" align="center" style="padding: 5px;">
+                <svg id="separatortype" class="gCbuttonL1">
+                    <rect class="svgButtonMainStyle"></rect>
+                    <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">===========</text>
+                </svg>
+            </td>
+        </tr>
+        <tr>
+            <td width="15%" align="center" style="padding: 5px;">
+                <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
+                   asp-controller="PlayerCommandPosts" asp-action="Index">
+                    <svg id="indexButton" class="gCbuttonL1">
+                        <rect class="svgButtonMainStyle"></rect>
+                        <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Author</text>
+                        <polygon class="svgButtonMainTriangleStyle" points='0,0 0,13 13,0'></polygon>
+                        <polygon class="svgButtonMainTriangleStyle" points='130,30 130,17 117,30'></polygon>
+                    </svg>
+                </a>
+            </td>
+            <td align="center">Toptitan1name</td>
+        </tr>
+        <tr>
+            <td rowspan="9"></td>
+            <td rowspan="4" width="120%" align="center">FLAVOURTEXT</td>
+        </tr>
+        <tr><td align="center">Toptitan1level</td></tr>
+        <tr><td align="center">Toptitan1image</td></tr>
+        <tr><td align="center">Toptitan2name</td></tr>
+        <tr>
+            <td rowspan="5" width="120%" align="center">SHOPWINDOW</td>
+            <td align="center">Toptitan2level</td>
+        </tr>
+        <tr><td align="center">Toptitan2image</td></tr>
+        <tr><td align="center">Toptitan3name</td></tr>
+        <tr><td align="center">Toptitan3level</td></tr>
+        <tr><td align="center">Toptitan3image</td></tr>
+        <tr>
+            <td colspan="3">table end</td>
+        </tr>
+    </table>
+</div>
+
+<div class="gTZRG isCommonBlue2">
+    <table>
+        <tr><td> Blue column </td></tr>
+        <tr><td> Blue column 2</td></tr>
+        <tr><td> Blue column 3</td></tr>
+        <tr><td> Blue column 4</td></tr>
+        <tr><td> Blue column 5</td></tr>
+        <tr><td> Blue column 6</td></tr>
+        <tr><td> Blue column 7</td></tr>
+        <tr><td> Blue column 8</td></tr>
+    </table>
+</div>
+<div class="gTZRG isCommonGreen2">
+    <table>
+        <tr><td> Green column </td></tr>
+        <tr><td> Green column 2</td></tr>
+        <tr><td> Green column 3</td></tr>
+        <tr><td> Green column 4</td></tr>
+        <tr><td> Green column 5</td></tr>
+        <tr><td> Green column 6</td></tr>
+        <tr><td> Green column 7</td></tr>
+        <tr><td> Green column 8</td></tr>
+    </table>
+</div>
+<div class="gTZRG isCommonMagenta">
+    <table>
+        <tr><td> Magenta column </td></tr>
+        <tr><td> Magenta column 2</td></tr>
+        <tr><td> Magenta column 3</td></tr>
+        <tr><td> Magenta column 4</td></tr>
+        <tr><td> Magenta column 5</td></tr>
+        <tr><td> Magenta column 6</td></tr>
+        <tr><td> Magenta column 7</td></tr>
+        <tr><td> Magenta column 8</td></tr>
+    </table>
+</div>
+
+
+<script>
+        var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+    }</script>
