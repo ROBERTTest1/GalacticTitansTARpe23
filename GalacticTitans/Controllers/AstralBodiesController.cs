@@ -49,7 +49,7 @@ namespace GalacticTitans.Controllers
                     EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
-                    SolarSystemID = (Guid)x.SolarSystemID,
+                    SolarSystemID = x.SolarSystemID,
                     //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
                     //   .Where(t => t.TitanID == x.ID)
                     //   .Select(z => new AstralBodyIndexViewModel
@@ -315,7 +315,7 @@ namespace GalacticTitans.Controllers
         {
             var thisSystemPlanets = _context.AstralBodies
                 .OrderByDescending(y => y.CreatedAt)
-                .Where(z => z.SolarSystemID == id)
+                .Where(z => z.SolarSystemID == id.ToString())
                 .Select(x => new AstralBodyIndexViewModel
                 {
                     ID = x.ID,
@@ -324,7 +324,7 @@ namespace GalacticTitans.Controllers
                     EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
-                    SolarSystemID = (Guid)x.SolarSystemID,
+                    SolarSystemID = x.SolarSystemID,
                     Image = _context.FilesToDatabase
                        .Where(t => t.AstralBodyID == x.ID)
                        .Select(z => new AstralBodyImageViewModel
@@ -375,7 +375,7 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public async Task<IActionResult> SolarSystemCreate()
         {
-            ViewData["userHasSelected"] = new List<Guid>();
+            ViewData["userHasSelected"] = new List<string>();
             SolarSystemCreateUpdateViewModel vm = new();
             var allPlanets = _context.AstralBodies
                 .OrderByDescending(y => y.AstralBodyType)
@@ -387,7 +387,7 @@ namespace GalacticTitans.Controllers
                     EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
-                    SolarSystemID = (Guid)x.SolarSystemID,
+                    SolarSystemID = x.SolarSystemID,
                     //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
                     //   .Where(t => t.TitanID == x.ID)
                     //   .Select(z => new AstralBodyIndexViewModel
@@ -407,15 +407,21 @@ namespace GalacticTitans.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, List<Guid> userHasSelected, List<AstralBody> planets)
+        public async Task<IActionResult> SolarSystemCreate(SolarSystemCreateUpdateViewModel vm, List<string> userHasSelected, List<AstralBody> planets)
         {
-            ViewData["userHasSelected"] = userHasSelected; /*opcheck: ids correctly obtained*/
+            List<Guid> tempParse = new();
+            foreach (var stringID in userHasSelected)
+            {
+                tempParse.Add(Guid.Parse(stringID));
+            }
+            ViewData["userHasSelected"] = tempParse; /*opcheck: ids correctly obtained*/
+
             // this make new, do not add guid
             var dto = new SolarSystemDto() { };
             dto.SolarSystemName = vm.SolarSystemName;
             dto.SolarSystemLore = vm.SolarSystemLore;
             dto.AstralBodyAtCenter = vm.AstralBodyAtCenter;
-            dto.AstralBodyIDs = userHasSelected; /*opcheck: id correctly set in dbo*/
+            dto.AstralBodyIDs = tempParse; /*opcheck: id correctly set in dbo*/
             dto.Planets = planets; /*opfail: no planets*/
             dto.CreatedAt = DateTime.Now;
             dto.UpdatedAt = DateTime.Now;
@@ -465,7 +471,7 @@ namespace GalacticTitans.Controllers
                     EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
                     MajorSettlements = x.MajorSettlements,
                     TechnicalLevel = x.TechnicalLevel,
-                    SolarSystemID = (Guid)x.SolarSystemID,
+                    SolarSystemID = x.SolarSystemID,
                     /*Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
                     //   .Where(t => t.TitanID == x.ID)
                     //   .Select(z => new AstralBodyIndexViewModel
@@ -488,14 +494,14 @@ namespace GalacticTitans.Controllers
             vm.CreatedAt = modifyThisSystem.CreatedAt;
             vm.UpdatedAt = modifyThisSystem.UpdatedAt;
 
-            List<Guid> preselectedPreviously = new();
+            List<string> preselectedPreviously = new();
             List<AstralBodyIndexViewModel> planetSelection = new();
 
             foreach (var planet in allPlanets)
             {
-                if (planet.SolarSystemID == modifyThisSystem.ID)
+                if (planet.SolarSystemID == modifyThisSystem.ID.ToString())
                 {
-                    preselectedPreviously.Add(planet.ID);
+                    preselectedPreviously.Add(planet.ID.ToString());
                     planetSelection.Add(planet);
                 }
             }
@@ -512,16 +518,26 @@ namespace GalacticTitans.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<Guid> userHasSelected, List<Guid> previouslySelected, List<AstralBody> planets)
+        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<string> userHasSelected, List<string> previouslySelected, List<AstralBody> planets)
         {
-            ViewData["userHasSelected"] = userHasSelected;
+            List<Guid> tempParse = new();
+            foreach (var stringID in userHasSelected)
+            {
+                tempParse.Add(Guid.Parse(stringID));
+            }
+            List<Guid> tempParse2 = new();
+            foreach (var stringID in previouslySelected)
+            {
+                tempParse.Add(Guid.Parse(stringID));
+            }
+            ViewData["userHasSelected"] = tempParse;
 
             var dto = new SolarSystemDto() { };
             dto.ID = vm.ID;
             dto.SolarSystemName = vm.SolarSystemName;
             dto.SolarSystemLore = vm.SolarSystemLore;
             dto.AstralBodyAtCenter = vm.AstralBodyAtCenter;
-            dto.AstralBodyIDs = userHasSelected; 
+            dto.AstralBodyIDs = tempParse; 
             dto.Planets = planets;
             dto.CreatedAt = DateTime.Now;
             dto.UpdatedAt = DateTime.Now;
@@ -538,7 +554,7 @@ namespace GalacticTitans.Controllers
             }
             planets = dto.Planets; //<--- added post next opcheck check
             //do nothing if there is (something or nothing) in both
-            List<AstralBody> removedPlanets = await IdToPlanet(previouslySelected);
+            List<AstralBody> removedPlanets = await IdToPlanet(tempParse2);
             for (int i = 0; i < removedPlanets.Count(); i++)
             {
                 if (planets.Contains(removedPlanets[i]))

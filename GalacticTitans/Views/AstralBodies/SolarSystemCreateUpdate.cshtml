@@ -13,7 +13,7 @@
     // var existingPlanets = ViewData["selectedPlanets"];
 
     // list of planets that the user has selected, contains everything given from the get method
-    List<Guid> userHasSelected = (List<Guid>)ViewData["userHasSelected"];
+    List<string> userHasSelected = (List<string>)ViewData["userHasSelected"];
 
 
     if (Model.ID.HasValue)
@@ -23,7 +23,7 @@
         //selected when editing a solar system
         //this is because if a planet is REMOVED from a system, 
         //we still want to update its solarsystemid with an anullment
-        List<Guid> previouslySelected = (List<Guid>)ViewData["previouslySelected"];
+        List<string> previouslySelected = (List<string>)ViewData["previouslySelected"];
     }
     else
     {
@@ -116,7 +116,7 @@ else
                                         name="userHasSelected" 
                                         value="@selectablePlanet.ID" 
                                         id="checkbox-@selectablePlanet.ID"
-                                        @if (userHasSelected.Contains(selectablePlanet.ID))
+                                        @if (userHasSelected.Contains(selectablePlanet.ID.ToString()))
                                         {
                                             @:checked
                                         }

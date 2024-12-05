@@ -14,7 +14,7 @@ namespace GalacticTitans.Models.AstralBodies
         //public List<Titan> TitansWhoOwnThisPlanet { get; set; }
         public Titan? TitanWhoOwnsThisPlanet { get; set; }
         //public Guid PlayerProfileID { get; set; }
-        public Guid? SolarSystemID { get; set; }
+        public string? SolarSystemID { get; set; }
 
         //image
         public List<AstralBodyImageViewModel> Image { get; set; } = new();

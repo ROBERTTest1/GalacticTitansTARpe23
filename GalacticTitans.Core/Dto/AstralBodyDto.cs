@@ -20,7 +20,7 @@ namespace GalacticTitans.Core.Dto
         //public List<Titan> TitansWhoOwnThisPlanet { get; set; }
         public Titan? TitanWhoOwnsThisPlanet { get; set; }
         //public Guid PlayerProfileID { get; set; }
-        public Guid? SolarSystemID { get; set; }
+        public string? SolarSystemID { get; set; }
 
         //image 
         public List<IFormFile> Files { get; set; }

@@ -53,7 +53,7 @@ namespace GalacticTitans.ApplicationServices.Services
             foreach (var planet in planetsInSystem)
             {
                 _context.AstralBodies.Attach(planet);
-                planet.SolarSystemID = newSystem.ID;
+                planet.SolarSystemID = newSystem.ID.ToString();
                 planet.ModifiedAt = DateTime.Now;
 
                 _context.Entry(planet).Property(p => p.SolarSystemID).IsModified = true;
@@ -91,7 +91,7 @@ namespace GalacticTitans.ApplicationServices.Services
             foreach (var planet in planetsInSystem)
             {
                 _context.AstralBodies.Attach(planet);
-                planet.SolarSystemID = modifiedSystem.ID;
+                planet.SolarSystemID = modifiedSystem.ID.ToString();
                 planet.ModifiedAt = DateTime.Now;
 
                 _context.Entry(planet).Property(p => p.SolarSystemID).IsModified = true;
