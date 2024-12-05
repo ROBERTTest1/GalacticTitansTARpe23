@@ -459,7 +459,6 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public async Task<IActionResult> SolarSystemUpdate(Guid id)
         {
-
             var modifyThisSystem = await _solarSystemsServices.DetailsAsync(id);
             var allPlanets = _context.AstralBodies
                 .OrderByDescending(y => y.AstralBodyType)
@@ -521,16 +520,17 @@ namespace GalacticTitans.Controllers
         public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<string> userHasSelected, List<string> previouslySelected, List<AstralBody> planets)
         {
             List<Guid> tempParse = new();
+            List<Guid> tempParse2 = new();
             foreach (var stringID in userHasSelected)
             {
                 tempParse.Add(Guid.Parse(stringID));
             }
-            List<Guid> tempParse2 = new();
+            List<string> oldList = (List<string>)ViewData["previouslySelected"];
+            previouslySelected = oldList;
             foreach (var stringID in previouslySelected)
             {
-                tempParse.Add(Guid.Parse(stringID));
+                tempParse2.Add(Guid.Parse(stringID));
             }
-            ViewData["userHasSelected"] = tempParse;
 
             var dto = new SolarSystemDto() { };
             dto.ID = vm.ID;

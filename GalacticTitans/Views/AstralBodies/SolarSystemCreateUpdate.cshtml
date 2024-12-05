@@ -23,7 +23,7 @@
         //selected when editing a solar system
         //this is because if a planet is REMOVED from a system, 
         //we still want to update its solarsystemid with an anullment
-        List<string> previouslySelected = (List<string>)ViewData["previouslySelected"];
+        ViewData["previouslySelected"] = (List<string>)ViewData["userHasSelected"];
     }
     else
     {
@@ -54,7 +54,8 @@ else
             <input asp-for="UpdatedAt" type="hidden" />
             @if (Model.ID.HasValue)
             {
-                <p>id is here</p>
+                <p>@Model.ID</p>
+                <input type="hidden" name="previouslySelected" value="@ViewData["previouslySelected"]" />
             }
 
             <div class="form-group-row">
