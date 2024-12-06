@@ -1,5 +1,7 @@
 ﻿using GalacticTitans.Core.Domain;
+using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.Dto.AccountsDtos;
+using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models;
 using GalacticTitans.Models.Accounts;
@@ -15,17 +17,20 @@ namespace GalacticTitans.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly GalacticTitansContext _context;
+        private readonly IEmailsServices _emailsServices;
 
         public AccountsController
             (
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            GalacticTitansContext context
+            GalacticTitansContext context,
+            IEmailsServices emailsServices
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _emailsServices = emailsServices;
         }
         [HttpGet]
         public async Task<IActionResult> AddPassword()
@@ -204,6 +209,14 @@ namespace GalacticTitans.Controllers
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     var confirmationLink = Url.Action("ConfirmEmail", "Accounts", new { userId = user.Id, token = token }, Request.Scheme);
+
+                    EmailTokenDto newsignup = new();
+                    newsignup.Token = token;
+                    newsignup.Body = $"Thank you for signing up, klikka här:  {confirmationLink}";
+                    newsignup.Subject = "GalacticTitans Register";
+                    newsignup.To = user.Email;
+
+                    _emailsServices.SendEmailToken(newsignup, token);
                     if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administrations");

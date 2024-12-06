@@ -1,4 +1,5 @@
 ﻿using GalacticTitans.Core.Domain;
+using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.Dto.AccountsDtos;
 using GalacticTitans.Core.ServiceInterface;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +16,19 @@ namespace GalacticTitans.ApplicationServices.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
+        /**/
+        private readonly IEmailsServices _emailsServices;
+
         public AccountsServices
             (
                 UserManager<ApplicationUser> userManager,
-                SignInManager<ApplicationUser> signInManager
+                SignInManager<ApplicationUser> signInManager,
+                IEmailsServices emailsServices
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailsServices = emailsServices;
         }
 
         public async Task<ApplicationUser> Register(ApplicationUserDto dto)
@@ -37,6 +43,7 @@ namespace GalacticTitans.ApplicationServices.Services
             if (result.Succeeded)
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                _emailsServices.SendEmailToken(new EmailTokenDto(), token);
             }
             return user;
         }
