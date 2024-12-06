@@ -246,6 +246,7 @@ namespace GalacticTitans.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if (userId == null || token == null) { return RedirectToAction("Index", "Home"); }
@@ -256,13 +257,33 @@ namespace GalacticTitans.Controllers
                 return View("NotFound");
             }
             var result = await _userManager.ConfirmEmailAsync(user, token);
+            List<string> errordatas =
+                        [
+                        "Area", "Accounts",
+                        "Issue", "Failure",
+                        "StatusMessage", "Confirmation Failure",
+                        "ActedOn", $"{user.Email}",
+                        "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidden]\n[password hidden]"
+                        ];
             if (result.Succeeded)
             {
+                errordatas =
+                        [
+                        "Area", "Accounts",
+                        "Issue", "Success",
+                        "StatusMessage", "Confirmation Success",
+                        "ActedOn", $"{user.Email}",
+                        "CreatedAccountData", $"{user.Email}\n{user.City}\n[password hidden]\n[password hidden]"
+                        ];
+                ViewBag.ErrorDatas = errordatas;
                 return View();
+
             }
+            
+            ViewBag.ErrorDatas = errordatas;
             ViewBag.ErrorTitle = "Email cannot be confirmed";
             ViewBag.ErrorMessage = $"The users email, with userid of {userId}, cannot be confirmed.";
-            return View("Error");
+            return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         // user login & logout methods

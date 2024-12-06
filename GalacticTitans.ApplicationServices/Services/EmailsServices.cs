@@ -56,7 +56,7 @@ namespace GalacticTitans.ApplicationServices.Services
             email.Subject = dto.Subject;
             var builder = new BodyBuilder
             {
-                HtmlBody = dto.Body += dto.Token,
+                HtmlBody = dto.Body,
             };
 
             email.Body = builder.ToMessageBody();
