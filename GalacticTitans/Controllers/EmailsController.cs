@@ -1,4 +1,5 @@
 ﻿using GalacticTitans.Core.Dto;
+using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Models.Emails;
 using Microsoft.AspNetCore.Mvc;
 
