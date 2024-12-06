@@ -11,14 +11,29 @@
     {
         @if (Model.ImageTitle == "LongViewStatic.png")
         {
-            <img width="256" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+            @if (ViewData["MakeSmallImage"] == "false");
+            {
+                <img width="256" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+            }
+            @if (ViewData["MakeSmallImage"] == "true");
+            {
+                <img width="64" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+            }
         }
     }
     else if (ViewData["IsAnimated"] == "true")
     {
         @if (Model.ImageTitle == "LongViewAnimated.gif")
         {
-            <img width="256" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+            @if (ViewData["MakeSmallImage"] == "false")
+            {
+                <img width="256" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+            }
+            @if (ViewData["MakeSmallImage"] == "true")
+            {
+                <img width="64" class="card-img-top" src="@Model.Image" asp-append-version="true" />
+            }
+            
         }
     }
     else

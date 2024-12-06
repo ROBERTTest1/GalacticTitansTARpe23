@@ -603,6 +603,94 @@ namespace GalacticTitans.Controllers
         }
 
         [HttpGet]
+        public IActionResult SolarSystemDetails(Guid id)
+        {
+            var thisSystemPlanets = _context.AstralBodies
+                .OrderByDescending(y => y.CreatedAt)
+                .Where(z => z.SolarSystemID == id.ToString())
+                .Select(x => new AstralBodyIndexViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyName = x.AstralBodyName,
+                    AstralBodyType = x.AstralBodyType,
+                    EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
+                    MajorSettlements = x.MajorSettlements,
+                    TechnicalLevel = x.TechnicalLevel,
+                    SolarSystemID = x.SolarSystemID,
+                    Image = _context.FilesToDatabase
+                       .Where(t => t.AstralBodyID == x.ID)
+                       .Select(z => new AstralBodyImageViewModel
+                       {
+                           AstralBodyID = z.ID,
+                           ImageID = z.ID,
+                           ImageData = z.ImageData,
+                           ImageTitle = z.ImageTitle,
+                           Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                       }).ToList()
+                }).ToList();
+            var thisSystem = _context.SolarSystems
+                .Where(z => z.ID == id)
+                .Select(x => new SolarSystemExploreViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    Planets = thisSystemPlanets
+                }).ToList();
+
+            //var result = thisSystem.ToList();
+            ViewData["RequestedView"] = "Details";
+            return View("SolarSystemDetailsDelete", thisSystem.First());
+        }
+
+        [HttpGet]
+        public IActionResult SolarSystemDelete(Guid id)
+        {
+            var thisSystemPlanets = _context.AstralBodies
+                .OrderByDescending(y => y.CreatedAt)
+                .Where(z => z.SolarSystemID == id.ToString())
+                .Select(x => new AstralBodyIndexViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyName = x.AstralBodyName,
+                    AstralBodyType = x.AstralBodyType,
+                    EnvironmentBoost = (Models.Titans.TitanType)x.EnvironmentBoost,
+                    MajorSettlements = x.MajorSettlements,
+                    TechnicalLevel = x.TechnicalLevel,
+                    SolarSystemID = x.SolarSystemID,
+                    Image = _context.FilesToDatabase
+                       .Where(t => t.AstralBodyID == x.ID)
+                       .Select(z => new AstralBodyImageViewModel
+                       {
+                           AstralBodyID = z.ID,
+                           ImageID = z.ID,
+                           ImageData = z.ImageData,
+                           ImageTitle = z.ImageTitle,
+                           Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                       }).ToList()
+                }).ToList();
+            var thisSystem = _context.SolarSystems
+                .Where(z => z.ID == id)
+                .Select(x => new SolarSystemExploreViewModel
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    Planets = thisSystemPlanets
+                }).ToList();
+
+            //var result = thisSystem.ToList();
+            ViewData["RequestedView"] = "Delete";
+            return View("SolarSystemDetailsDelete", thisSystem.First());
+        }
+
+        [HttpGet]
         public IActionResult GalacticConquest()
         {
             var allSolarSystems = _context.SolarSystems
