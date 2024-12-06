@@ -4,7 +4,6 @@ using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models;
 using GalacticTitans.Models.AstralBodies;
-using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -527,9 +526,12 @@ namespace GalacticTitans.Controllers
             }
             List<string> oldList = (List<string>)ViewData["previouslySelected"];
             previouslySelected = oldList;
-            foreach (var stringID in previouslySelected)
+            if (previouslySelected != null)
             {
-                tempParse2.Add(Guid.Parse(stringID));
+                foreach (var stringID in previouslySelected)
+                {
+                    tempParse2.Add(Guid.Parse(stringID));
+                }
             }
 
             var dto = new SolarSystemDto() { };
