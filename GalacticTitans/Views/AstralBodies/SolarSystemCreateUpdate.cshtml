@@ -56,7 +56,7 @@ else
             @if (Model.ID.HasValue)
             {
                 <p>@Model.ID</p>
-                <input type="hidden" name="previouslySelected" value="@ViewData["previouslySelected"]" />
+                <input type="hidden" name="previouslySelected" value="@previouslySelected" />
             }
 
             <div class="form-group-row">

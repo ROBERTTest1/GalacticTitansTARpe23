@@ -516,21 +516,59 @@ namespace GalacticTitans.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<string> userHasSelected, List<string> previouslySelected, List<AstralBody> planets)
+        public async Task<IActionResult> SolarSystemUpdate(SolarSystemCreateUpdateViewModel vm, List<string> userHasSelected, List<AstralBody> planets)
         {
-            List<Guid> tempParse = new();
-            List<Guid> tempParse2 = new();
+            //Generate list of planets 
+            var allPlanets = _context.AstralBodies
+            .OrderByDescending(y => y.AstralBodyType)
+            .Select(x => new AstralBody
+            {
+                ID = x.ID,
+                AstralBodyName = x.AstralBodyName,
+                AstralBodyType = x.AstralBodyType,
+                EnvironmentBoost = (Core.Domain.TitanType)(Models.Titans.TitanType)x.EnvironmentBoost,
+                MajorSettlements = x.MajorSettlements,
+                TechnicalLevel = x.TechnicalLevel,
+                SolarSystemID = x.SolarSystemID,
+                /*Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
+                //   .Where(t => t.TitanID == x.ID)
+                //   .Select(z => new AstralBodyIndexViewModel
+                //   {
+                //       TitanID = z.ID,
+                //       ImageID = z.ID,
+                //       ImageData = z.ImageData,
+                //       ImageTitle = z.ImageTitle,
+                //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                   })*/
+            });
+            //sort out planets that currently have solarsystem id of this vm
+            List<string> preselectedPreviously = new();
+            List<AstralBody> planetSelection = new();
+            List<AstralBody> removedPlanets = new();
+
+            foreach (var planet in allPlanets)
+            {
+                if (planet.SolarSystemID == vm.ID.ToString())
+                {
+                    planetSelection.Add(planet);
+                }
+            }
+
+            List<Guid> userHasSelectedGUID = new();
             foreach (var stringID in userHasSelected)
             {
-                tempParse.Add(Guid.Parse(stringID));
+                userHasSelectedGUID.Add(Guid.Parse(stringID));
             }
-            List<string> oldList = (List<string>)ViewData["previouslySelected"];
-            previouslySelected = oldList;
-            if (previouslySelected != null)
+
+            foreach (var planet in planetSelection)
             {
-                foreach (var stringID in previouslySelected)
+                if (!userHasSelectedGUID.Contains(planet.ID))
                 {
-                    tempParse2.Add(Guid.Parse(stringID));
+                    _context.AstralBodies.Attach(planet);
+                    planet.SolarSystemID = null;
+                    planet.ModifiedAt = DateTime.Now;
+                    await _context.SaveChangesAsync();
+                    removedPlanets.Add(planet);
                 }
             }
 
@@ -539,7 +577,7 @@ namespace GalacticTitans.Controllers
             dto.SolarSystemName = vm.SolarSystemName;
             dto.SolarSystemLore = vm.SolarSystemLore;
             dto.AstralBodyAtCenter = vm.AstralBodyAtCenter;
-            dto.AstralBodyIDs = tempParse; 
+            dto.AstralBodyIDs = userHasSelectedGUID; 
             dto.Planets = planets;
             dto.CreatedAt = DateTime.Now;
             dto.UpdatedAt = DateTime.Now;
@@ -554,17 +592,7 @@ namespace GalacticTitans.Controllers
             {
                 dto.AstralBodyIDs = await PlanetToID(dto.Planets);
             }
-            planets = dto.Planets; //<--- added post next opcheck check
-            //do nothing if there is (something or nothing) in both
-            List<AstralBody> removedPlanets = await IdToPlanet(tempParse2);
-            for (int i = 0; i < removedPlanets.Count(); i++)
-            {
-                if (planets.Contains(removedPlanets[i]))
-                {
-                    removedPlanets.Remove(removedPlanets[i]);
-                }
-            }
-
+            planets = dto.Planets; 
             //change the system
             var newSystem = await _solarSystemsServices.Update(dto, planets, removedPlanets);
             if (newSystem == null)
