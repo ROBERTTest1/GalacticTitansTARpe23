@@ -14,6 +14,7 @@
 
     // list of planets that the user has selected, contains everything given from the get method
     List<string> userHasSelected = (List<string>)ViewData["userHasSelected"];
+    List<string> previouslySelected = userHasSelected;
 
 
     if (Model.ID.HasValue)
@@ -23,7 +24,7 @@
         //selected when editing a solar system
         //this is because if a planet is REMOVED from a system, 
         //we still want to update its solarsystemid with an anullment
-        ViewData["previouslySelected"] = (List<string>)ViewData["userHasSelected"];
+        ViewData["previouslySelected"] = previouslySelected;
     }
     else
     {
