@@ -349,7 +349,10 @@ namespace GalacticTitans.Controllers
                 }).ToList();
 
             //var result = thisSystem.ToList();
-
+            if (!thisSystem.Any())
+            {
+                return RedirectToAction("./Views/Home/Error");
+            }
             return View("SolarSystemExplore", thisSystem.First());
         }
 
