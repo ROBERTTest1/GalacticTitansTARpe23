@@ -10,5 +10,6 @@ namespace GalacticTitans.Core.Domain
     public class ApplicationUser : IdentityUser
     {
         public string City { get; set; }
+        public Guid PlayerProfileID { get; set; } //1-1
     }
 }
