@@ -20,8 +20,8 @@ namespace GalacticTitans.Controllers
         private readonly ISolarSystemsServices _solarSystemsServices;
         public AstralBodiesController
             (
-            GalacticTitansContext context, 
-            IAstralBodiesServices astralBodiesServices, 
+            GalacticTitansContext context,
+            IAstralBodiesServices astralBodiesServices,
             IFileServices fileServices,
             ISolarSystemsServices solarSystemsServices
             )
@@ -302,7 +302,7 @@ namespace GalacticTitans.Controllers
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
             var astralBodyId = await _astralBodiesServices.Delete(id);
-            if (astralBodyId == null) 
+            if (astralBodyId == null)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -398,9 +398,9 @@ namespace GalacticTitans.Controllers
                     //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
                     //   })
                 });
-            
+
             vm.Planets = allPlanets.ToList();
-            ViewData["allPlanets"] = new SelectList(allPlanets, "ID","AstralBodyName", allPlanets);
+            ViewData["allPlanets"] = new SelectList(allPlanets, "ID", "AstralBodyName", allPlanets);
             //ViewData["selectedPlanets"] = vm.AstralBodyIDs;
             return View("SolarSystemCreateUpdate", vm);
         }
@@ -424,18 +424,18 @@ namespace GalacticTitans.Controllers
             dto.Planets = planets; /*opfail: no planets*/
             dto.CreatedAt = DateTime.Now;
             dto.UpdatedAt = DateTime.Now;
-            if (dto.Planets == null || dto.Planets.Count() !> 0) /*debugfail: invert condition on second argument to LESSTHAN ONE*/
+            if (dto.Planets == null || dto.Planets.Count()! > 0) /*debugfail: invert condition on second argument to LESSTHAN ONE*/
             {
                 await Console.Out.WriteLineAsync("planets null");
                 await Console.Out.WriteLineAsync("idcount" + dto.AstralBodyIDs.Count().ToString());
             }
-            if (dto.AstralBodyIDs == null || dto.AstralBodyIDs.Count() !> 0) /*debugfail: bad condition*/
+            if (dto.AstralBodyIDs == null || dto.AstralBodyIDs.Count()! > 0) /*debugfail: bad condition*/
             {
                 await Console.Out.WriteLineAsync("ids null"); /*debugfail: wrong error message here*/
                 await Console.Out.WriteLineAsync("planetcount" + dto.Planets.Count().ToString());
             }
             //populate planets from ids
-            if (dto.Planets !=  null && dto.AstralBodyIDs.Any())
+            if (dto.Planets != null && dto.AstralBodyIDs.Any())
             {
                 dto.Planets = await IdToPlanet(dto.AstralBodyIDs); /*opcheck: correctly converts id to planet*/
             }
@@ -507,7 +507,7 @@ namespace GalacticTitans.Controllers
 
             ViewData["userHasSelected"] = preselectedPreviously;
             ViewData["previouslySelected"] = preselectedPreviously;
-            
+
             vm.Planets = allPlanets.ToList();
             ViewData["allPlanets"] = new SelectList(allPlanets, "ID", "AstralBodyName", allPlanets);
             //ViewData["selectedPlanets"] = vm.AstralBodyIDs;
@@ -577,7 +577,7 @@ namespace GalacticTitans.Controllers
             dto.SolarSystemName = vm.SolarSystemName;
             dto.SolarSystemLore = vm.SolarSystemLore;
             dto.AstralBodyAtCenter = vm.AstralBodyAtCenter;
-            dto.AstralBodyIDs = userHasSelectedGUID; 
+            dto.AstralBodyIDs = userHasSelectedGUID;
             dto.Planets = planets;
             dto.CreatedAt = DateTime.Now;
             dto.UpdatedAt = DateTime.Now;
@@ -592,7 +592,7 @@ namespace GalacticTitans.Controllers
             {
                 dto.AstralBodyIDs = await PlanetToID(dto.Planets);
             }
-            planets = dto.Planets; 
+            planets = dto.Planets;
             //change the system
             var newSystem = await _solarSystemsServices.Update(dto, planets, removedPlanets);
             if (newSystem == null)
@@ -689,6 +689,65 @@ namespace GalacticTitans.Controllers
             ViewData["RequestedView"] = "Delete";
             return View("SolarSystemDetailsDelete", thisSystem.First());
         }
+        [HttpPost]
+        public async Task<IActionResult> SolarSystemDeletePermanent(Guid id)
+        {
+
+            var thisSystemPlanets = _context.AstralBodies
+                .OrderByDescending(y => y.CreatedAt)
+                .Where(z => z.SolarSystemID == id.ToString())
+                .Select(x => new AstralBody
+                {
+                    ID = x.ID,
+                    AstralBodyName = x.AstralBodyName,
+                    AstralBodyType = x.AstralBodyType,
+                    EnvironmentBoost = (Core.Domain.TitanType)(Models.Titans.TitanType)x.EnvironmentBoost,
+                    MajorSettlements = x.MajorSettlements,
+                    TechnicalLevel = x.TechnicalLevel,
+                    SolarSystemID = x.SolarSystemID,
+                    //Image = _context.FilesToDatabase
+                    //   .Where(t => t.AstralBodyID == x.ID)
+                    //   .Select(z => new AstralBodyImageViewModel
+                    //   {
+                    //       AstralBodyID = z.ID,
+                    //       ImageID = z.ID,
+                    //       ImageData = z.ImageData,
+                    //       ImageTitle = z.ImageTitle,
+                    //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                    //   }).ToList()
+                }).ToList();
+
+            var planetIDs = PlanetToIDList(thisSystemPlanets);
+
+            var thisSystem = _context.SolarSystems
+                .Where(z => z.ID == id)
+                .Select(x => new SolarSystem
+                {
+                    ID = x.ID,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    SolarSystemName = x.SolarSystemName,
+                    SolarSystemLore = x.SolarSystemLore,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    AstralBodyIDs = planetIDs
+                }).ToList();
+
+            //foreach (var planet in thisSystemPlanets)
+            //{
+            //    if (planet.SolarSystemID == thisSystem.First().ID.ToString())
+            //    {
+            //        planetSelection.Add(planet);
+            //    }
+            //}
+            //var result = thisSystem.ToList();
+            ViewData["RequestedView"] = "Details";
+            var deletedSystem = await _solarSystemsServices.Delete(thisSystemPlanets, thisSystem.First(), planetIDs);
+            if (deletedSystem == null)
+            {
+                return RedirectToAction("Error");
+            }
+            return RedirectToAction(nameof(SolarSystemAdminIndex));
+        }
 
         [HttpGet]
         public IActionResult GalacticConquest()
@@ -717,6 +776,15 @@ namespace GalacticTitans.Controllers
             }
             return result;
         }
+        private static List<Guid> PlanetToIDList(List<AstralBody> planets)
+        {
+            var result = new List<Guid>();
+            foreach (var planet in planets)
+            {
+                result.Add(planet.ID);
+            }
+            return result;
+        }
         private List<Guid> PlanetToID(List<AstralBodyIndexViewModel> planets)
         {
             var result = new List<Guid>();
@@ -735,8 +803,6 @@ namespace GalacticTitans.Controllers
                 result.Add( await _astralBodiesServices.DetailsAsync(id));
             }
             return result;
-        }
-
-        
+        }        
     }
 }

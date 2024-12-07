@@ -119,6 +119,40 @@ namespace GalacticTitans.ApplicationServices.Services
 
             return modifiedSystem;
         }
+
+        public async Task<SolarSystem> Delete(List<AstralBody> body, SolarSystem system, List<Guid> planetIDs)
+        {
+            List<AstralBody> removedPlanets = new List<AstralBody>();
+
+            foreach (var planetID in planetIDs)
+            {
+                Guid thisplanetID = planetID;
+                AstralBody thisplanet = IdToPlanet(planetID);
+                removedPlanets.Add(thisplanet);
+            }
+
+            // null ids of planets kicked out
+            foreach (var planet in removedPlanets)
+            {
+                _context.AstralBodies.Attach(planet);
+                planet.SolarSystemID = null;
+                planet.ModifiedAt = DateTime.Now;
+
+                _context.Entry(planet).Property(p => p.SolarSystemID).IsModified = true;
+                _context.Entry(planet).Property(p => p.ModifiedAt).IsModified = true;
+
+                await _context.SaveChangesAsync();
+            }
+
+
+            var result = await _context.SolarSystems.FirstOrDefaultAsync(x => x.ID == system.ID);
+            _context.SolarSystems.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
+
+
         private static List<Guid> PlanetToID(List<AstralBody> planets)
         {
             var result = new List<Guid>();
@@ -128,5 +162,12 @@ namespace GalacticTitans.ApplicationServices.Services
             }
             return result;
         }
+        private AstralBody IdToPlanet(Guid astralBodyID)
+        {
+            AstralBody result = _context.AstralBodies.FirstOrDefault(x => x.ID == astralBodyID);
+            return result;
+        }
+
+
     }
 }
