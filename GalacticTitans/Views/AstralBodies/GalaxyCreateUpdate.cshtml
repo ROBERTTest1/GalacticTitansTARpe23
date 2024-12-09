@@ -5,7 +5,7 @@
     bool devmode = false;
 
     //unused
-    var allSystemsTickboxes = ViewData["allSystems"] as List<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>;
+    var allSystemsTickboxes = ViewData["allSystems"] as List<GalacticTitans.Models.AstralBodies.SolarSystemDetailsDeleteViewModel>;
 
     // list of planets given from the model, is used to create tickboxes
     var listOfSystems = Model.SolarSystemsInGalaxyObject;
@@ -90,15 +90,15 @@ else
             <tbody>
                 @if (listOfSystems != null)
                 {
-                    @*foreach (var selectablePlanet in listOfPlanets)*@
-                    for (int i = 0; i < listOfSystems.Count; i++)
+                    foreach (var selectableSystem in listOfSystems)
+                    @*for (int i = 0; i < listOfSystems.Count(); i++)*@
                     {
-                        var selectableSystem = listOfSystems[i];
+                        @*var selectableSystem = listOfSystems[i];*@
                         <tr class="isCommonWhite">
-                            <td>@Html.DisplayFor(modelItem => selectableSystem.SolarSystemName)</td>
-                            <td>@Html.DisplayFor(modelItem => selectableSystem.AstralBodyIDs.Count().ToString())</td>
-                            <td>@Html.DisplayFor(modelItem => selectableSystem.AstralBodyAtCenterWith.AstralBodyName)</td>
-                            <td>@Html.DisplayFor(modelItem => selectableSystem.AstralBodyAtCenterWith.AstralBodyType)</td>
+                            <td>@selectableSystem.SolarSystemName</td>
+                            <td>@selectableSystem.AstralBodyIDs.Count().ToString()</td>
+                            <td>@selectableSystem.AstralBodyAtCenter</td>
+                            <td class="galacticErrorMessageColor">NA</td>
                             <td>
                                 @*Html.CheckBox("ID")*@
                                 @if (Model.ID.HasValue)
@@ -125,7 +125,7 @@ else
                 {
                     <tr>
                         <td>_</td>
-                        <td>No planets to select from</td>
+                        <td>No systems to select from</td>
                         <td>_</td>
                         <td>_</td>
                         <td>tickbox</td>

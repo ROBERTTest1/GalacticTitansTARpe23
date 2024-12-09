@@ -810,7 +810,35 @@ namespace GalacticTitans.Controllers
         public async Task<IActionResult> GalaxyCreate()
         {
             ViewData["userHasSelected"] = new List<string>();
-            return null;
+            GalaxyViewModel vm = new();
+
+
+            var allSystems = _context.SolarSystems
+                .OrderByDescending(y => y.UpdatedAt)
+                .Select(x => new SolarSystem
+                {
+                    ID = x.ID,
+                    SolarSystemName = x.SolarSystemName,
+                    AstralBodyIDs = x.AstralBodyIDs,
+                    AstralBodyAtCenterWith = x.AstralBodyAtCenterWith,
+                    AstralBodyAtCenter = x.AstralBodyAtCenter,
+                    UpdatedAt = x.UpdatedAt,
+                    //Image = (List<AstralBodyIndexViewModel>)_context.FilesToDatabase
+                    //   .Where(t => t.TitanID == x.ID)
+                    //   .Select(z => new AstralBodyIndexViewModel
+                    //   {
+                    //       TitanID = z.ID,
+                    //       ImageID = z.ID,
+                    //       ImageData = z.ImageData,
+                    //       ImageTitle = z.ImageTitle,
+                    //       Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                    //   })
+                });
+
+            vm.SolarSystemsInGalaxyObject = allSystems.ToList();
+            ViewData["allSystems"] = new SelectList(allSystems, "ID", "GalaxyName", allSystems);
+            //ViewData["selectedPlanets"] = vm.AstralBodyIDs;
+            return View("GalaxyCreateUpdate", vm);
         }
 
 
