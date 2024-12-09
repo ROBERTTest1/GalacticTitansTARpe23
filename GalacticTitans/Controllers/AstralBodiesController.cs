@@ -7,7 +7,6 @@ using GalacticTitans.Models.AstralBodies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using System.Diagnostics;
 
 namespace GalacticTitans.Controllers
@@ -18,19 +17,22 @@ namespace GalacticTitans.Controllers
         private readonly IFileServices _fileServices;
         private readonly IAstralBodiesServices _astralBodiesServices;
         private readonly ISolarSystemsServices _solarSystemsServices;
+        private readonly IGalaxiesServices _galaxiesServices;
         
         public AstralBodiesController
             (
             GalacticTitansContext context,
             IAstralBodiesServices astralBodiesServices,
             IFileServices fileServices,
-            ISolarSystemsServices solarSystemsServices
+            ISolarSystemsServices solarSystemsServices,
+            IGalaxiesServices galaxiesServices
             )
         {
             _context = context;
             _fileServices = fileServices;
             _astralBodiesServices = astralBodiesServices;
             _solarSystemsServices = solarSystemsServices;
+            _galaxiesServices = galaxiesServices;
         }
 
         /*
@@ -841,10 +843,59 @@ namespace GalacticTitans.Controllers
             return View("GalaxyCreateUpdate", vm);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GalaxyCreate(GalaxyViewModel vm, List<string> userHasSelected, List<SolarSystem> systems)
+        {
+            List<Guid> tempParse = new();
+            foreach (var stringID in userHasSelected)
+            {
+                tempParse.Add(Guid.Parse(stringID));
+            }
+            ViewData["userHasSelected"] = tempParse; /*opcheck: ids correctly obtained*/
 
+            // this make new, do not add guid
+            var dto = new GalaxyDto() { };
+            dto.GalaxyName = vm.GalaxyName;
+            dto.GalaxyLore = vm.GalaxyLore;
+            dto.SolarSystemsInGalaxy = tempParse;
+            dto.SolarSystemsInGalaxyObject = vm.SolarSystemsInGalaxyObject; /*opcheck: id correctly set in dbo*/
+            dto.CreatedAt = DateTime.Now;
+            dto.UpdatedAt = DateTime.Now;
+           
+            //populate planets from ids
+            if (dto.SolarSystemsInGalaxyObject == null && dto.SolarSystemsInGalaxy.Any())
+            {
+                dto.SolarSystemsInGalaxyObject = await IdToSystem(dto.SolarSystemsInGalaxy); /*opcheck: correctly converts id to planet*/
+            }
+            //or populate ids from planets
+            else if (dto.SolarSystemsInGalaxy != null && !dto.SolarSystemsInGalaxyObject.Any())
+            {
+                dto.SolarSystemsInGalaxy = await SystemToID(dto.SolarSystemsInGalaxyObject);
+            }
+            systems = dto.SolarSystemsInGalaxyObject; //<--- added post next opcheck check
+            //do nothing if there is (something or nothing) in both
+
+            //make the system
+            var newSystem = await _galaxiesServices.Create(dto, systems); /*opcheck: planets is empty, should not be empty*/
+            if (newSystem == null)
+            {
+                return RedirectToAction("GalaxyAdminIndex");
+            }
+            return RedirectToAction("GalaxyAdminIndex", vm);
+        }
 
 
         //private methods for use in controller only
+        private async Task<List<Guid>> SystemToID(List<SolarSystem> systems)
+        {
+            var result = new List<Guid>();
+            foreach (var system in systems)
+            {
+                result.Add(system.ID);
+            }
+            return result;
+        }
         private async Task<List<Guid>> PlanetToID(List<AstralBody> planets)
         {
             var result = new List<Guid>();
@@ -879,6 +930,15 @@ namespace GalacticTitans.Controllers
             foreach (var id in astralBodyIDs)
             {
                 result.Add( await _astralBodiesServices.DetailsAsync(id));
+            }
+            return result;
+        }        
+        private async Task<List<SolarSystem>> IdToSystem(List<Guid> systemIDs)
+        {
+            var result = new List<SolarSystem>();
+            foreach (var id in systemIDs)
+            {
+                result.Add( await _solarSystemsServices.DetailsAsync(id));
             }
             return result;
         }        
