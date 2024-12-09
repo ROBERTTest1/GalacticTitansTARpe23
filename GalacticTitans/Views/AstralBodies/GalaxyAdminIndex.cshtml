@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GalacticTitans.Models.AstralBodies.GalaxyViewModel>
+@{
+    int rowNumber = 1;
+}
+<div class="gTZRG"><a asp-action="GalaxyCreate" asp-controller="AstralBodies" type="submit" class="btn btn-primary gTZRG">Make Galaxy</a></div>
+@* Admin Control for adding a new astral body of X type into the DB *@
+
+<div class="h1 gTZRG">All solar systems:</div>
+<p class="gTZRG isCommonYellow">
+    NOTE! The game requires only *one* galaxy and as such doesnt currently have a way to select <br />
+    between multiple existing galaxies, so in order to make sure the newest galaxy is viewed in game, <br />
+    make sure it is the <i>only</i> existing galaxy. This should be solved in the future. <br />
+    For a similiar reason, one galaxy can only have a maximum of 16 solar systems, the table in <br />
+    players view just doesnt render any more, and will only take 16 first ones.
+</p>
+<form method="post">
+    <table class="table gHT gTZRG">
+        <thead class="isCommonWhite">
+            <tr>
+                @* Later, once images have been implemented, add image here aswell *@
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name of Galaxy</th>
+                <th scope="col">Lore of Galaxy</th>
+                <th scope="col">Amount of solar systems</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Modified At</th>
+                <th scope="col">Actions:</th>
+
+            </tr>
+        </thead>
+        <tbody class="isCommonBlue">
+            @if (!Model.Any())
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <td>@rowNumber</td>
+                    <td>_</td>
+                    <td>No Galaxy found</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>
+                        No actions available.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var system in Model)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>@system.ID</td>
+                        <td>@system.GalaxyName</td>
+                        <td>@system.GalaxyLore</td>
+                        <td>@system.SolarSystemsInGalaxy.Count().ToString()</td>
+                        <td>@system.CreatedAt</td>
+                        <td>@system.UpdatedAt</td>
+                        <td>
+                            <a asp-action="GalaxyUpdate" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">EDIT</a>
+                            <a asp-action="GalaxyDelete" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">DEL</a>
+                        </td>
+                    </tr>
+                    rowNumber++;
+                }
+            }
+        </tbody>
+    </table>
+</form>

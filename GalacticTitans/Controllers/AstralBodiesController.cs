@@ -18,6 +18,7 @@ namespace GalacticTitans.Controllers
         private readonly IFileServices _fileServices;
         private readonly IAstralBodiesServices _astralBodiesServices;
         private readonly ISolarSystemsServices _solarSystemsServices;
+        
         public AstralBodiesController
             (
             GalacticTitansContext context,
@@ -31,6 +32,14 @@ namespace GalacticTitans.Controllers
             _astralBodiesServices = astralBodiesServices;
             _solarSystemsServices = solarSystemsServices;
         }
+
+        /*
+     
+
+        P L A N E T S
+     
+     
+         */
         /// <summary>
         /// Index for admin view of planets
         /// </summary>
@@ -308,8 +317,14 @@ namespace GalacticTitans.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        /*
+     
 
-        [HttpGet]
+        S O L A R    S Y S T E M S 
+     
+     
+         */
+        [HttpGet] // user
         public IActionResult SolarSystemExplore(Guid id)
         {
             var thisSystemPlanets = _context.AstralBodies
@@ -355,7 +370,6 @@ namespace GalacticTitans.Controllers
             }
             return View("SolarSystemExplore", thisSystem.First());
         }
-
 
         [HttpGet]
         public IActionResult SolarSystemAdminIndex()
@@ -751,7 +765,13 @@ namespace GalacticTitans.Controllers
             }
             return RedirectToAction(nameof(SolarSystemAdminIndex));
         }
+        /*
 
+
+        G A L A X I E S 
+
+
+        */
         [HttpGet]
         public IActionResult GalacticConquest()
         {
@@ -768,6 +788,33 @@ namespace GalacticTitans.Controllers
                 }).Take(16);
             return View(allSolarSystems);
         }
+
+        [HttpGet]
+        public IActionResult GalaxyAdminIndex()
+        {
+            var galaxies = _context.Galaxies
+                .OrderByDescending(y => y.ID)
+                .Select(x => new GalaxyViewModel
+                {
+                    ID = x.ID,
+                    GalaxyName = x.GalaxyName,
+                    GalaxyLore = x.GalaxyLore,
+                    SolarSystemsInGalaxy = x.SolarSystemsInGalaxy,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                });
+            return View(galaxies);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GalaxyCreate()
+        {
+            ViewData["userHasSelected"] = new List<string>();
+            return null;
+        }
+
+
+
 
         //private methods for use in controller only
         private async Task<List<Guid>> PlanetToID(List<AstralBody> planets)
@@ -807,5 +854,6 @@ namespace GalacticTitans.Controllers
             }
             return result;
         }        
+
     }
 }

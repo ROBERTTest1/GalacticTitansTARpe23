@@ -15,5 +15,6 @@ namespace GalacticTitans.Data
         public DbSet<AstralBody> AstralBodies { get; set; }
         public DbSet<SolarSystem> SolarSystems { get; set; }
         public DbSet<FileToDatabase> FilesToDatabase { get; set; }
+        public DbSet<Galaxy> Galaxies { get; set; }
     }
 }

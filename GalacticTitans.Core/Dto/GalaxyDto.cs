@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GalacticTitans.Core.Domain
+namespace GalacticTitans.Core.Dto
 {
-    public class Galaxy
+    public class GalaxyDto
     {
         public Guid ID { get; set; }
         public string GalaxyName { get; set; }
