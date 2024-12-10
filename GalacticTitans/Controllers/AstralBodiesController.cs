@@ -885,6 +885,125 @@ namespace GalacticTitans.Controllers
             return RedirectToAction("GalaxyAdminIndex", vm);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GalaxyUpdate(Guid id)
+        {
+            var modifyThisGalaxy = await _galaxiesServices.DetailsAsync(id);
+            var allSystems = _context.SolarSystems
+                            .OrderByDescending(y => y.UpdatedAt)
+                            .Select(x => new SolarSystem
+                            {
+                                ID = x.ID,
+                                SolarSystemName = x.SolarSystemName,
+                                AstralBodyIDs = x.AstralBodyIDs,
+                                AstralBodyAtCenterWith = x.AstralBodyAtCenterWith,
+                                AstralBodyAtCenter = x.AstralBodyAtCenter,
+                                UpdatedAt = x.UpdatedAt
+                            });
+            GalaxyViewModel vm = new();
+            vm.ID = modifyThisGalaxy.ID;
+            vm.GalaxyName = modifyThisGalaxy.GalaxyName;
+            vm.GalaxyLore = modifyThisGalaxy.GalaxyLore;
+            vm.SolarSystemsInGalaxy = modifyThisGalaxy.SolarSystemsInGalaxy;
+            vm.SolarSystemsInGalaxyObject = new();
+            vm.UpdatedAt = modifyThisGalaxy.UpdatedAt;
+
+            List<string> preselectedPreviously = new();
+            List<SolarSystem> systemSelection = new();
+
+            foreach (var system in allSystems)
+            {
+                if (vm.SolarSystemsInGalaxy.Contains(system.ID))
+                {
+                    preselectedPreviously.Add(system.ID.ToString());
+                    systemSelection.Add(system);
+                }
+            }
+            vm.SolarSystemsInGalaxyObject.AddRange(systemSelection);
+
+            ViewData["userHasSelected"] = preselectedPreviously;
+            ViewData["previouslySelected"] = preselectedPreviously;
+
+            vm.SolarSystemsInGalaxyObject = allSystems.ToList();
+            ViewData["allSystems"] = new SelectList(allSystems, "ID", "SolarSystemName", allSystems);
+            //ViewData["selectedPlanets"] = vm.AstralBodyIDs;
+            return View("GalaxyCreateUpdate", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GalaxyUpdate(GalaxyViewModel vm, List<string> userHasSelected, List<SolarSystem> systems)
+        {
+            //Generate list of planets 
+            var allSystems = _context.SolarSystems
+                            .OrderByDescending(y => y.UpdatedAt)
+                            .Select(x => new SolarSystem
+                            {
+                                ID = x.ID,
+                                SolarSystemName = x.SolarSystemName,
+                                AstralBodyIDs = x.AstralBodyIDs,
+                                AstralBodyAtCenterWith = x.AstralBodyAtCenterWith,
+                                AstralBodyAtCenter = x.AstralBodyAtCenter,
+                                UpdatedAt = x.UpdatedAt
+                            });
+            //sort out planets that currently have solarsystem id of this vm
+            List<string> preselectedPreviously = new();
+            List<SolarSystem> systemSelection = new();
+            List<SolarSystem> removedSystems = new();
+
+            foreach (var systemID in vm.SolarSystemsInGalaxy)
+            {
+                if (vm.SolarSystemsInGalaxy.Contains(systemID))
+                {
+                    systemSelection.Add(await _solarSystemsServices.DetailsAsync(systemID));
+                }
+            }
+
+            List<Guid> userHasSelectedGUID = new();
+            foreach (var stringID in userHasSelected)
+            {
+                userHasSelectedGUID.Add(Guid.Parse(stringID));
+            }
+
+            foreach (var system in systemSelection)
+            {
+                if (!userHasSelectedGUID.Contains(system.ID))
+                {
+                    removedSystems.Add(system);
+                }
+            }
+
+            var dto = new GalaxyDto() { };
+            dto.ID = (Guid)vm.ID;
+            dto.GalaxyName = vm.GalaxyName;
+            dto.GalaxyLore = vm.GalaxyLore;
+            dto.SolarSystemsInGalaxyObject = vm.SolarSystemsInGalaxyObject;
+            dto.SolarSystemsInGalaxy = userHasSelectedGUID;
+            dto.CreatedAt = vm.CreatedAt;
+            dto.UpdatedAt = DateTime.Now;
+
+            //populate planets from ids
+            if (dto.SolarSystemsInGalaxyObject != null && dto.SolarSystemsInGalaxy.Any())
+            {
+                dto.SolarSystemsInGalaxyObject = await IdToSystem(dto.SolarSystemsInGalaxy); /*opcheck: correctly converts id to planet*/
+            }
+            //or populate ids from planets
+            else if (!dto.SolarSystemsInGalaxy.Any() && dto.SolarSystemsInGalaxyObject.Any())
+            {
+                dto.SolarSystemsInGalaxy = await SystemToID(dto.SolarSystemsInGalaxyObject);
+            }
+            systems = dto.SolarSystemsInGalaxyObject;
+            //change the system
+            var newSystem = await _galaxiesServices.Update(dto, dto.SolarSystemsInGalaxyObject, removedSystems);
+            if (newSystem == null)
+            {
+                return RedirectToAction("GalaxyAdminIndex");
+            }
+            return RedirectToAction("GalaxyAdminIndex", vm);
+        }
+
+
+
 
         //private methods for use in controller only
         private async Task<List<Guid>> SystemToID(List<SolarSystem> systems)
