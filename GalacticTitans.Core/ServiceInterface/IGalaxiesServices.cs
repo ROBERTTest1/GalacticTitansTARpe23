@@ -13,5 +13,6 @@ namespace GalacticTitans.Core.ServiceInterface
         Task<Galaxy> DetailsAsync(Guid id);
         Task<Galaxy> Create(GalaxyDto dto, List<SolarSystem> systemsInGalaxy);
         Task<Galaxy> Update(GalaxyDto dto, List<SolarSystem> systemsInGalaxy, List<SolarSystem> removedSystems);
+        Task<Galaxy> Delete(Galaxy galaxyToBeDeleted);
     }
 }

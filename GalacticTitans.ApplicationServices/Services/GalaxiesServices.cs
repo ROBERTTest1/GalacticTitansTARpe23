@@ -79,6 +79,14 @@ namespace GalacticTitans.ApplicationServices.Services
             return modifiedGalaxy;
         }
 
+        public async Task<Galaxy> Delete(Galaxy galaxyToBeDeleted)
+        {
+            var result = await _context.Galaxies.FirstOrDefaultAsync(x => x.ID == galaxyToBeDeleted.ID);
+            _context.Galaxies.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
 
         private static List<Guid> SystemToID(List<SolarSystem> systems)
         {

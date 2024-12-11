@@ -2,7 +2,7 @@
 @{
     int rowNumber = 1;
 }
-<div class="gTZRG"><a asp-action="GalaxyCreate" asp-controller="AstralBodies" type="submit" class="btn btn-primary gTZRG">Make Galaxy</a></div>
+<div class="gTZRG"><a asp-action="GalaxyCreate" asp-controller="AstralBodies" class="btn btn-primary gTZRG">Make Galaxy</a></div>
 @* Admin Control for adding a new astral body of X type into the DB *@
 
 <div class="h1 gTZRG">All solar systems:</div>
@@ -13,7 +13,6 @@
     For a similiar reason, one galaxy can only have a maximum of 16 solar systems, the table in <br />
     players view just doesnt render any more, and will only take 16 first ones.
 </p>
-<form method="post">
     <table class="table gHT gTZRG">
         <thead class="isCommonWhite">
             <tr>
@@ -61,7 +60,9 @@
                         <td>@system.UpdatedAt</td>
                         <td>
                             <a asp-action="GalaxyUpdate" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">EDIT</a>
-                            <a asp-action="GalaxyDelete" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">DEL</a>
+                            <form method="post" >
+                                <button type="submit" asp-action="GalaxyDeletePermanent" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">DEL</button>
+                            </form>
                         </td>
                     </tr>
                     rowNumber++;
@@ -69,4 +70,3 @@
             }
         </tbody>
     </table>
-</form>

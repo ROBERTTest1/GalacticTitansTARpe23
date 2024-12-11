@@ -1013,7 +1013,20 @@ namespace GalacticTitans.Controllers
             }
             return RedirectToAction("GalaxyAdminIndex", vm);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GalaxyDeletePermanent(Guid id)
+        {
+            var thisGalaxy = _context.Galaxies
+                .FirstOrDefaultAsync(z => z.ID == id);
 
+            var deletedGalaxy = await _galaxiesServices.Delete(await thisGalaxy);
+            if (deletedGalaxy == null)
+            {
+                return RedirectToAction("Error");
+            }
+            return RedirectToAction("GalaxyAdminIndex");
+        }
 
 
 
