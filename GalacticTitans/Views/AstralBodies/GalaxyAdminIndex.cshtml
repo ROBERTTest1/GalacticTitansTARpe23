@@ -11,7 +11,17 @@
     between multiple existing galaxies, so in order to make sure the newest galaxy is viewed in game, <br />
     make sure it is the <i>only</i> existing galaxy. This should be solved in the future. <br />
     For a similiar reason, one galaxy can only have a maximum of 16 solar systems, the table in <br />
-    players view just doesnt render any more, and will only take 16 first ones.
+    players view just doesnt render any more, and will only take 16 first ones.<br /><br />
+    NOTE 2! The Galaxy object is third order of the astralbody implementation. In it that <br />
+    AstralBodies form a Solar System, which in turn form a Galaxy. As the game (for time constraint)<br />
+    purposes is only intended to have gameplay on planets, Solar systems and galaxy is just a way<br />
+    to order and organize the gameplay in a more logical manner. As such, The last order - Galaxies<br />
+    is not a full implementation of an order like planet or solar system is. There is no details or <br />
+    delete views. deleting happens via a post method with no confirmation whatsoever - this is not really<br />
+    the best way to go about it. In the future, a full implementation of galaxy order is recommended<br />
+    alongside a new, final order - the universal map. Creation of objects in the universe could also<br />
+    be streamlined by an enum for orders themselves, cutting down much of the fluff right now in the <br />
+    controller, services and views.<br />
 </p>
     <table class="table gHT gTZRG">
         <thead class="isCommonWhite">
