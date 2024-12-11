@@ -951,13 +951,21 @@ namespace GalacticTitans.Controllers
             List<SolarSystem> systemSelection = new();
             List<SolarSystem> removedSystems = new();
 
-            foreach (var systemID in vm.SolarSystemsInGalaxy)
+            if (vm.SolarSystemsInGalaxy != null)
             {
-                if (vm.SolarSystemsInGalaxy.Contains(systemID))
+                foreach (var systemID in vm.SolarSystemsInGalaxy)
                 {
-                    systemSelection.Add(await _solarSystemsServices.DetailsAsync(systemID));
+                    if (vm.SolarSystemsInGalaxy.Contains(systemID))
+                    {
+                        systemSelection.Add(await _solarSystemsServices.DetailsAsync(systemID));
+                    }
                 }
             }
+            else
+            {
+                systemSelection = new();
+            }
+
 
             List<Guid> userHasSelectedGUID = new();
             foreach (var stringID in userHasSelected)
@@ -982,16 +990,20 @@ namespace GalacticTitans.Controllers
             dto.CreatedAt = vm.CreatedAt;
             dto.UpdatedAt = DateTime.Now;
 
-            //populate planets from ids
-            if (dto.SolarSystemsInGalaxyObject != null && dto.SolarSystemsInGalaxy.Any())
+            if (vm.SolarSystemsInGalaxy != null)
             {
-                dto.SolarSystemsInGalaxyObject = await IdToSystem(dto.SolarSystemsInGalaxy); /*opcheck: correctly converts id to planet*/
+                //populate planets from ids
+                if (dto.SolarSystemsInGalaxyObject != null && dto.SolarSystemsInGalaxy.Any())
+                {
+                    dto.SolarSystemsInGalaxyObject = await IdToSystem(dto.SolarSystemsInGalaxy); /*opcheck: correctly converts id to planet*/
+                }
+                //or populate ids from planets
+                else if (!dto.SolarSystemsInGalaxy.Any() && dto.SolarSystemsInGalaxyObject.Any())
+                {
+                    dto.SolarSystemsInGalaxy = await SystemToID(dto.SolarSystemsInGalaxyObject);
+                }
             }
-            //or populate ids from planets
-            else if (!dto.SolarSystemsInGalaxy.Any() && dto.SolarSystemsInGalaxyObject.Any())
-            {
-                dto.SolarSystemsInGalaxy = await SystemToID(dto.SolarSystemsInGalaxyObject);
-            }
+            
             systems = dto.SolarSystemsInGalaxyObject;
             //change the system
             var newSystem = await _galaxiesServices.Update(dto, dto.SolarSystemsInGalaxyObject, removedSystems);

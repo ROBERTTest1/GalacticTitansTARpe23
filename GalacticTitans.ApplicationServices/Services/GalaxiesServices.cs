@@ -58,6 +58,27 @@ namespace GalacticTitans.ApplicationServices.Services
             return newGalaxy;
         }
 
+        public async Task<Galaxy> Update(GalaxyDto dto, List<SolarSystem> systemsInGalaxy, List<SolarSystem> removedSystems)
+        {
+            Galaxy modifiedGalaxy = new();
+
+            // set by service on first creation
+            modifiedGalaxy.ID = (Guid)dto.ID;
+
+            // set by admin
+            modifiedGalaxy.GalaxyName = dto.GalaxyName;
+            modifiedGalaxy.GalaxyLore = dto.GalaxyLore;
+            modifiedGalaxy.SolarSystemsInGalaxy = dto.SolarSystemsInGalaxy;
+            // set for db
+            modifiedGalaxy.CreatedAt = DateTime.Now;
+            modifiedGalaxy.UpdatedAt = DateTime.Now;
+            /*opcheck: newsystem is not assigned any planetids*/
+            _context.Galaxies.Update(modifiedGalaxy);
+            await _context.SaveChangesAsync();
+
+            return modifiedGalaxy;
+        }
+
 
         private static List<Guid> SystemToID(List<SolarSystem> systems)
         {
