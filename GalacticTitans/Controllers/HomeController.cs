@@ -36,5 +36,13 @@ namespace GalacticTitans.Controllers
             ViewBag.ErrorDatas = errordatas;
             return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult PlanetsUnavailableError()
+        {
+            List<string> errordatas = ["Area", "Planets", "Status", "Unavailable"];
+            ViewBag.ErrorDatas = errordatas;
+            return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
     }
 }

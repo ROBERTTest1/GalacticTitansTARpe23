@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GalacticTitans.Models.AstralBodies.SolarSystemAdminIndexViewModel>
+
+@{
+    int rowNumber = 1;
+}
+<div class="gTZRG"><a asp-action="SolarSystemCreate" asp-controller="AstralBodies" type="submit" class="btn btn-primary gTZRG">Add new solar system</a></div>
+@* Admin Control for adding a new astral body of X type into the DB *@
+
+<div class="h1 gTZRG">All solar systems:</div>
+<form method="post">
+    <table class="table gHT gTZRG">
+        <thead class="isCommonWhite">
+            <tr>
+                @* Later, once images have been implemented, add image here aswell *@
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name of System</th>
+                <th scope="col">Center object</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Modified At</th>
+                <th scope="col">Actions:</th>
+
+            </tr>
+        </thead>
+        <tbody class="isCommonBlue">
+            @if (!Model.Any())
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <td>@rowNumber</td>
+                    <td>_</td>
+                    <td>No Systems found</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>
+                        No actions available.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var system in Model)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>@system.ID</td>
+                        <td>@system.SolarSystemName</td>
+                        <td>@system.AstralBodyAtCenter</td>
+                        <td>@system.CreatedAt</td>
+                        <td>@system.UpdatedAt</td>
+                        <td>                            
+                            <a asp-action="SolarSystemDetails" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">INFO</a>
+                            <a asp-action="SolarSystemUpdate" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">EDIT</a>
+                            <a asp-action="solarsystemdelete" asp-controller="astralbodies" asp-route-id="@system.ID" class="btn btn-light">DEL</a>
+                        </td>
+                    </tr>
+                    rowNumber++;
+                }
+            }            
+        </tbody>
+    </table>
+</form>

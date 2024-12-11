@@ -1,0 +1,102 @@
+﻿@using GalacticTitans.Core.Domain
+@model GalacticTitans.Models.AstralBodies.AstralBodyCreateUpdateViewModel
+@if (Model.ID.HasValue)
+{
+    <h1 class="gTZRG">Edit Planet</h1>
+}
+else
+{
+    <h1 class ="gTZRG">Make New Planet</h1>
+}
+<div class="gTZRG">
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="UpdatedAt" type="hidden" />
+
+        <div class="form-group-row">
+            <label asp-for="AstralBodyName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="AstralBodyName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="AstralBodyDescription" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="AstralBodyDescription" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="AstralBodyType" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <select asp-for="AstralBodyType" asp-items="Html.GetEnumSelectList<AstralBodyType>()">                   
+                    <option value="">Select type of planet</option>
+                </select>
+                <span asp-validation-for="AstralBodyType" class="galacticErrorMessageColor"></span>
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="EnvironmentBoost" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <select asp-for=EnvironmentBoost asp-items="Html.GetEnumSelectList<TitanType>()">                   
+                    <option value="">Select environmental boost</option>
+                </select>
+                <span asp-validation-for="EnvironmentBoost" class="galacticErrorMessageColor"></span>
+            </div>
+        </div>
+
+        
+
+        <div class="form-group-row">
+            <label asp-for="Files" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-5">
+                <div class="custom-file">
+                    <input class="form-control custom-file-input"
+                           asp-for="Files"
+                           multiple type="file" />
+                    <label class="custom-file-label">Choose Images from device -></label>
+                </div>
+            </div>
+
+        </div>
+        @if (Model.ID.HasValue)
+        {
+            <input asp-action="Update" 
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary" 
+                   value="Save Changes" />
+        }
+        else
+        {
+            <input asp-action="Create"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Make this planet" />
+        }
+
+        <a asp-action="index" class="btn btn-primary">Cancel</a>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-input');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}

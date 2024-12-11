@@ -1,0 +1,167 @@
+﻿@model GalacticTitans.Models.AstralBodies.SolarSystemCreateUpdateViewModel
+
+@{
+    //unused, for development only
+    bool devmode = false;
+
+    //unused
+    var allPlanetsTickboxes = ViewData["allPlanets"] as List<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>;
+
+    // list of planets given from the model, is used to create tickboxes
+    var listOfPlanets = Model.Planets;
+
+    // var existingPlanets = ViewData["selectedPlanets"];
+
+    // list of planets that the user has selected, contains everything given from the get method
+    List<string> userHasSelected = (List<string>)ViewData["userHasSelected"];
+    List<string> previouslySelected = userHasSelected;
+
+
+    if (Model.ID.HasValue)
+    {
+        Console.WriteLine(listOfPlanets + "modelid has value");
+        //we make duplicate of userhasselected to remember what was 
+        //selected when editing a solar system
+        //this is because if a planet is REMOVED from a system, 
+        //we still want to update its solarsystemid with an anullment
+        ViewData["previouslySelected"] = previouslySelected;
+    }
+    else
+    {
+        Console.WriteLine(listOfPlanets + "no id detected");
+    }
+}
+@if (devmode)
+{
+    <p class="gTZRG galacticErrorMessageColor">
+        no.
+    </p>
+}
+else
+{
+    <form method="post" enctype="multipart/form-data">
+        @if (Model.ID.HasValue)
+        {
+            <div class="h1 gTZRG">Edit @Model.SolarSystemName:</div>
+        }
+        else
+        {
+            <div class="h1 gTZRG">Solar system data:</div>
+        }
+        
+        <div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="CreatedAt" type="hidden" />
+            <input asp-for="UpdatedAt" type="hidden" />
+            @if (Model.ID.HasValue)
+            {
+                <p>@Model.ID</p>
+                <input type="hidden" name="previouslySelected" value="@previouslySelected" />
+            }
+
+            <div class="form-group-row">
+                <label asp-for="SolarSystemName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="SolarSystemName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <label asp-for="SolarSystemLore" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="SolarSystemLore" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <label asp-for="AstralBodyAtCenter" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="AstralBodyAtCenter" asp-items="ViewBag.allPlanets">
+                        <option value="">Select astral body as the center object</option>
+                    </select>
+                    <span asp-validation-for="AstralBodyAtCenter" class="galacticErrorMessageColor"></span>
+                </div>
+            </div>
+
+        </div>
+        <div> <br /><br /> </div>
+        <div class="h1 gTZRG">Select planets for the system:</div>
+        @*     <div class="h1 gTZRG">Add Astral Bodies into the solar system: (update)</div> *@
+        <table class="table gTZRG isCommonBlue gTB">
+            <thead>
+                <tr>
+                    <td>MiniIcon</td>
+                    <td>Astral Body Name</td>
+                    <td>Astral Body Type</td>
+                    <td>Environmental Boost Type</td>
+                    <td>Select?</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (listOfPlanets != null)
+                {
+                    @*foreach (var selectablePlanet in listOfPlanets)*@
+                    for (int i = 0; i < listOfPlanets.Count; i++)
+                    {
+                        var selectablePlanet = listOfPlanets[i];
+                        <tr class="isCommonWhite">
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.Image)</td>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.AstralBodyName)</td>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.AstralBodyType)</td>
+                            <td>@Html.DisplayFor(modelItem => selectablePlanet.EnvironmentBoost)</td>
+                            <td>
+                                @*Html.CheckBox("ID")*@
+                                @if (Model.ID.HasValue)
+                                {
+                                    <input 
+                                        type="checkbox" 
+                                        name="userHasSelected" 
+                                        value="@selectablePlanet.ID" 
+                                        id="checkbox-@selectablePlanet.ID"
+                                        @if (userHasSelected.Contains(selectablePlanet.ID.ToString()))
+                                        {
+                                            @:checked
+                                        }
+                                        />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="userHasSelected" value="@selectablePlanet.ID" id="checkbox-@selectablePlanet.ID" />
+                                }
+                               
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>_</td>
+                        <td>No planets to select from</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>tickbox</td>
+                    </tr>                    
+                }
+            </tbody>
+        </table>
+        @if (Model.ID.HasValue)
+        {
+            <input asp-action="SolarSystemUpdate"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Save Changes" />
+        }
+        else
+        {
+            <input asp-action="SolarSystemCreate"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Make this system" />
+        }
+
+    </form>
+
+}

@@ -27,6 +27,7 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+
             var resultingInventory = _context.Titans
                 .OrderByDescending(y => y.TitanLevel)
                 .Select(x => new TitanIndexViewModel
@@ -34,7 +35,17 @@ namespace GalacticTitans.Controllers
                     ID = x.ID,
                     TitanName = x.TitanName,
                     TitanType = (Models.Titans.TitanType)(Core.Dto.TitanType)x.TitanType,
-                    TitanLevel = x.TitanLevel,                    
+                    TitanLevel = x.TitanLevel,
+                    Image = (List<TitanImageViewModel>)_context.FilesToDatabase
+                       .Where(t => t.TitanID == x.ID)
+                       .Select(z => new TitanImageViewModel
+                       {
+                           TitanID = z.ID,
+                           ImageID = z.ID,
+                           ImageData = z.ImageData,
+                           ImageTitle = z.ImageTitle,
+                           Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(z.ImageData))
+                       })
                 });
             return View(resultingInventory);
         }

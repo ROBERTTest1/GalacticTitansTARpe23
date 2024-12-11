@@ -1,0 +1,155 @@
+﻿@model GalacticTitans.Models.AstralBodies.GalaxyViewModel
+
+@{
+    //unused, for development only
+    bool devmode = false;
+
+    //unused
+    var allSystemsTickboxes = ViewData["allSystems"] as List<GalacticTitans.Models.AstralBodies.SolarSystemDetailsDeleteViewModel>;
+
+    // list of planets given from the model, is used to create tickboxes
+    var listOfSystems = Model.SolarSystemsInGalaxyObject;
+
+    // var existingPlanets = ViewData["selectedPlanets"];
+
+    // list of planets that the user has selected, contains everything given from the get method
+    List<string> userHasSelected = (List<string>)ViewData["userHasSelected"];
+    List<string> previouslySelected = userHasSelected;
+
+
+    if (Model.ID.HasValue)
+    {
+        Console.WriteLine(listOfSystems + "modelid has value");
+        //we make duplicate of userhasselected to remember what was
+        //selected when editing a solar system
+        //this is because if a planet is REMOVED from a system,
+        //we still want to update its solarsystemid with an anullment
+        ViewData["previouslySelected"] = previouslySelected;
+    }
+    else
+    {
+        Console.WriteLine(listOfSystems + "no id detected");
+    }
+}
+@if (devmode)
+{
+    <p class="gTZRG galacticErrorMessageColor">
+        no.
+    </p>
+}
+else
+{
+    <form method="post" enctype="multipart/form-data">
+        @if (Model.ID.HasValue)
+        {
+            <div class="h1 gTZRG">Edit @Model.GalaxyName:</div>
+        }
+        else
+        {
+            <div class="h1 gTZRG">Galaxy data:</div>
+        }
+
+        <div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="CreatedAt" type="hidden" />
+            <input asp-for="UpdatedAt" type="hidden" />
+            @if (Model.ID.HasValue)
+            {
+                <p>@Model.ID</p>
+                <input type="hidden" name="previouslySelected" value="@previouslySelected" />
+            }
+
+            <div class="form-group-row">
+                <label asp-for="GalaxyName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="GalaxyName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <label asp-for="GalaxyLore" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="GalaxyLore" class="form-control" />
+                </div>
+            </div>
+
+        </div>
+        <div> <br /><br /> </div>
+        <div class="h1 gTZRG">Select systems in galaxy:</div>
+        @*     <div class="h1 gTZRG">Add Astral Bodies into the solar system: (update)</div> *@
+        <table class="table gTZRG isCommonBlue gTB">
+            <thead>
+                <tr>
+                    <td>System Name</td>
+                    <td>Planet Count</td>
+                    <td>Astral Body Type</td>
+                    <td>Center Object Type</td>
+                    <td>Select?</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (listOfSystems != null)
+                {
+                    foreach (var selectableSystem in listOfSystems)
+                    @*for (int i = 0; i < listOfSystems.Count(); i++)*@
+                    {
+                        @*var selectableSystem = listOfSystems[i];*@
+                        <tr class="isCommonWhite">
+                            <td>@selectableSystem.SolarSystemName</td>
+                            <td>@selectableSystem.AstralBodyIDs.Count().ToString()</td>
+                            <td>@selectableSystem.AstralBodyAtCenter</td>
+                            <td class="galacticErrorMessageColor">NA</td>
+                            <td>
+                                @*Html.CheckBox("ID")*@
+                                @if (Model.ID.HasValue)
+                                {
+                                    <input type="checkbox"
+                                           name="userHasSelected"
+                                           value="@selectableSystem.ID"
+                                           id="checkbox-@selectableSystem.ID"
+                                    @if (userHasSelected.Contains(selectableSystem.ID.ToString()))
+                                    {
+                                        @:checked
+                                    } />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="userHasSelected" value="@selectableSystem.ID" id="checkbox-@selectableSystem.ID" />
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>_</td>
+                        <td>No systems to select from</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>tickbox</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (Model.ID.HasValue)
+        {
+            <input asp-action="GalaxyUpdate"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Save Changes" />
+        }
+        else
+        {
+            <input asp-action="GalaxyCreate"
+                   asp-controller="AstralBodies"
+                   type="submit"
+                   class="btn btn-primary"
+                   value="Make this system" />
+        }
+
+    </form>
+
+}

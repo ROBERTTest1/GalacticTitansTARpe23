@@ -1,0 +1,74 @@
+﻿@model IEnumerable<GalacticTitans.Models.AstralBodies.AstralBodyIndexViewModel>
+
+@{
+    bool devflag = true;
+
+    int rowNumber = 1;
+}
+<div class="gTZRG"><a asp-action="Create" asp-controller="AstralBodies" type="submit" class="btn btn-primary gTZRG">Create new planet</a></div>
+@* Admin Control for adding a new astral body of X type into the DB *@
+
+<div class="h1 gTZRG">All planets:</div>
+<form method="post">
+    <table class="table gHT gTZRG">
+        <thead class="isCommonWhite">
+            <tr>
+                @* Later, once images have been implemented, add image here aswell *@
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name of Planet</th>
+                <th scope="col">Type of Astral Body</th>
+                <th scope="col">Boost type</th>
+                <th scope="col">Settlement Count</th>
+                <th scope="col">Kardashev Scale</th>
+                <th scope="col">Belongs to solar system:</th>
+                <th scope="col">Actions:</th>
+
+            </tr>
+        </thead>
+        <tbody class="isCommonBlue">
+            @if (!Model.Any())
+            {
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell *@
+                    <td>@rowNumber</td>
+                    <td>_</td>
+                    <td>No astral bodies found.</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>
+                        No actions available.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var planet in Model)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>@planet.ID</td>
+                        <td>@planet.AstralBodyName</td>
+                        <td>@planet.AstralBodyType</td>
+                        <td>@planet.EnvironmentBoost</td>
+                        <td>@planet.MajorSettlements</td>
+                        <td>@planet.TechnicalLevel</td>
+                        <td>@planet.SolarSystemID</td>
+                        <td>
+                            
+                            <a asp-action="details" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">INFO</a>
+                            <a asp-action="update" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">EDIT</a>
+                            <a asp-action="delete" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">DEL</a>
+                    
+                        </td>
+                    </tr>
+                    rowNumber++;
+                }
+            }            
+        </tbody>
+    </table>
+</form>

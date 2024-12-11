@@ -1,0 +1,76 @@
+﻿@model GalacticTitans.Models.AstralBodies.SolarSystemExploreViewModel
+
+@{
+    bool devflag = true;
+    ViewData["IsAnimated"] = "false";
+    int rowNumber = 1;
+}
+<div class="h1 gTZRG">@Model.SolarSystemName</div>
+<form method="post">
+    <table class="table gHT gTZRG">
+        <thead class="isCommonWhite">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type of Astral Body</th>
+                <th scope="col">Boost type</th>
+                <th scope="col">Settlement Count</th>
+                <th scope="col">Kardashev Scale</th>
+                <th scope="col">CurrentlyOccupiedGUID</th>
+
+            </tr>
+        </thead>
+        <tbody class="isCommonBlue">
+            @if (!Model.Planets.Any())
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>Solar system has no planets</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>
+                        No actions available.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var planet in Model.Planets)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>
+                            @foreach (var image in planet.Image)
+                            {
+                                if (image.ImageTitle == "LongView.png" && ViewData["IsAnimated"] == "false")
+                                {
+                                    ViewData["MakeSmallImage"] = "true";
+                                    <partial name="_Images" model="image" />
+                                    ViewData["MakeSmallImage"] = "false";
+                                }
+                            }
+                        </td>
+                        <td>@planet.AstralBodyName</td>
+                        <td>@planet.AstralBodyType</td>
+                        <td>@planet.EnvironmentBoost</td>
+                        <td>@planet.MajorSettlements</td>
+                        <td>@planet.TechnicalLevel</td>
+                        <td class="galacticErrorMessageColor">NotImplemented</td>
+                        <td>
+                        </td>
+                    </tr>
+                    rowNumber++;
+                }
+            }
+        </tbody>
+    </table>
+    @if (ViewData["RequestedView"] == "Delete")
+    {
+
+        <input asp-action="SolarSystemDeletePermanent" asp-controller="astralbodies" asp-route-id="@Model.ID" type="submit" class="btn btn-danger" value="Erase System"/>
+    }
+    <a asp-action="SolarSystemAdminIndex" asp-controller="astralbodies" class="btn btn-light">Cancel</a>
+</form>

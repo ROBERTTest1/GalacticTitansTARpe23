@@ -26,8 +26,9 @@
         public string SpecialAttackName { get; set; }
         public DateTime TitanWasBorn { get; set; }
         public DateTime TitanDied { get; set; }
+        public List<TitanImageViewModel> Image { get; set; } = new List<TitanImageViewModel>();
 
-        //db only
+        //db only                                            2671650
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

@@ -1,0 +1,81 @@
+﻿@model GalacticTitans.Models.AstralBodies.AstralBodyDetailsDeleteViewModel
+@if (ViewData["RequestedView"] == "Details")
+{
+    <h1 class="gTZRG">@Model.AstralBodyName</h1>
+    ViewData["IsAnimated"] = "false";
+}
+else
+{
+    <h1 class="gTZRG">Delete @Model.AstralBodyName ?</h1>
+    ViewData["IsAnimated"] = "true";
+}
+<div class="gTZRG gTB">
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="ModifiedAt" type="hidden" />
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="5">
+                        @foreach (var image in Model.Image)
+                        {
+                            if (image.ImageTitle == "LongViewAnimated.gif" && ViewData["IsAnimated"] == "true")
+                            {
+                                <partial name="_Images" model="image" />                                
+                            }
+                            if (image.ImageTitle == "LongViewStatic.png" && ViewData["IsAnimated"] == "false")
+                            {
+                                <partial name="_Images" model="image" />
+                            }
+                        }
+                    </th>
+                    <th>@Model.AstralBodyName</th>
+                </tr>
+                <tr>
+                    <td>@Model.AstralBodyType</td>
+                </tr>
+                <tr>
+                    <td>@Model.MajorSettlements</td>
+                </tr>
+                <tr>
+                    <td>@Model.TechnicalLevel</td>
+                </tr>
+                <tr>
+                    <td>Titans of type @Model.EnvironmentBoost are boosted</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">@Model.AstralBodyDescription</td>
+                </tr>
+                <tr>
+                    <td>currentowner</td>
+                    <td>@Model.TitanWhoOwnsThisPlanet</td>
+                </tr>
+                <tr>
+                    <td>whereis</td>
+                    <td>@Model.SolarSystemID</td>
+                </tr>
+                <tr>
+                    <td>actions</td>
+                    <td>
+                        @if (ViewData["RequestedView"] == "Details")
+                        {
+                            <a asp-action="index" class="btn btn-primary">Back</a>
+                        }
+                        else
+                        {
+                            <input asp-action="DeleteConfirmation"
+                                   asp-controller="AstralBodies"
+                                   type="submit"
+                                   class="btn btn-primary"
+                                   value="Thanos snap" />
+                            <a asp-action="index" class="btn btn-primary">Cancel</a>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

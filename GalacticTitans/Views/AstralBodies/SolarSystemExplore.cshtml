@@ -1,0 +1,71 @@
+﻿@model GalacticTitans.Models.AstralBodies.SolarSystemExploreViewModel
+
+@{
+    bool devflag = true;
+    ViewData["IsAnimated"] = "true";
+    int rowNumber = 1;
+}
+<div class="gTZRG"><a asp-action="Error" asp-controller="Home" type="submit" class="btn btn-primary gTZRG">there is no button</a></div>
+
+
+<div class="h1 gTZRG">@Model.SolarSystemName</div>
+<form method="post">
+    <table class="table gHT gTZRG">
+        <thead class="isCommonWhite">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"></th>
+                <th scope="col">Type of Astral Body</th>
+                <th scope="col">Boost type</th>
+                <th scope="col">Settlement Count</th>
+                <th scope="col">Kardashev Scale</th>
+                <th scope="col">Actions:</th>
+
+            </tr>
+        </thead>
+        <tbody class="isCommonBlue">
+            @if (!Model.Planets.Any())
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>Solar system has no planets</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>_</td>
+                    <td>
+                        No actions available.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var planet in Model.Planets)
+                {
+                    <tr>
+                        @* Later, once images have been implemented, add image here aswell *@
+                        <td>@rowNumber</td>
+                        <td>
+                            @foreach (var image in planet.Image)
+                            {
+                                if (image.ImageTitle == "LongViewAnimated.gif" && ViewData["IsAnimated"] == "true")
+                                {
+                                    <partial name="_Images" model="image" />
+                                }
+                            }
+                        </td>
+                        <td>@planet.AstralBodyName</td>
+                        <td>@planet.AstralBodyType</td>
+                        <td>@planet.EnvironmentBoost</td>
+                        <td>@planet.MajorSettlements</td>
+                        <td>@planet.TechnicalLevel</td>
+                        <td>                            
+                            <a asp-action="details" asp-controller="astralbodies" asp-route-id="@planet.ID" class="btn btn-light">Planet Details (admin: INFO)</a>                           
+                        </td>
+                    </tr>
+                    rowNumber++;
+                }
+            }            
+        </tbody>
+    </table>
+</form>
