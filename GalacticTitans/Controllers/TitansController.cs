@@ -1,6 +1,8 @@
-﻿using GalacticTitans.Core.Dto;
+﻿using GalacticTitans.Core.Domain;
+using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
+using GalacticTitans.Models.Stories;
 using GalacticTitans.Models.Titans;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,12 @@ namespace GalacticTitans.Controllers
             _fileServices = fileServices;
         }
 
+
+        /*
+         
+        T I T A N S 
+         
+         */
         [HttpGet]
         public IActionResult Index()
         {
@@ -279,5 +287,65 @@ namespace GalacticTitans.Controllers
             if (image == null) { return RedirectToAction("Index"); }
             return RedirectToAction("Index");
         }
+
+        /*
+
+        T I T A N O W N E R S H I P 
+
+         */
+
+        /// <summary>
+        /// player get titan from story event
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        [HttpPost, ActionName("CreateTitanOwnership")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRandomTitanOwnership(TitanOwnershipFromStoryViewModel vm)
+        {
+            int RNG = new Random().Next(1, _context.Titans.Count());
+
+            var sourceTitan = _context.Titans.OrderByDescending(x => x.TitanName).Take(RNG);
+
+            var dto = new TitanOwnershipDto()
+            {
+                TitanName = vm.AddedTitan.TitanName,
+                TitanHealth = 100,
+                TitanXP = 0,
+                TitanXPNextLevel = 100,
+                TitanLevel = 0,
+                TitanType = (Core.Dto.TitanType)vm.AddedTitan.TitanType,
+                TitanStatus = (Core.Dto.TitanStatus)vm.AddedTitan.TitanStatus,
+                PrimaryAttackName = vm.AddedTitan.PrimaryAttackName,
+                PrimaryAttackPower = vm.AddedTitan.PrimaryAttackPower,
+                SecondaryAttackName = vm.AddedTitan.SecondaryAttackName,
+                SecondaryAttackPower = vm.AddedTitan.SecondaryAttackPower,
+                SpecialAttackName = vm.AddedTitan.SpecialAttackName,
+                SpecialAttackPower = vm.AddedTitan.SpecialAttackPower,
+                TitanWasBorn = vm.AddedTitan.TitanWasBorn,
+                OwnershipCreatedAt = DateTime.Now,
+                OwnershipUpdatedAt = DateTime.Now,
+                Files = vm.AddedTitan.Files,
+                Image = vm.AddedTitan.Image
+                //.Select(x => new FileToDatabase
+                //{
+                //    ID = x.ImageID,
+                //    ImageData = x.ImageData,
+                //    ImageTitle = x.ImageTitle,
+                //    TitanID = x.TitanID,
+                //}).ToArray()
+            };
+            //var result = await _storiesServices.Create(dto);
+            //STUB, needs storiesservices, a story to utilise, storiescontroller to function
+
+            string result = null;
+            if (result == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index", vm);
+        }
+
     }
 }

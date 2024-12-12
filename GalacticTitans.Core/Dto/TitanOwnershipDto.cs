@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace GalacticTitans.Core.Dto
         public DateTime TitanWasBorn { get; set; }
         public DateTime TitanDied { get; set; }
         //public string OwnedByPlayerProfile { get; set; } //is string but holds guid
+
+        //image 
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
 
         //db only
         public DateTime OwnershipCreatedAt { get; set; }
