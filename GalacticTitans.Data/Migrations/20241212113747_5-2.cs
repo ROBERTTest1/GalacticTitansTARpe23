@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GalacticTitans.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class doesthiswork : Migration
+    public partial class _52 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +31,7 @@ namespace GalacticTitans.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlayerProfileID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -58,11 +59,28 @@ namespace GalacticTitans.Data.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    TitanID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TitanID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AstralBodyID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FilesToDatabase", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Galaxies",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GalaxyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GalaxyLore = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SolarSystemsInGalaxy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Galaxies", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,6 +217,55 @@ namespace GalacticTitans.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AstralBodies",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AstralBodyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AstralBodyType = table.Column<int>(type: "int", nullable: false),
+                    EnvironmentBoost = table.Column<int>(type: "int", nullable: false),
+                    AstralBodyDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MajorSettlements = table.Column<int>(type: "int", nullable: false),
+                    TechnicalLevel = table.Column<int>(type: "int", nullable: false),
+                    TitanWhoOwnsThisPlanetID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SolarSystemID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AstralBodies", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_AstralBodies_Titans_TitanWhoOwnsThisPlanetID",
+                        column: x => x.TitanWhoOwnsThisPlanetID,
+                        principalTable: "Titans",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SolarSystems",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AstralBodyAtCenter = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AstralBodyAtCenterWithID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SolarSystemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SolarSystemLore = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AstralBodyIDs = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SolarSystems", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_SolarSystems_AstralBodies_AstralBodyAtCenterWithID",
+                        column: x => x.AstralBodyAtCenterWithID,
+                        principalTable: "AstralBodies",
+                        principalColumn: "ID");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -237,6 +304,16 @@ namespace GalacticTitans.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AstralBodies_TitanWhoOwnsThisPlanetID",
+                table: "AstralBodies",
+                column: "TitanWhoOwnsThisPlanetID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SolarSystems_AstralBodyAtCenterWithID",
+                table: "SolarSystems",
+                column: "AstralBodyAtCenterWithID");
         }
 
         /// <inheritdoc />
@@ -261,13 +338,22 @@ namespace GalacticTitans.Data.Migrations
                 name: "FilesToDatabase");
 
             migrationBuilder.DropTable(
-                name: "Titans");
+                name: "Galaxies");
+
+            migrationBuilder.DropTable(
+                name: "SolarSystems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "AstralBodies");
+
+            migrationBuilder.DropTable(
+                name: "Titans");
         }
     }
 }
