@@ -10,7 +10,7 @@
     <p>
         This is a test div. [<br />
         <a onmouseover="playHoverSound()" onclick="playClickSound()" id="gCbuttonText" viewBox="0 0 200 50"
-           asp-controller="PlayerCommandPosts" asp-action="Index">
+           asp-controller="PlayerCommandPosts" asp-action="Index2">
             <svg id="indexButton" class="gCbuttonL1">
                 <rect class="svgButtonMainStyle"></rect>
                 <text x="10" y="21" class="svgButtonMainTextStyle gTZRG">Aa Bb Cc</text>
@@ -23,6 +23,10 @@
     </p>
     <p>
         <img src="~/lib/gameasset/image/site/title.png" class="gTW"/>
+    </p>
+    <p>
+        buttonimagetest<br />
+        <a asp-controller="PlayerCommandPosts" asp-action="Index2"><img src="~/lib/test/captainobvious.png" /> </a>
     </p>
     <p class="gTZRG">In order to play the game, please <a asp-controller="Accounts" asp-action="Login">Log in</a>.</p>
 

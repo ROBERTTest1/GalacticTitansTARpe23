@@ -9,5 +9,10 @@ namespace GalacticTitans.Controllers
             //return View("~./Views/Testing/PlayerCommandPost.cshtml");
             return View();
         }
+        public IActionResult Index2()
+        {
+            //return View("~./Views/Testing/PlayerCommandPost.cshtml");
+            return View();
+        }
     }
 }
