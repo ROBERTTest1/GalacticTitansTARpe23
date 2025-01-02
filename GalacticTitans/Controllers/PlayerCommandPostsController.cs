@@ -11,6 +11,7 @@ namespace GalacticTitans.Controllers
         }
         public IActionResult Index2()
         {
+            ViewData["StoryValue"] = 1;
             //return View("~./Views/Testing/PlayerCommandPost.cshtml");
             return View();
         }

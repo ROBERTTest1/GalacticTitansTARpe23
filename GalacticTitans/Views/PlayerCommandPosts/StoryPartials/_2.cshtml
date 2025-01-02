@@ -1,33 +1,220 @@
-﻿
-<div class="gTZRG isCommonBlue2">
-    <table align="center">
-        <tr>            
-            <td rowspan="3" width="120%" align="center"><h1>(NAME OF PLAYER) HOME GALAXY</h1> </td>
-        </tr>        
-        <tr></tr>
-        <tr></tr>
-        <tr>            
-            <td rowspan="6" width="120%" align="center">(HOME GALAXY IMAGE)<br /><img width="800" height="400" src="~/lib/gameasset/image/site/title.png"/></td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td rowspan="4" width="120%" align="center">Welcome to yar galaxy, ye cunt. This is where yer shit be.</td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td rowspan="5" width="120%" align="center"></td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-        </tr>
-    </table>
-</div>
+﻿@{
+    Random buycredit = new Random();
+    int buysarcophagus = buycredit.Next(10000, 250000);
+    var storyswitch = ViewData["StoryValue"];
+}
+@switch (storyswitch)
+{
+    case 1:
+        <div class="gTZRG isCommonBlue2">
+            <table align="center">
+                <tr>
+                    <td rowspan="3" width="120%" align="center"><h1>A useful fool</h1> </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="6" width="120%" align="center"><i>Many a traveller has passed these lands, <br />the rank and statute of whom is lost to the past</i><br /><img width="800" height="400" src="~/lib/gameasset/image/stories/forest_02.png" /></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="4" width="120%" align="center">
+                        You come across a vagabond in a distant system [this.system] <br />
+                        he offers you a suspicious, yet small object. He claims it has traveled <br />
+                        far and wide, but cannot find the key to open it. He is selling <br />
+                        it because to run such a foolish quest for most of their life, has been <br />
+                        for nothing, and is selling it to enjoy what little time he has left <br />
+                        with whatever credits he can get for it. What do you do?
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="5" width="120%" align="start">
+                        [button] purchase for @buycredit.Next(450, 1800)<br />
+                        [button] take it by force<br />
+                        [button] "No thank you, I have no wish for your destiny."<br />
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        break;
+    case 2:
+        <div class="gTZRG isCommonBlue2">
+            <table align="center">
+                <tr>
+                    <td rowspan="3" width="120%" align="center"><h1>Hazed</h1> </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="6" width="120%" align="center"><i>Ruins of a powerful civilisation... <br />and yet even they see the usefulness in a rectangular rock.</i><br /><img width="800" height="400" src="~/lib/gameasset/image/stories/skyland_02.png" /></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="4" width="120%" align="center">
+                        As you wake up to the noise of the morningberries popping loudly <br />
+                        you ponder upon yourself "How far is it really worth it to travel for a <br />
+                        proper pint of toiletmilk?" After this blackout, you concede that roughly <br />
+                        37456 solar units is the answer. With nobody around and nothing left to do. <br />
+                        now what? <br />
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="5" width="120%" align="start">
+                        no purhcase option<br />
+                        no take by force option<br />
+                        [button] "You ruffle the magenta dust off you, and try to find your way in this fog"<br />
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        break;
+    case 3:
+        <div class="gTZRG isCommonBlue2">
+            <table align="center">
+                <tr>
+                    <td rowspan="3" width="120%" align="center"><h1>Glowing</h1> </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="6" width="120%" align="center"><i>Having the sky under your feet is the least <br />unsettling thing about this place.</i><br /><img width="800" height="400" src="~/lib/gameasset/image/stories/skyland_02.png" /></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="4" width="120%" align="center">
+                        The lanterntrees glow with a dim warm pink hue, and as the trader starts talking <br />
+                        all of that warmth as if escapes the surrounding area. But I need the sarcophagus. <br />
+                        He says: "Well, you've seen the thing, touched the thing, heard the thing, smelt it" <br />
+                        even, do ya need to <i>lick</i> it aswell?? That will be @buysarcophagus.ToString() credits please..." <br />
+                        with a sly.. grin?<br /> I probably wont be able to steal it off him, as its too heavy.
+                        
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="5" width="120%" align="start">
+                        [button] purchase for @buysarcophagus.ToString()<br />
+                        no take by force option<br />
+                        [button] "Chief, i'd like to buy it, but im afraid im short" And both of you take your leave.<br />
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        break;
+    case 4:
+        <div class="gTZRG isCommonBlue2">
+            <table align="center">
+                <tr>
+                    <td rowspan="3" width="120%" align="center"><h1>Thorned Throne</h1> </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="6" width="120%" align="center"><i>Pointing upwards to the main moon... <br />...ever hoping that IT will return and prevail.</i><br /><img width="800" height="400" src="~/lib/gameasset/image/stories/spikefield_01.png" /></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="4" width="120%" align="center">
+                        You find yourself on a field of ancient spikes, put here by an even older civilisation. <br />
+                        They worshipped their main moon, now, nothing of them, but their numerous massive <br />
+                        spikes remain of them. As you look down to avert the gaze from the moon. You see something <br />
+                        in the sand. Is it...? 
+                        
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="5" width="120%" align="start">
+                        [button] You find 1500 credits<br />
+                        no take by force option<br />
+                        [button] Leave the credits be and find better luck elsewhere.<br />
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        break;
+    default:
+        <div class="gTZRG isCommonBlue2">
+            <table align="center">
+                <tr>
+                    <td rowspan="3" width="120%" align="center"><h1>(NAME OF PLAYER) HOME GALAXY</h1> </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="6" width="120%" align="center">(HOME GALAXY IMAGE)<br /><img width="800" height="400" src="~/lib/gameasset/image/site/title.png" /></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="4" width="120%" align="center">Welcome to yar galaxy, ye cunt. This is where yer shit be.</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="5" width="120%" align="center"></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        break;
+}
