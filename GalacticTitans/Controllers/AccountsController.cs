@@ -1,4 +1,5 @@
-﻿using GalacticTitans.Core.Domain;
+﻿using GalacticTitans.ApplicationServices.Services;
+using GalacticTitans.Core.Domain;
 using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.Dto.AccountsDtos;
 using GalacticTitans.Core.ServiceInterface;
@@ -18,19 +19,21 @@ namespace GalacticTitans.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly GalacticTitansContext _context;
         private readonly IEmailsServices _emailsServices;
-
+        private readonly IPlayerProfilesServices _playerProfilesServices;
         public AccountsController
             (
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             GalacticTitansContext context,
-            IEmailsServices emailsServices
+            IEmailsServices emailsServices,
+            IPlayerProfilesServices playerProfilesServices
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
             _emailsServices = emailsServices;
+            _playerProfilesServices = playerProfilesServices;
         }
         [HttpGet]
         public async Task<IActionResult> AddPassword()
@@ -222,19 +225,26 @@ namespace GalacticTitans.Controllers
                         return RedirectToAction("ListUsers", "Administrations");
                     }
 
-                    List<string> errordatas = 
-                        [
-                        "Area", "Accounts", 
-                        "Issue", "Success", 
-                        "StatusMessage", "Registration Success", 
-                        "ActedOn", $"{model.Email}", 
-                        "CreatedAccountData", $"{model.Email}\n{model.City}\n[password hidden]\n[password hidden]"
-                        ];
-                    ViewBag.ErrorDatas = errordatas;
-                    ViewBag.ErrorTitle = "You have successfully registered";
-                    ViewBag.ErrorMessage = "Before you can log in, please confirm email from the link" +
-                        "\nwe have emailed to your email address.";
-                    return View("~/Views/Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                    return View("~/Views/PlayerProfiles/NewProfile.cshtml");
+
+                    //List<string> errordatas = 
+                    //    [
+                    //    "Area", "Accounts", 
+                    //    "Issue", "Success", 
+                    //    "StatusMessage", "Registration Success", 
+                    //    "ActedOn", $"{model.Email}", 
+                    //    "CreatedAccountData", $"{model.Email}\n{model.City}\n[password hidden]\n[password hidden]"
+                    //    ];
+                    //ViewBag.ErrorDatas = errordatas;
+                    //ViewBag.ErrorTitle = "You have successfully registered";
+                    //ViewBag.ErrorMessage = "Before you can log in, please confirm email from the link" +
+                    //    "\nwe have emailed to your email address.";
+
+                    ////var newprofileforthisuser = _context
+
+
+                    //return View("~/Views/Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
                 }
                 foreach (var error in result.Errors)
                 {

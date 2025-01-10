@@ -17,6 +17,7 @@ builder.Services.AddScoped<ISolarSystemsServices, SolarSystemsServices>();
 builder.Services.AddScoped<IGalaxiesServices, GalaxiesServices>();
 builder.Services.AddScoped<IEmailsServices, EmailsServices>();
 builder.Services.AddScoped<IAccountsServices, AccountsServices>();
+builder.Services.AddScoped<IPlayerProfilesServices, PlayerProfilesServices>();
 builder.Services.AddDbContext<GalacticTitansContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>

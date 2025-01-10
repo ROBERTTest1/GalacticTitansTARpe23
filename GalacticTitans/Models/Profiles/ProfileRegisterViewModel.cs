@@ -1,13 +1,8 @@
 ﻿using GalacticTitans.Core.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GalacticTitans.Core.Dto.AccountsDtos
+namespace GalacticTitans.Models.Profiles
 {
-    public class PlayerProfileDto
+    public class ProfileRegisterViewModel
     {
         public Guid ID { get; set; }
         public string ApplicationUserID { get; set; } // 1-1
@@ -21,11 +16,5 @@ namespace GalacticTitans.Core.Dto.AccountsDtos
         public ProfileStatus CurrentStatus { get; set; }
 
         public bool ProfileType { get; set; } //true, admin, false, player
-
-        //dbonly
-        public DateTime ProfileCreatedAt { get; set; }
-        public DateTime ProfileModifiedAt { get; set; }
-        public DateTime ProfileAttributedToAnAccountUserAt { get; set; }
-        public DateTime ProfileStatusLastChangedAt { get; set; }
     }
 }

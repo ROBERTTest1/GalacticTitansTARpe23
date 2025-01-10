@@ -13,7 +13,7 @@ namespace GalacticTitans.Core.Domain
     public class PlayerProfile
     {
         public Guid ID { get; set; }
-        public Guid ApplicationUserID { get; set; } // 1-1
+        public string ApplicationUserID { get; set; } // 1-1
         public string ScreenName { get; set; }
         public int GalacticCredits { get; set; }
         public int ScrapResource { get; set; }
