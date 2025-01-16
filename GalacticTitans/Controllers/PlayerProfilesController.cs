@@ -23,6 +23,7 @@ namespace GalacticTitans.Controllers
         [HttpGet]
         public async Task<IActionResult> NewProfile()
         {
+
             return View();
         }
 
@@ -30,7 +31,9 @@ namespace GalacticTitans.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> NewProfile(PlayerProfileDto dto)
         {
-            if (dto.ApplicationUserID == null)
+            string userid = TempData["NewUserID"].ToString();
+            //if (ViewData["NewUserID"] == null)
+            if (userid == null)
             {
                 List<string> errordatas =
                         [
@@ -45,8 +48,8 @@ namespace GalacticTitans.Controllers
             var newprofile = new PlayerProfile()
             {
                 ID = dto.ID,
-                ApplicationUserID = dto.ApplicationUserID,
-                ScreenName = "",
+                ApplicationUserID = TempData["NewUserID"].ToString(),
+                ScreenName = dto.ScreenName,
                 GalacticCredits = 100,
                 ScrapResource = 0,
                 MyTitans = new List<TitanOwnership>(),
@@ -59,7 +62,8 @@ namespace GalacticTitans.Controllers
                 ProfileModifiedAt = DateTime.UtcNow,
             };
             var result = await _context.PlayerProfiles.AddAsync(newprofile);
-            if (result != null)
+            await _context.SaveChangesAsync();
+            if (result == null)
             {
                 List<string> errordatas =
                        [

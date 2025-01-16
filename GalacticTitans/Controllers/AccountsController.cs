@@ -207,6 +207,7 @@ namespace GalacticTitans.Controllers
                     City = model.City,
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
+                TempData["NewUserID"] = user.Id;
                 if (result.Succeeded)
                 {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -225,7 +226,7 @@ namespace GalacticTitans.Controllers
                         return RedirectToAction("ListUsers", "Administrations");
                     }
 
-                    return View("~/Views/PlayerProfiles/NewProfile.cshtml");
+                    return RedirectToAction("NewProfile", "PlayerProfiles");
 
                     //List<string> errordatas = 
                     //    [
