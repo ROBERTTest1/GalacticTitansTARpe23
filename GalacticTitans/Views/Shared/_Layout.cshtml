@@ -27,18 +27,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
                             <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Titans" asp-action="Index">My Titans</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Home" asp-action="PlanetsUnavailableError">Conquest the Galaxy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="AdminAreas" asp-action="Index">Admin Panel</a>
-                        </li>
-
-                            <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Emails" asp-action="Index">Test Email Sending</a>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Home" asp-action="PlanetsUnavailableError">Conquest the Galaxy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="AdminAreas" asp-action="Index">Admin Panel</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Emails" asp-action="Index">Test Email Sending</a>
+                            </li>
+                        }                        
                     </ul>
                     @* User login section on the navbar *@
                     <ul class="navbar-nav ml-auto">
