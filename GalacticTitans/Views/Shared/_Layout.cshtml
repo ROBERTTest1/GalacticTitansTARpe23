@@ -32,11 +32,14 @@
                             TODO: Get the id from a User.Claim. We need the GUID, this guid 
                             will be seeking correct user from db, to parse the profiletype
                             and display correct buttons for user and admin.
+
+                            Current progress, no progress. can find identities, do not know
+                            how to address the claims properly
                         *@
 
                         @if (signInManager.IsSignedIn(User))
                         {
-                            var test = User.Identity.Name;
+                            var test = User.Claims.FirstOrDefault(c => c.);
                             Guid userid = Guid.Empty;
                             var user = await userManager.FindByNameAsync(test.ToString());
                             bool pType = user.ProfileType;
