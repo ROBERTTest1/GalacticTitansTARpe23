@@ -42,6 +42,8 @@ namespace GalacticTitans.ApplicationServices.Services
                 UserName = dto.UserName,
                 Email = dto.Email,
                 City = dto.City,
+                ProfileType = false
+                
             };
             var result = await _userManager.CreateAsync(user, dto.Password);
             if (result.Succeeded)

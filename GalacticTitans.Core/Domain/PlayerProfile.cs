@@ -24,6 +24,7 @@ namespace GalacticTitans.Core.Domain
 
         public bool ProfileType { get; set; } //true, admin, false, player
 
+
         //dbonly
         public DateTime ProfileCreatedAt { get; set; }
         public DateTime ProfileModifiedAt { get; set; }

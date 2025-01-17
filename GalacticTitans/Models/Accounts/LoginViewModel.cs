@@ -14,6 +14,8 @@ namespace GalacticTitans.Models.Accounts
         public bool RememberMe { get; set; }
         public string? ReturnURL { get; set; }
 
+        public bool ProfileType { get; set; } //true, admin, false, player
+
         /* EXL */
     }
 }

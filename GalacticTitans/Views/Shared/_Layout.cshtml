@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<GalacticTitans.Core.Domain.ApplicationUser> signInManager;
+@inject UserManager<GalacticTitans.Core.Domain.ApplicationUser> userManager;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,19 +28,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @* 
+                            TODO: Get the id from a User.Claim. We need the GUID, this guid 
+                            will be seeking correct user from db, to parse the profiletype
+                            and display correct buttons for user and admin.
+                        *@
+
                         @if (signInManager.IsSignedIn(User))
                         {
+                            var test = User.Identity.Name;
+                            Guid userid = Guid.Empty;
+                            var user = await userManager.FindByNameAsync(test.ToString());
+                            bool pType = user.ProfileType;
+                            if (pType == true);
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="AdminAreas" asp-action="Index">Admin Panel</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Emails" asp-action="Index">Test Email Sending</a>
+                                </li>                                
+                            }
                             <li class="nav-item">
                             <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Titans" asp-action="Index">My Titans</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Home" asp-action="PlanetsUnavailableError">Conquest the Galaxy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="AdminAreas" asp-action="Index">Admin Panel</a>
-                            </li>
-                            <li>
-                                <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Emails" asp-action="Index">Test Email Sending</a>
                             </li>
                         }                        
                     </ul>
