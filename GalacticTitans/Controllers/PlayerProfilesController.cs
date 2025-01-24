@@ -63,6 +63,12 @@ namespace GalacticTitans.Controllers
             };
             var result = await _context.PlayerProfiles.AddAsync(newprofile);
             await _context.SaveChangesAsync();
+
+            //Code provided by: Mel Kosk
+            var user = await _context.Users.FindAsync(newprofile.ApplicationUserID);
+            user.PlayerProfileID = dto.ID;
+            await _context.SaveChangesAsync();
+
             if (result == null)
             {
                 List<string> errordatas =
