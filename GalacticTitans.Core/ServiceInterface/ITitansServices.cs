@@ -14,5 +14,7 @@ namespace GalacticTitans.Core.ServiceInterface
         Task<Titan> Create(TitanDto dto);
         Task<Titan> Update(TitanDto dto);
         Task<Titan> Delete(Guid id);
+        Task<TitanOwnership> CreateRandom(Titan sourceTitan);
+        //Task<TitanOwnership> CreateRandom(TitanOwnership dto);
     }
 }

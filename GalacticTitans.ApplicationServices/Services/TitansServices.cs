@@ -117,5 +117,45 @@ namespace GalacticTitans.ApplicationServices.Services
 
             return result;
         }
+
+        public async Task<TitanOwnership> CreateRandom(Titan sourceTitan)
+        {
+            TitanOwnership titan = new TitanOwnership();
+
+            // set by service
+            titan.ID = Guid.NewGuid();
+            titan.TitanHealth = 100;
+            titan.TitanXP = 0;
+            titan.TitanXPNextLevel = 100;
+            titan.TitanLevel = 0;
+            titan.TitanStatus = Core.Domain.TitanStatus.Alive;
+            titan.TitanWasBorn = DateTime.Now;
+            titan.TitanDied = DateTime.Parse("01/01/9999 00:00:00");
+
+            //set by user
+            titan.TitanName = sourceTitan.TitanName;
+            titan.TitanType = (Core.Domain.TitanType)sourceTitan.TitanType;
+            titan.PrimaryAttackName = sourceTitan.PrimaryAttackName;
+            titan.PrimaryAttackPower = sourceTitan.PrimaryAttackPower;
+            titan.SecondaryAttackName = sourceTitan.SecondaryAttackName;
+            titan.SecondaryAttackPower = sourceTitan.SecondaryAttackPower;
+            titan.SpecialAttackName = sourceTitan.SpecialAttackName;
+            titan.SpecialAttackPower = sourceTitan.SpecialAttackPower;
+
+            //set for db
+            titan.CreatedAt = DateTime.Now;
+            titan.UpdatedAt = DateTime.Now;
+
+            ////files
+            //if (dto.Files != null)
+            //{
+            //    _fileServices.UploadFilesToDatabase(dto, titan);
+            //}
+
+            await _context.TitanOwnerships.AddAsync(titan);
+            await _context.SaveChangesAsync();
+
+            return titan;
+        }
     }
 }

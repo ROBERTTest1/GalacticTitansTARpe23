@@ -1,5 +1,8 @@
-﻿using GalacticTitans.Core.Domain;
+﻿using GalacticTitans.ApplicationServices.Services;
+using GalacticTitans.Core.Domain;
+using GalacticTitans.Core.Dto;
 using GalacticTitans.Core.Dto.AccountsDtos;
+using GalacticTitans.Core.ServiceInterface;
 using GalacticTitans.Data;
 using GalacticTitans.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +13,11 @@ namespace GalacticTitans.Controllers
     public class PlayerProfilesController : Controller
     {
         private readonly GalacticTitansContext _context;
-        public PlayerProfilesController(GalacticTitansContext context)
+        private readonly ITitansServices _titansServices;
+        public PlayerProfilesController(GalacticTitansContext context, TitansServices titansServices)
         {
             _context = context;
+            _titansServices = titansServices;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -61,6 +66,14 @@ namespace GalacticTitans.Controllers
                 ProfileCreatedAt = DateTime.UtcNow,
                 ProfileModifiedAt = DateTime.UtcNow,
             };
+            TitanOwnership startingTitan = new();
+            startingTitan = await TitansController.NewRandomTitanOwnership(startingTitan);// call controller method
+            newprofile.MyTitans.Add(startingTitan);
+            await _context.SaveChangesAsync();
+            // TODO: caLll create ownership method from titanservices.
+            // return here, into startingtitan, the generated titan
+            // append this titan to the user
+            // TODO: implement random titanownership for the new userprofile.
             var result = await _context.PlayerProfiles.AddAsync(newprofile);
             await _context.SaveChangesAsync();
 

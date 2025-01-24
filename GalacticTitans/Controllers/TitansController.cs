@@ -303,8 +303,10 @@ namespace GalacticTitans.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRandomTitanOwnership(TitanOwnershipFromStoryViewModel vm)
         {
+            // create random int based on how many titans are in the database
             int RNG = new Random().Next(1, _context.Titans.Count());
 
+            //find the source titan, based on random integer
             var sourceTitan = _context.Titans.OrderByDescending(x => x.TitanName).Take(RNG);
 
             var dto = new TitanOwnershipDto()
@@ -326,7 +328,7 @@ namespace GalacticTitans.Controllers
                 OwnershipCreatedAt = DateTime.Now,
                 OwnershipUpdatedAt = DateTime.Now,
                 Files = vm.AddedTitan.Files,
-                Image = vm.AddedTitan.Image
+                Image = vm.AddedTitan.Image 
                 //.Select(x => new FileToDatabase
                 //{
                 //    ID = x.ImageID,
@@ -345,6 +347,51 @@ namespace GalacticTitans.Controllers
             }
 
             return RedirectToAction("Index", vm);
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<TitanOwnership> NewRandomTitanOwnership(TitanOwnership newOwnership)
+        {
+            // create random int based on how many titans are in the database
+            int RNG = new Random().Next(1, _context.Titans.Count());
+
+            //find the source titan, based on random integer
+            var sourceTitan = _context.Titans.OrderByDescending(x => x.TitanName).Take(RNG);
+
+            var randomtitan = new TitanOwnership()
+            {
+                TitanName = newOwnership.TitanName,
+                TitanHealth = 100,
+                TitanXP = 0,
+                TitanXPNextLevel = 100,
+                TitanLevel = 0,
+                TitanType = (Core.Dto.TitanType)newOwnership.TitanType,
+                TitanStatus = (Core.Dto.TitanStatus)newOwnership.TitanStatus,
+                PrimaryAttackName = newOwnership.PrimaryAttackName,
+                PrimaryAttackPower = newOwnership.PrimaryAttackPower,
+                SecondaryAttackName = newOwnership.SecondaryAttackName,
+                SecondaryAttackPower = newOwnership.SecondaryAttackPower,
+                SpecialAttackName = newOwnership.SpecialAttackName,
+                SpecialAttackPower = newOwnership.SpecialAttackPower,
+                TitanWasBorn = newOwnership.TitanWasBorn,
+                OwnershipCreatedAt = DateTime.Now,
+                OwnershipUpdatedAt = DateTime.Now,
+                //Files = newOwnership.Files,
+                //Image = newOwnership.Image
+                //.Select(x => new FileToDatabase
+                //{
+                //    ID = x.ImageID,
+                //    ImageData = x.ImageData,
+                //    ImageTitle = x.ImageTitle,
+                //    TitanID = x.TitanID,
+                //}).ToArray()
+            };
+            await _titansServices.CreateRandom(randomtitan);
+
+            //var result = await _storiesServices.Create(dto);
+            //STUB, needs storiesservices, a story to utilise, storiescontroller to function
+
+            return randomtitan;
         }
 
     }

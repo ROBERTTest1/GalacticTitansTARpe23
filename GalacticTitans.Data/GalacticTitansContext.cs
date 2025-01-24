@@ -20,6 +20,6 @@ namespace GalacticTitans.Data
         public DbSet<Galaxy> Galaxies { get; set; }
         public DbSet<IdentityRole> IdentityRoles { get; set; }
         public DbSet<PlayerProfile> PlayerProfiles { get; set; }
-        public DbSet<TitanOwnership> titanOwnerships { get; set; }
+        public DbSet<TitanOwnership> TitanOwnerships { get; set; }
     }
 }
