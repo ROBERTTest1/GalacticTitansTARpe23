@@ -39,11 +39,21 @@
 
                         @if (signInManager.IsSignedIn(User))
                         {
-                            var test = User.Claims.FirstOrDefault(c => c.);
-                            Guid userid = Guid.Empty;
-                            var user = await userManager.FindByNameAsync(test.ToString());
-                            bool pType = user.ProfileType;
-                            if (pType == true);
+                            var empty = "";
+                            var test = User.Claims;
+                            List<string> parsedclaims = new List<string>();
+                            foreach (var claim in test)
+                            {
+                                parsedclaims.Add(claim.ToString());
+                                Console.WriteLine(claim);
+                                if (claim.ToString().Contains("nameidentifier"))
+                                {
+                                    empty = claim.ToString().Substring(70, 36);
+                                }
+                            }
+                            Guid userid = Guid.Parse(empty);
+                            var user = await userManager.FindByIdAsync(userid.ToString());
+                            if (user.ProfileType == true)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="AdminAreas" asp-action="Index">Admin Panel</a>
