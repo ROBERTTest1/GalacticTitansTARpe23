@@ -29,12 +29,9 @@
                             <a class="nav-link text-dark gTZRG" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @* 
-                            TODO: Get the id from a User.Claim. We need the GUID, this guid 
-                            will be seeking correct user from db, to parse the profiletype
-                            and display correct buttons for user and admin.
-
-                            Current progress, no progress. can find identities, do not know
-                            how to address the claims properly
+                            TODO: rewrite getting claim, using proper microsoft documentation.
+                            this hack works, but its a hack.
+                        https://learn.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-9.0
                         *@
 
                         @if (signInManager.IsSignedIn(User))
