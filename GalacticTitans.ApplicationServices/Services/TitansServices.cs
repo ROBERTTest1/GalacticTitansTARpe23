@@ -28,6 +28,7 @@ namespace GalacticTitans.ApplicationServices.Services
                 .FirstOrDefaultAsync(x => x.ID == id);
             return result;
         }
+
         public async Task<Titan> Create(TitanDto dto)
         {
             Titan titan = new Titan();
