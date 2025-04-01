@@ -1,0 +1,477 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GalacticTitans.bundle.scp.css",
+      "PackagePath": "staticwebassets\\GalacticTitans.4ih3jkmk93.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\css\\gameStyle.css",
+      "PackagePath": "staticwebassets\\css\\gameStyle.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\Typodermic Desktop EULA 2023.pdf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\Typodermic Desktop EULA 2023.pdf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\Typodermic Desktop EULA 2023_1.pdf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\Typodermic Desktop EULA 2023_1.pdf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\Typodermic Desktop EULA 2023_2.pdf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\Typodermic Desktop EULA 2023_2.pdf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\ethnocentric rg it.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\ethnocentric rg it.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\ethnocentric rg.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\ethnocentric rg.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\forgotten futurist bd it.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\forgotten futurist bd it.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\forgotten futurist bd.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\forgotten futurist bd.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\forgotten futurist rg it.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\forgotten futurist rg it.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\forgotten futurist rg.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\forgotten futurist rg.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\font\\zekton rg.otf",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\font\\zekton rg.otf"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\premadetitans\\NotImplementedImage.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\premadetitans\\NotImplementedImage.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\premadetitans\\captainobvious.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\premadetitans\\captainobvious.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\site\\title.jpg",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\site\\title.jpg"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\site\\title.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\site\\title.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\digislum_01.PNG",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\digislum_01.PNG"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\forest_01.PNG",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\forest_01.PNG"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\forest_02.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\forest_02.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\forest_03.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\forest_03.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\ship_01.PNG",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\ship_01.PNG"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\skyland_01.PNG",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\skyland_01.PNG"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\skyland_02.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\skyland_02.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\skyland_03.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\skyland_03.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\spikefield_01.PNG",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\spikefield_01.PNG"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\spikefield_02.png",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\spikefield_02.png"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\image\\stories\\spikefield_03.PNG",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\image\\stories\\spikefield_03.PNG"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\music\\mainpage\\Readme.txt",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\music\\mainpage\\Readme.txt"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\music\\mainpage\\Space Ambience.mp3",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\music\\mainpage\\Space Ambience.mp3"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\beep-21.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\beep-21.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\beep-24.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\beep-24.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\beep-26.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\beep-26.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\beep-30b.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\beep-30b.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-32.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-32.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-33a.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-33a.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-34.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-34.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-36.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-36.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-38.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-38.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-39.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-39.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-40.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-40.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-41.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-41.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\button-42.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\button-42.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr0.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr0.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr1.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr1.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr2.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr2.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr3.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr3.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr4.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr4.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr5.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr5.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr6.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr6.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr7.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr7.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr8.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr8.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\gameasset\\uiaudio\\cell-phone-1-nr9.wav",
+      "PackagePath": "staticwebassets\\lib\\gameasset\\uiaudio\\cell-phone-1-nr9.wav"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\jyri.vaitmaa\\source\\repos\\deresivski\\regmode\\GalacticTitansTARpe23\\GalacticTitans\\wwwroot\\lib\\test\\captainobvious.png",
+      "PackagePath": "staticwebassets\\lib\\test\\captainobvious.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GalacticTitans.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GalacticTitans.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.GalacticTitans.props",
+      "PackagePath": "build\\GalacticTitans.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.GalacticTitans.props",
+      "PackagePath": "buildMultiTargeting\\GalacticTitans.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.GalacticTitans.props",
+      "PackagePath": "buildTransitive\\GalacticTitans.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

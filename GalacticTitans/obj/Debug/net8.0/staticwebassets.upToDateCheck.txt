@@ -1,0 +1,112 @@
+wwwroot\css\gameStyle.css
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\js\site.js
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\gameasset\font\ethnocentric rg it.otf
+wwwroot\lib\gameasset\font\ethnocentric rg.otf
+wwwroot\lib\gameasset\font\forgotten futurist bd it.otf
+wwwroot\lib\gameasset\font\forgotten futurist bd.otf
+wwwroot\lib\gameasset\font\forgotten futurist rg it.otf
+wwwroot\lib\gameasset\font\forgotten futurist rg.otf
+wwwroot\lib\gameasset\font\zekton rg.otf
+wwwroot\lib\gameasset\font\Typodermic Desktop EULA 2023.pdf
+wwwroot\lib\gameasset\font\Typodermic Desktop EULA 2023_1.pdf
+wwwroot\lib\gameasset\font\Typodermic Desktop EULA 2023_2.pdf
+wwwroot\lib\gameasset\image\premadetitans\captainobvious.png
+wwwroot\lib\gameasset\image\premadetitans\NotImplementedImage.png
+wwwroot\lib\gameasset\image\site\title.jpg
+wwwroot\lib\gameasset\image\site\title.png
+wwwroot\lib\gameasset\image\stories\digislum_01.PNG
+wwwroot\lib\gameasset\image\stories\forest_01.PNG
+wwwroot\lib\gameasset\image\stories\forest_02.png
+wwwroot\lib\gameasset\image\stories\forest_03.png
+wwwroot\lib\gameasset\image\stories\ship_01.PNG
+wwwroot\lib\gameasset\image\stories\skyland_01.PNG
+wwwroot\lib\gameasset\image\stories\skyland_02.png
+wwwroot\lib\gameasset\image\stories\skyland_03.png
+wwwroot\lib\gameasset\image\stories\spikefield_01.PNG
+wwwroot\lib\gameasset\image\stories\spikefield_02.png
+wwwroot\lib\gameasset\image\stories\spikefield_03.PNG
+wwwroot\lib\gameasset\music\mainpage\Readme.txt
+wwwroot\lib\gameasset\music\mainpage\Space Ambience.mp3
+wwwroot\lib\gameasset\uiaudio\beep-21.wav
+wwwroot\lib\gameasset\uiaudio\beep-24.wav
+wwwroot\lib\gameasset\uiaudio\beep-26.wav
+wwwroot\lib\gameasset\uiaudio\beep-30b.wav
+wwwroot\lib\gameasset\uiaudio\button-32.wav
+wwwroot\lib\gameasset\uiaudio\button-33a.wav
+wwwroot\lib\gameasset\uiaudio\button-34.wav
+wwwroot\lib\gameasset\uiaudio\button-36.wav
+wwwroot\lib\gameasset\uiaudio\button-38.wav
+wwwroot\lib\gameasset\uiaudio\button-39.wav
+wwwroot\lib\gameasset\uiaudio\button-40.wav
+wwwroot\lib\gameasset\uiaudio\button-41.wav
+wwwroot\lib\gameasset\uiaudio\button-42.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr0.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr1.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr2.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr3.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr4.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr5.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr6.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr7.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr8.wav
+wwwroot\lib\gameasset\uiaudio\cell-phone-1-nr9.wav
+wwwroot\lib\jquery\dist\jquery.js
+wwwroot\lib\jquery\dist\jquery.min.js
+wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\lib\jquery\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\lib\test\captainobvious.png

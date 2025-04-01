@@ -1,0 +1,13 @@
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\bin\Debug\net8.0\GalacticTitans.Core.deps.json
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\bin\Debug\net8.0\GalacticTitans.Core.dll
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\bin\Debug\net8.0\GalacticTitans.Core.pdb
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.csproj.AssemblyReference.cache
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.AssemblyInfoInputs.cache
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.AssemblyInfo.cs
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.csproj.CoreCompileInputs.cache
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.sourcelink.json
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.dll
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\refint\GalacticTitans.Core.dll
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\GalacticTitans.Core.pdb
+C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans.Core\obj\Debug\net8.0\ref\GalacticTitans.Core.dll

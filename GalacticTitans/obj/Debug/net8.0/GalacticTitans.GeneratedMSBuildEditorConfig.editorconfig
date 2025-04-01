@@ -1,0 +1,153 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = GalacticTitans
+build_property.RootNamespace = GalacticTitans
+build_property.ProjectDir = C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\jyri.vaitmaa\source\repos\deresivski\regmode\GalacticTitansTARpe23\GalacticTitans
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/AccountLocked.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQWNjb3VudExvY2tlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/AddPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQWRkUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/AddPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQWRkUGFzc3dvcmRDb25maXJtYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ChangePasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQ2hhbmdlUGFzc3dvcmRDb25maXJtYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQ29uZmlybUVtYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRm9yZ290UGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRm9yZ290UGFzc3dvcmRDb25maXJtYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVzZXRQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Accounts/ResetPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVzZXRQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/ErrorPartial/NotAvailableByDesign/_UnderConstruction.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JQYXJ0aWFsXE5vdEF2YWlsYWJsZUJ5RGVzaWduXF9VbmRlckNvbnN0cnVjdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/Index2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXEluZGV4Mi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/StoryPartials/_1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXFN0b3J5UGFydGlhbHNcXzEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/StoryPartials/_2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXFN0b3J5UGFydGlhbHNcXzIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/_CenterColumn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXF9DZW50ZXJDb2x1bW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/_LeftColumn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXF9MZWZ0Q29sdW1uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/PlayerCommandPosts/_RightColumn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyQ29tbWFuZFBvc3RzXF9SaWdodENvbHVtbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Titans/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0YW5zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Titans/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0YW5zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Titans/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0YW5zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Titans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0YW5zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Titans/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0YW5zXFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Titans/_Images.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0YW5zXF9JbWFnZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jyri.vaitmaa/source/repos/deresivski/regmode/GalacticTitansTARpe23/GalacticTitans/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-r0862i5l3y
