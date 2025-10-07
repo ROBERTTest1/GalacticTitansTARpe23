@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GalacticTitans.Data.Migrations
 {
     [DbContext(typeof(GalacticTitansContext))]
-    [Migration("20241108075506_filestodatabase")]
-    partial class filestodatabase
+    [Migration("20251007064654_InitialBaseline")]
+    partial class InitialBaseline
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
